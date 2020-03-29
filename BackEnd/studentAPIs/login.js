@@ -3,59 +3,71 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dbConnectionPool = require('../config/sqlConnectionPool');
+const kafka = require('../kafka/client');
 
-router.post('/', async (request, response) => {
+router.post('/', async (req, res) => {
 
-     const {student_email_id, student_password} = request.body;
+  //  request.body.path="student-login"
 
-     
-    
-    // try {
-    //     dbConnectionPool.query(
-    //     `SELECT student_password, student_id FROM student_information WHERE student_email_id='${student_email_id}'`,
-    //     async (error, result) => {
-          
-    //       if (error) {
-    //         console.log(error);
-    //         return response.status(500).send('Server Error');
-    //       }
+  kafka.make_request('login', req.body, (err, results) => {
 
-    //       if (result.length == 0) {
-    //         return response.status(401).json({errorMsg:[{msg:'Invalid Credentials'}]});
-    //       }
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
 
-    //       const isMatch = await bcrypt.compare(student_password, result[0].student_password);
 
-    //       if (!isMatch) {
-    //         return response.status(401).json({errorMsg:[{msg:'Invalid Credentials'}]});
-    //       }
+    res.status(200).end(results);
 
-    //       const payload = {
-    //         user: {
-    //           id: student_email_id,
-    //           usertype: 'student'
-    //         }
-    //       };
-
-    //       jwt.sign(
-    //         payload,
-    //         "jwtSecret",
-    //         {
-    //           expiresIn: 600000
-    //         },
-    //         (error, token) => {
-    //           if (error) {
-    //             throw error;
-    //           }
-    //           response.json({token, id: result[0].student_id });
-    //         }
-    //       );
-    //     }
-    //   );
-    // } catch (error) {
-    //   console.error(error.message);
-    //   response.status(500).send('Server Error');
-    // }
   });
-  
-  module.exports = router;
+
+  // try {
+  //     dbConnectionPool.query(
+  //     `SELECT student_password, student_id FROM student_information WHERE student_email_id='${student_email_id}'`,
+  //     async (error, result) => {
+
+  //       if (error) {
+  //         console.log(error);
+  //         return response.status(500).send('Server Error');
+  //       }
+
+  //       if (result.length == 0) {
+  //         return response.status(401).json({errorMsg:[{msg:'Invalid Credentials'}]});
+  //       }
+
+  //       const isMatch = await bcrypt.compare(student_password, result[0].student_password);
+
+  //       if (!isMatch) {
+  //         return response.status(401).json({errorMsg:[{msg:'Invalid Credentials'}]});
+  //       }
+
+  //       const payload = {
+  //         user: {
+  //           id: student_email_id,
+  //           usertype: 'student'
+  //         }
+  //       };
+
+  //       jwt.sign(
+  //         payload,
+  //         "jwtSecret",
+  //         {
+  //           expiresIn: 600000
+  //         },
+  //         (error, token) => {
+  //           if (error) {
+  //             throw error;
+  //           }
+  //           response.json({token, id: result[0].student_id });
+  //         }
+  //       );
+  //     }
+  //   );
+  // } catch (error) {
+  //   console.error(error.message);
+  //   response.status(500).send('Server Error');
+  // }
+});
+
+module.exports = router;
