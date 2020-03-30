@@ -7,197 +7,160 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dbConnectionPool = require('../config/sqlConnectionPool');
 
-aws.config.update({
-  secretAccessKey: 'VwtrGXg9aWjso48/cc+JExDhFL71X4Gs6nePB3S3',
-  accessKeyId: 'AKIAITEHYHEDXFIG4KVQ',
-  region: 'us-west-2'
-});
+// aws.config.update({
+//   secretAccessKey: 'VwtrGXg9aWjso48/cc+JExDhFL71X4Gs6nePB3S3',
+//   accessKeyId: 'AKIAITEHYHEDXFIG4KVQ',
+//   region: 'us-west-2'
+// });
 
-const s3 = new aws.S3();
+// const s3 = new aws.S3();
 
 
-const upload = multer({
-  storage: multerS3({
-      s3: s3,
-      acl: 'public-read',
-      bucket: 'handshake-project',
-      contentType: multerS3.AUTO_CONTENT_TYPE,
-      contentDisposition: 'inline',
-      key: function (req, file, cb) {
-          cb(null, 'profile_' + req.params.id);
-      }
-  })
-});
+// const upload = multer({
+//   storage: multerS3({
+//       s3: s3,
+//       acl: 'public-read',
+//       bucket: 'handshake-project',
+//       contentType: multerS3.AUTO_CONTENT_TYPE,
+//       contentDisposition: 'inline',
+//       key: function (req, file, cb) {
+//           cb(null, 'profile_' + req.params.id);
+//       }
+//   })
+// });
 
-const upload2 = multer({
-  storage: multerS3({
-      s3: s3,
-      acl: 'public-read',
-      bucket: 'handshake-project',
-      contentType: multerS3.AUTO_CONTENT_TYPE,
-      contentDisposition: 'inline',
-      key: function (req, file, cb) {
-        console.log(req.params.id);
-          //console.log(file);
-          cb(null, 'resume_' + req.params.id);
-      }
-  })
-});
+// const upload2 = multer({
+//   storage: multerS3({
+//       s3: s3,
+//       acl: 'public-read',
+//       bucket: 'handshake-project',
+//       contentType: multerS3.AUTO_CONTENT_TYPE,
+//       contentDisposition: 'inline',
+//       key: function (req, file, cb) {
+//         console.log(req.params.id);
+//           //console.log(file);
+//           cb(null, 'resume_' + req.params.id);
+//       }
+//   })
+// });
 
-router.get('/', (request, response) => {
-  try {
-    dbConnectionPool.query(`SELECT * from student_information`, (error, result) => {
-      if (error) {
-        console.log(error);
-        return response.status(500).send('Server Error');
-      }
-      console.log(result);
-      response.status(200).json({ result });
-    });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send('Server Error');
-  }
+router.get('/', (req, res) => {
+  req.body.path="get-all-students"
+ 
+  kafka.make_request('profile', req.body, (err, results) => {
+
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
+
+
+    res.status(200).end(results);
+  });
 });
 
 router.get('/:student_id', (request, response) => {
-  const student_id = request.params.student_id;
-  try {
-    dbConnectionPool.query(`SELECT * from student_information WHERE student_id=${student_id}`, (error, result) => {
-      if (error) {
-        console.log(error);
-        return response.status(500).send('Server Error');
-      }
-      obj = {}
-      obj.extraDetails = {
-        city_name: result[0].city_name,
-        state_name:result[0].state_name,
-        country_name:result[0].country_name,
-        phone_number:result[0].phone_number,
-        date_of_birth:result[0].date_of_birth
-      }
-      obj.BasicDetails={
-        student_name:result[0].student_name,
-        student_college_name:result[0].student_college_name,
-        major:result[0].major,
-        student_profile_photo:result[0].student_profile_photo,
-        career_objective:result[0].career_objective,
-      }
-      obj.skillSet={skillSet:result[0].skillSet}
-     
-      response.status(200).json({ obj });
-    });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send('Server Error');
-  }
+  req.body.student_id = request.params.student_id;
+  req.body.path="get-student-by-id"
+ 
+  kafka.make_request('profile', req.body, (err, results) => {
+
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
+
+
+    res.status(200).end(results);
+  });
 });
 
 router.post('/basicDetails/:student_id', (request, response) => {
   
-  const student_id = request.params.student_id;
-  const {  date_of_birth, city_name,
-    state_name, country_name, career_objective,
-    phone_number } = request.body;
-  try {
-    var query = `UPDATE student_information set date_of_birth = '${date_of_birth}', 
-      city_name = '${city_name}', state_name = '${state_name}', country_name = '${country_name}', 
-      career_objective = '${career_objective}', phone_number = '${phone_number}' WHERE student_id = ${student_id}`;
-    dbConnectionPool.query(query, (error, result) => {
-      if (error) {
-        console.log(error);
-        return response.status(500).send('Server Error');
-      }
-      console.log(result);
+  req.body.student_id = request.params.student_id;
+  req.body.path="post-student-by-id"
+ 
+  kafka.make_request('profile', req.body, (err, results) => {
 
-      response.status(200).json({ result });
-    });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send('Server Error');
-  }
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
+
+
+    res.status(200).end(results);
+  });
 });
 
 router.get('/educationDetails/:student_id', (request, response) => {
-  const student_id = request.params.student_id;
-  try {
-    dbConnectionPool.query(`SELECT * from student_educational_details WHERE student_id=${student_id}`, async (error, result) => {
-      if (error) {
-        console.log(error);
-        return response.status(500).send('Server Error');
-      }
-      console.log(result);
-      response.status(200).json({ result });
-    });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send('Server Error');
-  }
+  req.body.student_id = request.params.student_id;
+  req.body.path="get-student-education-by-id"
+ 
+  kafka.make_request('profile', req.body, (err, results) => {
+
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
+
+
+    res.status(200).end(results);
+  });
 });
 
 router.post('/educationDetails/:student_id', (request, response) => {
-  console.log("vghvghghv")
-  const student_id = request.params.student_id;
-  const { institution_name, degree, major, passing_year, cgpa } = request.body;
+  req.body.student_id = request.params.student_id;
+  req.body.path="get-education-of-student-by-id"
+ 
+  kafka.make_request('profile', req.body, (err, results) => {
 
-  try {
-    var query = `INSERT into student_educational_details (degree, institution_name, cgpa, major, passing_year, student_id) 
-      VALUES ('${degree}', '${institution_name}', '${cgpa}', '${major}', '${passing_year}', ${student_id})`;
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
 
-    dbConnectionPool.query(query, (error, result) => {
-      if (error) {
-        console.log(error);
-        return response.status(500).send('Server Error');
-      }
-      console.log(result);
 
-      response.status(200).json({ result });
-    });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send('Server Error');
-  }
+    res.status(200).end(results);
+  });
 });
 
 router.put('/educationDetails/:education_id', (request, response) => {
-  const education_id = request.params.education_id;
-  const { institution_name, degree, major, passing_year, cgpa } = request.body;
+  req.body.education_id = request.params.education_id;
+  req.body.path="update-student-education-by-id"
+ 
+  kafka.make_request('profile', req.body, (err, results) => {
 
-  try {
-    var query = `UPDATE student_educational_details set institution_name = '${institution_name}',  
-      degree = '${degree}', major = '${major}', passing_year = '${passing_year}', cgpa = '${cgpa}' 
-      WHERE (education_id = ${education_id})`;
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
 
-    dbConnectionPool.query(query, (error, result) => {
-      if (error) {
-        console.log(error);
-        return response.status(500).send('Server Error');
-      }
-      console.log(result);
 
-      response.status(200).json({ result });
-    });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send('Server Error');
-  }
+    res.status(200).end(results);
+  });
 });
 
-router.get('/experienceDetails/:student_id', (request, response) => {
-  const student_id = request.params.student_id;
-  try {
-    dbConnectionPool.query(`SELECT * from student_experience_details WHERE student_id=${student_id}`, async (error, result) => {
-      if (error) {
-        console.log(error);
-        return response.status(500).send('Server Error');
-      }
-      console.log(result);
-      response.status(200).json({ result });
-    });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send('Server Error');
-  }
+router.get('/experienceDetails/:student_id', (req, res) => {
+  req.body.student_id = request.params.student_id;
+  req.body.path="get-experience-of-student-by-id"
+ 
+  kafka.make_request('profile', req.body, (err, results) => {
+
+    // let payload = results.message;
+    // var token = jwt.sign(results, "test", {
+    //   expiresIn: 1008000
+    // })
+    // res.json({ success: true, token: 'JWT ' + token });
+
+
+    res.status(200).end(results);
+  });
 });
 
 router.post('/experienceDetails/:student_id', (request, response) => {
@@ -267,30 +230,30 @@ router.post('/skills/:student_id', (request, response) => {
   }
 });
 
-router.post('/upload/resume/:id', upload2.array('upl',1), (req, res, next) => {
+// router.post('/upload/resume/:id', upload2.array('upl',1), (req, res, next) => {
 
-  res.status(200).json({msg: 'uploaded'});
+//   res.status(200).json({msg: 'uploaded'});
   
-});
+// });
 
-router.post('/upload/:id', upload.array('upl',1), (req, res, next) => {
-  console.log("bhbjhbjhbjhbjhjbhjb")
-  const id = req.params.id;
-  const profile_path = 'https://handshake-project.s3-us-west-2.amazonaws.com/profile_' + id;
-  try {
-    dbConnectionPool.query(`UPDATE student_information set student_profile_photo = '${profile_path}'   WHERE student_id=${id}`, (err, result) => {
-      if(err) {
-        console.log(err);
-        res.status(500).send('server error');
-      }
-      res.status(200).json({msg: 'uploaded!'})
-    })
+// router.post('/upload/:id', upload.array('upl',1), (req, res, next) => {
+//   console.log("bhbjhbjhbjhbjhjbhjb")
+//   const id = req.params.id;
+//   const profile_path = 'https://handshake-project.s3-us-west-2.amazonaws.com/profile_' + id;
+//   try {
+//     dbConnectionPool.query(`UPDATE student_information set student_profile_photo = '${profile_path}'   WHERE student_id=${id}`, (err, result) => {
+//       if(err) {
+//         console.log(err);
+//         res.status(500).send('server error');
+//       }
+//       res.status(200).json({msg: 'uploaded!'})
+//     })
     
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('server error!');
-  }
-});
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send('server error!');
+//   }
+// });
 
 
 module.exports = router;

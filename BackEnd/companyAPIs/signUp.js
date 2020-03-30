@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const kafka = require('../kafka/client');
 
-router.post('/', async (request, response) => {
+router.post('/', async (req, res) => {
 
     
    req.body.path="company-signup"

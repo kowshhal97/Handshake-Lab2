@@ -22,7 +22,7 @@ router.get('/:company_id', (req, res) => {
   });
 });
 
-router.put('/:company_id', (request, response) => {
+router.put('/:company_id', (req, res) => {
   req.body.path="Update-company-profile"
   req.body.company_id=req.params.company_id
 

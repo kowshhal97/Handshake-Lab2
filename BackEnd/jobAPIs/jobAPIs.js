@@ -41,7 +41,7 @@ router.get('/postings/:company_id', (req, res) => {
    });
 });
 
-router.get('/jobs/:job_id', (request, response) => {
+router.get('/jobs/:job_id', (req, res) => {
     req.body.job_id = request.params.job_id;
     req.body.path="get-job-by-jobId"
  
@@ -61,7 +61,7 @@ router.get('/jobs/:job_id', (request, response) => {
 
 
 
-router.post('/:company_id', (request, response) => {
+router.post('/:company_id', (req, res) => {
     req.body.company_id = request.params.company_id;
     req.body.path="post-job"
  

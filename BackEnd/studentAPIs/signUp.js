@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const dbConnectionPool = require('../config/sqlConnectionPool');
 
 
-router.post('/', async (request, response) => {
+router.post('/', async (req, res) => {
   req.body.path="student-signup"
  
   kafka.make_request('signup', req.body, (err, results) => {
