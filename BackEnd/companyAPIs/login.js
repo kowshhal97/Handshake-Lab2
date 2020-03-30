@@ -3,58 +3,25 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dbConnectionPool = require('../config/sqlConnectionPool');
+const kafka = require('../kafka/client');
 
 router.post('/', async (request, response) => {
 
-    const {company_email_id, company_password} = request.body;
     
-    try {
-        dbConnectionPool.query(
-        `SELECT company_password, company_id from company_information WHERE company_email_id='${company_email_id}'`,
-        async (error, result) => {
-          
-          if (error) {
-            console.log(error);
-            return response.status(500).send('Server Error');
-          }
-
-          if (result.length == 0) {
-            return response.status(403).json({errorMsg:[{msg:'Invalid Credentials'}]});
-          }
-
-          const isMatch = await bcrypt.compare(company_password, result[0].company_password);
-
-          if (!isMatch) {
-            return res.status(403).json({errorMsg:[{msg:'Invalid Credentials'}]});
-          }
-
-          const payload = {
-            user: {
-              id: company_email_id,
-              usertype: 'employer'
-            }
-          };
-
-          jwt.sign(
-            payload,
-            "jwtSecret",
-            {
-              expiresIn: 600000
-            },
-            (error, token) => {
-              if (error) {
-                throw error;
-              }
-              console.log("******");
-              response.json({token, id: result[0].company_id });
-            }
-          );
-        }
-      );
-    } catch (error) {
-      console.error(error.message);
-      response.status(500).send('Server Error');
-    }
+   req.body.path="company-login"
+ 
+   kafka.make_request('login', req.body, (err, results) => {
+ 
+     // let payload = results.message;
+     // var token = jwt.sign(results, "test", {
+     //   expiresIn: 1008000
+     // })
+     // res.json({ success: true, token: 'JWT ' + token });
+ 
+ 
+     res.status(200).end(results);
+ 
+   });
   });
   
   module.exports = router;
