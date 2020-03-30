@@ -7,8 +7,13 @@ const kafka = require('../kafka/client');
 
 router.post('/', async (req, res) => {
 
-  //  request.body.path="student-login"
-
+   req.body.path="student-login"
+   req.body.path="company-login"
+   
+   if(req.body.path==="student-login"){
+     //do database operation on stdeunt table
+   }
+ 
   kafka.make_request('login', req.body, (err, results) => {
 
     // let payload = results.message;
