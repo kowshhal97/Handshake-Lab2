@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const dbConnectionPool = require('../config/sqlConnectionPool');
 const kafka=require('./../kafka/client')
 
 router.get('/:company_id', (req, res) => {
