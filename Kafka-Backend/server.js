@@ -2,8 +2,12 @@ var connection = new require('./kafka/connection');
 //topics files
 var Signup = require('./services/signup');
 var Login = require('./services/login');
-
-
+const application=require('./services/application')
+const events=require('./services/events')
+const jobs=require('./services/jobs')
+const messages=require('./services/messages')
+const studentProfile=require('./services/studentProfile')
+const companyProfile=require('./services/companyProfile')
 
 
 function handleTopicRequest(topic_name, fname) {
@@ -35,5 +39,12 @@ function handleTopicRequest(topic_name, fname) {
     });
 }
 
+
 handleTopicRequest("signup", Signup);
 handleTopicRequest("login", Login);
+handleTopicRequest("studentProfile",studentProfile)
+handleTopicRequest('jobs',jobs)
+handleTopicRequest('events',events)
+handleTopicRequest('applications',application)
+handleTopicRequest('messages',messages)
+handleTopicRequest('companyProfile',companyProfile)
