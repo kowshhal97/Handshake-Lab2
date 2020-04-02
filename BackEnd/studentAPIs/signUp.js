@@ -8,7 +8,7 @@ const dbConnectionPool = require('../config/sqlConnectionPool');
 router.post('/', async (req, res) => {
   req.body.path="student-signup"
  
-  kafka.make_request('signup', req.body, (err, results) => {
+  kafka.make_request('studentAuth', req.body, (err, results) => {
 
     // let payload = results.message;
     // var token = jwt.sign(results, "test", {

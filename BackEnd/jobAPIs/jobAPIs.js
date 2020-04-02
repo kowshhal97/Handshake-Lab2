@@ -3,8 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dbConnectionPool = require('../config/sqlConnectionPool');
-
-
   
 
 router.get('/', (req, res) => {
@@ -12,34 +10,13 @@ router.get('/', (req, res) => {
  
    kafka.make_request('jobs', req.body, (err, results) => {
  
-     // let payload = results.message;
-     // var token = jwt.sign(results, "test", {
-     //   expiresIn: 1008000
-     // })
-     // res.json({ success: true, token: 'JWT ' + token });
  
  
      res.status(200).end(results);
  
    });
 });
-router.get('/postings/:company_id', (req, res) => {
-    req.body.company_id = request.params.company_id;
-    req.body.path="get-all-Jobs-for-company"
- 
-   kafka.make_request('jobs', req.body, (err, results) => {
- 
-     // let payload = results.message;
-     // var token = jwt.sign(results, "test", {
-     //   expiresIn: 1008000
-     // })
-     // res.json({ success: true, token: 'JWT ' + token });
- 
- 
-     res.status(200).end(results);
- 
-   });
-});
+
 
 router.get('/jobs/:job_id', (req, res) => {
     req.body.job_id = request.params.job_id;
@@ -47,18 +24,11 @@ router.get('/jobs/:job_id', (req, res) => {
  
    kafka.make_request('jobs', req.body, (err, results) => {
  
-     // let payload = results.message;
-     // var token = jwt.sign(results, "test", {
-     //   expiresIn: 1008000
-     // })
-     // res.json({ success: true, token: 'JWT ' + token });
- 
  
      res.status(200).end(results);
  
    });
 });
-
 
 
 router.post('/:company_id', (req, res) => {

@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
 
    req.body.path="student-login"
  
-  kafka.make_request('login', req.body, (err, results) => {
+  kafka.make_request('studentAuth', req.body, (err, results) => {
 
     // let payload = results.message;
     // var token = jwt.sign(results, "test", {
