@@ -5,7 +5,6 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const dbConnectionPool = require('../config/sqlConnectionPool');
 
 router.get('/', (req, res) => {
   req.body.path="get-all-students"

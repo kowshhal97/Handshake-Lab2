@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 const kafka=require('./../kafka/client')
 
 
-
-
 router.put('/:studentId/:jobId', (req, res) => {
     req.body.student_id=req.params.studentId;
     req.body.job_id=req.params.jobId;

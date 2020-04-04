@@ -1,5 +1,5 @@
 
-
+const Employer = require('../models/employer')
 
 loginHandler=(msg,callback)=>{
   callback(null,"welcome from signup!")
@@ -7,6 +7,14 @@ loginHandler=(msg,callback)=>{
 }
 
 signupHandler=(msg,callback)=>{
+  // const user = new Employer(req.body)
+
+  //   try {
+  //       await user.save()
+  //       res.status(201).send(user)
+  //   } catch (e) {
+  //       res.status(400).send(e)
+  //   }
   callback(null,"welcome from signup!")
 }
 
