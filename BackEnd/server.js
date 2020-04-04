@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
+
 app.use(express.json({extended:false}));
 app.use(cors({origin:'http://localhost:3001',credentials:true}));
 
@@ -19,8 +20,8 @@ app.get('/', (request,response) => response.send('API Test Run Successful'));
 
 // Routes for Student APIs 
 app.use('/student/login', require('./studentAPIs/login'));
-// app.use('/student/signUp', require('./studentAPIs/signUp'));
-// app.use('/student/studentProfile', require('./studentAPIs/studentProfile'));
+app.use('/student/signUp', require('./studentAPIs/signUp'));
+app.use('/student/studentProfile', require('./studentAPIs/studentProfile'));
 
 // // Routes for Job APIs
 // app.use('/jobs', require('./jobAPIs/jobAPIs'));
@@ -32,8 +33,8 @@ app.use('/student/login', require('./studentAPIs/login'));
 // app.use('/applications', require('./applicationAPIs/applicationAPIs'));
 
 // // Routes for Company APIs 
-// app.use('/company/login', require('./companyAPIs/login'));
-// app.use('/company/signUp', require('./companyAPIs/signUp'));
+app.use('/company/login', require('./companyAPIs/login'));
+app.use('/company/signUp', require('./companyAPIs/signUp'));
 // app.use('/company/companyProfile', require('./companyAPIs/companyProfile'));
 
 

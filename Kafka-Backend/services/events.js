@@ -74,15 +74,19 @@ function handle_request(msg, callback) {
 
     console.log(msg)
     if (msg.path === "get-all-events") {
+        delete msg.path
         getAllEvents(msg, callback)
     }
     else if (msg.path === "get-event-by-id") {
+        delete msg.path
         getEventByIdHandler(msg, callback)
     }
     else if (msg.path === "post-event") {
+        delete msg.path
         postEventHandler(msg, callback)
     }
     else if (msg.path === 'post-register-for-event') {
+        delete msg.path
         postRegisterForEvent(msg, callback)
     }
 };

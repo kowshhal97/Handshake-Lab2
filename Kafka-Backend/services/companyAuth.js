@@ -2,29 +2,50 @@
 const Employer = require('../models/employer')
 
 loginHandler=(msg,callback)=>{
-  callback(null,"welcome from signup!")
+  try {
+    const user = await Employer.findOne(msg.body)
+
+    if(!user) {
+        res.status=400
+        callback(null,res)
+    }
+
+    res.status=200
+    res
+    callback(null)
+    res.send(user)
+} catch (e) {
+    res.status(500).send()
+}
 
 }
 
-signupHandler=(msg,callback)=>{
-  // const user = new Employer(req.body)
+signupHandler=async(msg,callback)=>{
+  res={}
 
-  //   try {
-  //       await user.save()
-  //       res.status(201).send(user)
-  //   } catch (e) {
-  //       res.status(400).send(e)
-  //   }
-  callback(null,"welcome from signup!")
+  const user = new Employer(msg.body)
+
+    try {
+        await user.save()
+        res.data=user
+        res.status=201
+        callback(null,res)
+    } catch (e) {
+      res.status=400
+      callback(e,res)
+    }
+  
 }
 
 
 function handle_request(msg, callback) {
   var res = {};
   if(msg.path='company-login'){
+    delete msg.path
     loginHandler(msg,callback)
   }
   if(msg.path='company-signup'){
+    delete msg.path
     signupHandler(msg,callback)
   }
 };

@@ -1,47 +1,49 @@
+const Student=require('./../models/student')
 
-
-getAllStudents=(msg,callback)=>{
+getAllStudents=async(msg,callback)=>{
     var res={}
-  //   try {
-  //     const users = await Student.find({})
-  //     res.send(users)
-  // } catch (e) {
-  //     res.status(500).send()
-  // }
-  callback(err,"Hello-from-handshake!")
+    try {
+      const users = await Student.find({})
+      res.data=JSON.stringify(users)
+    res.status=200
+    callback(null,res)
+  } catch (e) {
+    console.log(e)
+      callback(null,"err")
+  }
   }
   
-  updateStudentByIdHandler=(msg,callback)=>{
+  updateStudentByIdHandler=async(msg,callback)=>{
     var res={}
-  //   try {
-  //     const user = await Student.findByIdAndUpdate(req.params.id, req.body)
-
-  //     if (!user) {
-  //         return res.status(404).send()
-  //     }
-
-  //     res.send(user)
-  // } catch (e) {
-  //     res.status(400).send(e)
-  // }
-  callback(err,"Hello-from-handshake!")
+    try {
+      const user = await Student.findByIdAndUpdate(msg.id, msg.body)
+      res.data=JSON.stringify(user)
+      res.status=200
+      callback(null,res)
+    } catch (e) {
+      console.log(e)
+        callback(null,"err")
+    }
   }
   
   getStudentByIdHandler=(msg,callback)=>{
     var res={}
-    // const _id = req.params.id
+    const _id = msg.id
 
-    // try {
-    //     const user = await Student.findById(_id)
+    try {
+        const user = await Student.findById(_id)
 
-    //     if (!user) {
-    //         return res.status(404).send()
-    //     }
-
-    //     res.send(user)
-    // } catch (e) {
-    //     res.status(500).send()
-    // }
+        if (!user) {
+          res.data=JSON.stringify(user)
+          res.status=404
+          callback(null,res)
+        }
+        res.data=JSON.stringify(user)
+      res.status=200
+      callback(null,res)
+    } catch (e) {
+      callback(null,"err")
+    }
   callback(err,"Hello-from-handshake!")
   }
 
@@ -50,12 +52,15 @@ getAllStudents=(msg,callback)=>{
   
     console.log(msg)
     if(msg.path==="get-all-students"){
+      delete msg.path
         getAllStudents(msg,callback)
     }
     if(msg.path==="get-student-by-id"){
+      delete msg.path
         getStudentByIdHandler(msg,callback)
     }
     if(msg.path==="update-student-by-id"){
+      delete msg.path
         updateStudentByIdHandler(msg,callback)
       }
   };

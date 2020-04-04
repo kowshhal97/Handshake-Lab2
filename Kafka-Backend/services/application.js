@@ -25,6 +25,7 @@ function handle_request(msg, callback) {
 
     console.log(msg)
     if (msg.path === "update-application") {
+        delete msg.path
         updateApplicationHandler(msg, callback)
     }
 };

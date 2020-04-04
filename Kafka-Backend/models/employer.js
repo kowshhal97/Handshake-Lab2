@@ -17,7 +17,6 @@ const EmployerSchema = new Schema({
     location: String,
     description: String,
     contactNumber: Number,
-
 })
 
 const Employer = mongoose.model('employer', EmployerSchema);

@@ -9,6 +9,10 @@ const messages = require('./services/messages')
 const studentProfile = require('./services/studentProfile')
 const companyProfile = require('./services/companyProfile')
 
+require('./db/mongoose')
+
+
+
 
 function handleTopicRequest(topic_name, fname) {
     //var topic_name = 'root_topic';

@@ -38,9 +38,11 @@ getCompanyHandler=(msg,callback)=>{
   function handle_request(msg, callback) {
     var res = {};
     if(msg.path='get-company-profile'){
+      delete msg.path
       getCompanyHandler(msg,callback)
     }
     if(msg.path='update-company-profile'){
+      delete msg.path
       updateCompanyhandler(msg,callback)
     }
   };

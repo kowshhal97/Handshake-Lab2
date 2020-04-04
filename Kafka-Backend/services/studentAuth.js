@@ -1,34 +1,52 @@
+const Student = require('./../models/student')
 
+const loginHandler = (msg, callback) => {
+  var res = {}
+  try {
+    const user = await Student.findOne(req.body)
 
-loginHandler=(msg,callback)=>{
-  var res={}
-callback(err,"Hello-from-handshake!")
+    if (!user) {
+      res.status = 404
+      callback(null, res)
+    }
+
+    res.status = 200
+    res.data = JSON.stringify(user)
+    callback(null, res)
+  } catch (e) {
+    res.status = 500
+    callback(null, "error")
+  }
 }
 
-signupHandler=(msg,callback)=>{
-  var res={}
-  console.log(res)
-  // const user = new Student(req.body)
-
-  // try {
-  //     await user.save()
-      
-  //     res.status(201).send(user)
-  // } catch (e) {
-  //     res.status(400).send(e)
-  // }
-  callback(err,"Hello-from-handshake!")
+const signupHandler = async (msg, callback) => {
+  var res = {}
+  const user = new Student(msg)
+  try {
+    await user.save()
+    console.log("saved!")
+    res.data = JSON.stringify(user)
+    res.status = 201
+    callback(null, res)
+  } catch (e) {
+    console.log(e)
+    res.status = 400
+    console.log("signup failed!!")
+    callback(null, "error")
+  }
 }
 
 
 function handle_request(msg, callback) {
 
-  console.log(msg)
-  if(msg.path==="student-login"){
-    loginHandler(msg,callback)
+  if (msg.path === "student-login") {
+    delete msg.path
+    loginHandler(msg, callback)
   }
-  if(msg.path==="student-signup"){
-    signupHandler(msg,callback)
+  if (msg.path === "student-signup") {
+    delete msg.path
+    console.log(msg)
+    signupHandler(msg, callback)
   }
 };
 
