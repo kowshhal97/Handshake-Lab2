@@ -4,20 +4,21 @@ const JobPost = require('../models/job')
 updateApplicationHandler = (msg, callback) => {
     var res = {}
 
-    // try {
-    //     const post = await JobPost.findByIdAndUpdate(req.params.id, req.body)
+    try {
+        const post = await JobPost.findByIdAndUpdate(msg.id, req.body)
 
-    //     if (!post) {
-    //         return res.status(404).send()
-    //     }
+        if (!post) {
+            res.status=400
+            callback(null,res)
+        }
 
-    //     res.send(post)
-    // } catch (e) {
-    //     res.status(400).send(e)
-    // }
-
-
-    callback(err, "Hello-from-handshake!")
+        res.status = 200
+        res.data = JSON.stringify(post)
+        callback(null, res)
+    } catch (e) {
+        res.status=400
+        callback(null,res)
+    }
 }
 
 
