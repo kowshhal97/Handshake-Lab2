@@ -10,6 +10,7 @@ const loginHandler = async (msg, callback) => {
       callback(null, res)
     }
 
+    
     res.status = 200
     res.data = JSON.stringify(user)
     callback(null, res)
@@ -24,7 +25,6 @@ const signupHandler = async (msg, callback) => {
   const user = new Student(msg)
   try {
     await user.save()
-    console.log("saved!")
     res.data = JSON.stringify(user)
     res.status = 201
     callback(null, res)

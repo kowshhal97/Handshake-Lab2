@@ -24,18 +24,18 @@ app.use('/student/signUp', require('./studentAPIs/signUp'));
 app.use('/student/studentProfile', require('./studentAPIs/studentProfile'));
 
 // // Routes for Job APIs
-// app.use('/jobs', require('./jobAPIs/jobAPIs'));
+ app.use('/jobs', require('./jobAPIs/jobAPIs'));
 
 // // Routes for Event APIs 
-// app.use('/events', require('./eventAPIs/eventAPIs'));
+ app.use('/events', require('./eventAPIs/eventAPIs'));
 
 // // Routes for Application APIs
-// app.use('/applications', require('./applicationAPIs/applicationAPIs'));
+ app.use('/applications', require('./applicationAPIs/applicationAPIs'));
 
 // // Routes for Company APIs 
 app.use('/company/login', require('./companyAPIs/login'));
 app.use('/company/signUp', require('./companyAPIs/signUp'));
-// app.use('/company/companyProfile', require('./companyAPIs/companyProfile'));
+ app.use('/company/companyProfile', require('./companyAPIs/companyProfile'));
 
 
 app.listen(3000, () => console.log("Server Listening on port 3000!"));

@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
 
 
 
-    res.status(results.status).end(results.data);
+    res.status(results.status).end(JSON.parse(results.data));
 
   });
 

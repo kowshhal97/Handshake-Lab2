@@ -11,39 +11,33 @@ router.get('/', (req, res) => {
  
  
  
-     res.status(200).end(results);
+     res.status(results.status).send(JSON.parse(results.data));
  
    });
 });
 
 
-router.get('/jobs/:job_id', (req, res) => {
-    req.body.id = request.params.job_id;
+router.get('/:job_id', (req, res) => {
+    req.body.id = req.params.job_id;
     req.body.path="get-job-by-jobId"
  
    kafka.make_request('jobs', req.body, (err, results) => {
  
  
-     res.status(200).end(results);
+     res.status(results.status).send(JSON.parse(results.data));
  
    });
 });
 
 
-router.post('/:company_id', (req, res) => {
-    req.body.company_id = request.params.company_id;
-    req.body.path="post-job"
+router.post('/', (req, res) => {
+    req.body.path="post-job";
  
    kafka.make_request('jobs', req.body, (err, results) => {
  
-     // let payload = results.message;
-     // var token = jwt.sign(results, "test", {
-     //   expiresIn: 1008000
-     // })
-     // res.json({ success: true, token: 'JWT ' + token });
  
  
-     res.status(200).end(results);
+     res.status(results.status).send(JSON.parse(results.data));
  
    });
 });

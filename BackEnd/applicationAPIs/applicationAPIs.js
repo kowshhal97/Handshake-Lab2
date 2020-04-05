@@ -5,17 +5,28 @@ const jwt = require('jsonwebtoken');
 const kafka=require('./../kafka/client')
 
 
-router.put('/:studentId/:jobId', (req, res) => {
-    req.body.studentId=req.params.studentId;
-    req.body.jobId=req.params.jobId;
+router.put('/:applicationId', (req, res) => {
+    req.body.id=req.params.applicationId;
     req.body.path="update-application"
    kafka.make_request('applications', req.body, (err, results) => {
  
  
-     res.status(200).end(results);
+     res.status(results.status).send(JSON.parse(results.data));
  
    });
 });
 
+
+router.put('/apply/:jobId', (req, res) => {
+  req.body.id=req.params.jobId;
+  req.body.path="apply"
+ kafka.make_request('applications', req.body, (err, results) => {
+
+  console.log(results)
+
+    res.status(results.status).send(JSON.parse(results.data));
+
+ });
+});
 
 module.exports = router;

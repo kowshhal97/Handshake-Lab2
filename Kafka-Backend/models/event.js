@@ -17,6 +17,7 @@ const EventPostSchema = new Schema({
     toDate: Date,
     students: [{
         name: String,
+        studentId: Schema.Types.ObjectId,
         major: String,
         university: String
     }]

@@ -12,27 +12,25 @@ router.get('/', (req, res) => {
  
   kafka.make_request('studentProfile', req.body, (err, results) => {
 
-
-    res.status(results.status).send(results.data);
+    
+    res.status(results.status).send(JSON.parse(results.data));
   });
 });
 
-router.get('/:student_id', (request, response) => {
-  req.body.student_id = request.params.student_id;
+router.get('/:student_id', (req, res) => {
+  req.body.id = req.params.student_id;
   req.body.path="get-student-by-id"
  
   kafka.make_request('studentProfile', req.body, (err, results) => {
 
 
-
-
-    res.status(results.status).end(results.data);
+    res.status(results.status).send(JSON.parse(results.data));
   });
 });
 
-router.put('/basicDetails/:student_id', (request, response) => {
+router.put('/:student_id', (req, res) => {
   
-  req.body.student_id = request.params.student_id;
+  req.body.id = req.params.student_id;
   req.body.path="update-student-by-id"
  
   kafka.make_request('studentProfile', req.body, (err, results) => {
@@ -40,7 +38,8 @@ router.put('/basicDetails/:student_id', (request, response) => {
 
 
 
-    res.status(results.status).end(results.data);
+    console.log(results)
+    res.status(results.status).send(JSON.parse(results.data));
   });
 });
 

@@ -1,7 +1,7 @@
 
 const JobPost = require('../models/job')
 
-getAllJobs = async(msg, callback) => {
+const getAllJobs = async(msg, callback) => {
     var res = {}
 
 try {
@@ -13,12 +13,9 @@ try {
         res.status=500
         callback(null,res)
     }
-
-
 }
 
-
-getJobByIdHandler = async(msg, callback) => {
+const getJobByIdHandler = async(msg, callback) => {
     var res = {}
     const _id = msg.id
 
@@ -27,14 +24,14 @@ getJobByIdHandler = async(msg, callback) => {
 
         if (!post) {
             res.status=404
-           
-            return res.status(404).send()
+            callback(null,res)
         }
         res.status=200
         res.data=JSON.stringify(post)
-        res.send(post)
+        callback(null,res)
     } catch (e) {
-        res.status(500).send()
+        res.status=200
+        callback(null,"err")
     }
 
 
@@ -42,10 +39,10 @@ getJobByIdHandler = async(msg, callback) => {
 
 
 
-PostJobHandler = async(msg, callback) => {
+const PostJobHandler = async(msg, callback) => {
     var res = {}
-    const post = new JobPost(req.body)
-
+    console.log(msg)
+    const post = new JobPost(msg)
     try {
         await post.save()
         res.status=201
@@ -59,18 +56,17 @@ PostJobHandler = async(msg, callback) => {
 
 
 function handle_request(msg, callback) {
-    console.log(msg)
     if (msg.path === "get-all-jobs") {
         delete msg.path
-        getAllEvents(msg, callback)
+        getAllJobs(msg, callback)
     }
     else if (msg.path === "get-job-by-jobId") {
         delete msg.path
-        getEventByIdHandler(msg, callback)
+        getJobByIdHandler(msg, callback)
     }
     else if (msg.path === "post-job") {
         delete msg.path
-        postEventHandler(msg, callback)
+        PostJobHandler(msg, callback)
     }
 };
 

@@ -6,14 +6,12 @@ const kafka = require('../kafka/client');
 
 router.post('/', async (req, res) => {
 
-  req.body.path="student-login";
- 
+  req.body.path = "student-login";
+
   kafka.make_request('studentAuth', req.body, (err, results) => {
 
-console.log(results)
 
-    res.status(200).send(results);
-
+    res.status(results.status).send(JSON.parse(results.data));
   });
 });
 
