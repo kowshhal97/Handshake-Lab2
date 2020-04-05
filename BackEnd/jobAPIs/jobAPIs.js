@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/jobs/:job_id', (req, res) => {
-    req.body.job_id = request.params.job_id;
+    req.body.id = request.params.job_id;
     req.body.path="get-job-by-jobId"
  
    kafka.make_request('jobs', req.body, (err, results) => {

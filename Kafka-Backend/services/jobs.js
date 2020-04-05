@@ -1,7 +1,7 @@
 
 const JobPost = require('../models/job')
 
-getAllJobs = (msg, callback) => {
+getAllJobs = async(msg, callback) => {
     var res = {}
 
 try {
@@ -15,13 +15,12 @@ try {
     }
 
 
-    callback(err, "Hello-from-handshake!")
 }
 
 
-getJobByIdHandler = (msg, callback) => {
+getJobByIdHandler = async(msg, callback) => {
     var res = {}
-    const _id = req.params.id
+    const _id = msg.id
 
     try {
         const post = await JobPost.findById(_id)
@@ -43,7 +42,7 @@ getJobByIdHandler = (msg, callback) => {
 
 
 
-PostJobHandler = (msg, callback) => {
+PostJobHandler = async(msg, callback) => {
     var res = {}
     const post = new JobPost(req.body)
 

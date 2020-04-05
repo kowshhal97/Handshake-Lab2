@@ -1,7 +1,7 @@
 
 const EventPost = require('../models/event')
 
-getAllEvents = (msg, callback) => {
+getAllEvents = async(msg, callback) => {
     var res = {}
      try {
         const posts = await EventPost.find({})
@@ -15,7 +15,7 @@ getAllEvents = (msg, callback) => {
 }
 
 
-getEventByIdHandler = (msg, callback) => {
+getEventByIdHandler = async(msg, callback) => {
     var res = {}
    
     const _id = msg.id
@@ -39,9 +39,9 @@ getEventByIdHandler = (msg, callback) => {
 
 
 
-postEventHandler = (msg, callback) => {
+postEventHandler = async(msg, callback) => {
     var res = {}
-    const post = new EventPost(req.body)
+    const post = new EventPost(msg)
 
     try {
         await post.save()
@@ -55,10 +55,10 @@ postEventHandler = (msg, callback) => {
 }
 
 
-postRegisterForEvent = (msg, callback) => {
+postRegisterForEvent = async(msg, callback) => {
     var res = {}
     try {
-        const post = await EventPost.findByIdAndUpdate(req.params.id, req.body)
+        const post = await EventPost.findByIdAndUpdate(msg.id, msg)
 
         if (!post) {
             res.status=404

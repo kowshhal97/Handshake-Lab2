@@ -1,9 +1,9 @@
 
 const Employer = require('../models/employer')
 
-loginHandler=(msg,callback)=>{
+loginHandler=async(msg,callback)=>{
   try {
-    const user = await Employer.findOne(msg.body)
+    const user = await Employer.findOne(msg)
 
     if(!user) {
         res.status=400
@@ -23,7 +23,7 @@ loginHandler=(msg,callback)=>{
 signupHandler=async(msg,callback)=>{
   res={}
 
-  const user = new Employer(msg.body)
+  const user = new Employer(msg)
 
     try {
         await user.save()

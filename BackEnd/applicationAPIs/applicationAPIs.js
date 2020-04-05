@@ -6,8 +6,8 @@ const kafka=require('./../kafka/client')
 
 
 router.put('/:studentId/:jobId', (req, res) => {
-    req.body.student_id=req.params.studentId;
-    req.body.job_id=req.params.jobId;
+    req.body.studentId=req.params.studentId;
+    req.body.jobId=req.params.jobId;
     req.body.path="update-application"
    kafka.make_request('applications', req.body, (err, results) => {
  

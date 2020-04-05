@@ -1,7 +1,7 @@
 
 
 
-getCompanyHandler = (msg, callback) => {
+getCompanyHandler = async (msg, callback) => {
   const _id = msg.id
 
   try {
@@ -19,9 +19,9 @@ getCompanyHandler = (msg, callback) => {
   }
 }
 
-updateCompanyhandler = (msg, callback) => {
+updateCompanyhandler = async (msg, callback) => {
     try {
-      const user = await Employer.findByIdAndUpdate(req.params.id, req.body)
+      const user = await Employer.findByIdAndUpdate(msg.id, msg)
 
       if (!user) {
         res.status = 404

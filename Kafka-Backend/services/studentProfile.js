@@ -16,7 +16,7 @@ getAllStudents=async(msg,callback)=>{
   updateStudentByIdHandler=async(msg,callback)=>{
     var res={}
     try {
-      const user = await Student.findByIdAndUpdate(msg.id, msg.body)
+      const user = await Student.findByIdAndUpdate(msg.id, msg)
       res.data=JSON.stringify(user)
       res.status=200
       callback(null,res)
@@ -26,7 +26,7 @@ getAllStudents=async(msg,callback)=>{
     }
   }
   
-  getStudentByIdHandler=(msg,callback)=>{
+  getStudentByIdHandler=async(msg,callback)=>{
     var res={}
     const _id = msg.id
 

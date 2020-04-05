@@ -1,7 +1,7 @@
 
 const JobPost = require('../models/job')
 
-updateApplicationHandler = (msg, callback) => {
+updateApplicationHandler = async(msg, callback) => {
     var res = {}
 
     try {

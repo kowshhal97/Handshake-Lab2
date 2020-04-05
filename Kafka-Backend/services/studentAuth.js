@@ -1,9 +1,9 @@
 const Student = require('./../models/student')
 
-const loginHandler = (msg, callback) => {
+const loginHandler = async (msg, callback) => {
   var res = {}
   try {
-    const user = await Student.findOne(req.body)
+    const user = await Student.findOne(msg)
 
     if (!user) {
       res.status = 404

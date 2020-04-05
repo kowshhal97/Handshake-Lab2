@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:event_id', (req, res) => {
-    req.body.event_id = request.params.event_id;
+    req.body.id = request.params.event_id;
     req.body.path="get-event-by-id"
  
    kafka.make_request('events', req.body, (err, results) => {
@@ -31,7 +31,7 @@ router.get('/:event_id', (req, res) => {
 
 
 router.post('/:company_id', (req, res) => {
-    req.body.company_id = request.params.company_id;
+    req.body.companyId = request.params.company_id;
     req.body.path="post-event"
  
    kafka.make_request('events', req.body, (err, results) => {
@@ -47,7 +47,7 @@ router.post('/:company_id', (req, res) => {
 
 router.post('/registered/:student_id', (req, res) => {
     
-    req.body.student_id = request.params.student_id;
+    req.body.studentId = request.params.student_id;
     req.body.path="post-register-for-event"
  
    kafka.make_request('events', req.body, (err, results) => {
