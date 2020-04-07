@@ -6,12 +6,13 @@ const kafka=require('./../kafka/client')
 
 
 router.put('/:applicationId', (req, res) => {
-    req.body.id=req.params.applicationId;
+    req.body.applicationId=req.params.applicationId;
     req.body.path="update-application"
    kafka.make_request('applications', req.body, (err, results) => {
  
  
-     res.status(results.status).send(JSON.parse(results.data));
+    console.log(results)
+    res.status(results.status).send(JSON.parse(results.data));
  
    });
 });

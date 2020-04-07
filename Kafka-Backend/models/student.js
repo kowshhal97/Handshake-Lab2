@@ -15,9 +15,6 @@ const StudentSchema = new Schema({
         type: String, 
         required: true
     },
-    collegeName: {
-        type: String, 
-    },
     major: String,
     contactNumber: Number,
     dateOfBirth: Date,
@@ -42,7 +39,17 @@ const StudentSchema = new Schema({
         startDate: Date,
         endDate: Date
     }],
-    applications: [],
+    applications: [{
+        applicationId: Schema.Types.ObjectId,
+        status: String,
+        companyName: String,
+        title: String,
+        location: String,
+        salary: String,
+        jobDescription: String,
+        category: String
+
+    }],
     registeredEvents: []
 })
 

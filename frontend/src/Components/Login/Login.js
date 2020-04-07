@@ -62,11 +62,11 @@ class SimpleTabs extends React.Component {
         }
          e.preventDefault();
         const data = {
-            student_email_id : this.state.emailId,
-            student_password : this.state.password
+            emai : this.state.emailId,
+            password : this.state.password
         }
         axios.defaults.withCredentials = true;
-        axios.post('http://54.188.68.233:3000/student/login',data,header)
+        axios.post('http://localhost:3000/student/login',data,header)
             .then(response => {
                 let studentId=response.data.id
                 this.props.onLogin(userType,studentId);
@@ -83,7 +83,7 @@ class SimpleTabs extends React.Component {
                 company_password : this.state.password
             }
             axios.defaults.withCredentials = true;
-            axios.post('http://54.188.68.233:3000/company/login',data)
+            axios.post('http://localhost:3000/company/login',data)
                 .then(response => {
                     // window.alert("Successs")
                     let companyId=response.data.id
