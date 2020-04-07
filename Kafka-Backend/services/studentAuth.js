@@ -6,7 +6,7 @@ const loginHandler = async (msg, callback) => {
     const user = await Student.findOne(msg)
 
     if (!user) {
-      res.status = 404
+      res.status = 400
       callback(null, res)
     }
 
@@ -26,7 +26,7 @@ const signupHandler = async (msg, callback) => {
   try {
     await user.save()
     res.data = JSON.stringify(user)
-    res.status = 201
+    res.status = 201;
     callback(null, res)
   } catch (e) {
     console.log(e)

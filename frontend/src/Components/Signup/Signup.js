@@ -79,35 +79,32 @@ signup=(e,userType)=>{
         e.preventDefault();
         if(userType==='student'){
         const data = {
-            student_email_id : this.state.emailId,
-            student_password : this.state.password,
-            student_name:this.state.name,
-            student_college_name:this.state.collegeName,
+            email : this.state.emailId,
+            password : this.state.password,
+            name:this.state.name,
+            collegeName:this.state.collegeName,
             major:this.state.major
         }
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/student/signUp',data)
             .then(response => {
-                let studentId=response.data.id
-                this.props.onLogin(userType,studentId);
-                console.log("Status Code : ",response.status);
+                let user=response.data
+                this.props.onLogin(userType,user);
             }).catch(()=>{
                 window.alert("FAIL")
             })}
             else{
                 const data = {
-                    company_email_id : this.state.emailId,
-                    company_password : this.state.password,
-                    company_name:this.state.name,
-                    company_location:this.state.collegeName,
-                    major:this.state.major
+                    email : this.state.emailId,
+                    password : this.state.password,
+                    name:this.state.name,
+                    location:this.state.collegeName,
                 }
                 axios.defaults.withCredentials = true;
                 axios.post('http://localhost:3000/company/signUp',data)
                     .then(response => {
-                        window.alert(response.data.id)
-                        let companyId=response.data.id
-                        this.props.onLogin(userType,companyId);
+                        let user=response.data
+                        this.props.onLogin(userType,user);
                         console.log("Status Code : ",response.status);
                     }).catch(()=>{
                         window.alert("FAIL")
@@ -145,16 +142,15 @@ SimpleTabs.propTypes = {
 const mapDispatchToProps = dispatch => {
     return ({
         onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value,studentId) => dispatch({ type: 'LOGIN', value: value,studentId:studentId })
+        onLogin: (value,user) => dispatch({ type: 'LOGIN', value: value,user:user })
     });
 }
 
 const mapStateToProps = state => {
     return {
-
         isLoggedIn: state.isLoggedIn,
         userType: state.userType,
-        studentId:state.studentId
+        user:state.user
     };
 };
 

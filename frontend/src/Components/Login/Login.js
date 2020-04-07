@@ -62,14 +62,15 @@ class SimpleTabs extends React.Component {
         }
          e.preventDefault();
         const data = {
-            emai : this.state.emailId,
+            email : this.state.emailId,
             password : this.state.password
         }
+        console.log(data)
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/student/login',data,header)
             .then(response => {
-                let studentId=response.data.id
-                this.props.onLogin(userType,studentId);
+                let user=response.data
+                this.props.onLogin(userType,user);
             }).catch(()=>{
                 window.alert("FAIL")
             })
@@ -79,15 +80,15 @@ class SimpleTabs extends React.Component {
             var headers = new Headers();
              e.preventDefault();
             const data = {
-                company_email_id : this.state.emailId,
-                company_password : this.state.password
+                email : this.state.emailId,
+                password : this.state.password
             }
             axios.defaults.withCredentials = true;
             axios.post('http://localhost:3000/company/login',data)
                 .then(response => {
                     // window.alert("Successs")
-                    let companyId=response.data.id
-                    this.props.onLogin(userType,companyId);
+                    let user=response.data
+                    this.props.onLogin(userType,user);
                 }).catch(()=>{
                     window.alert("FAIL");
                 })
@@ -130,7 +131,7 @@ SimpleTabs.propTypes = {
 const mapDispatchToProps = dispatch => {
     return ({
         onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value,studentId) => dispatch({ type: 'LOGIN', value: value,studentId:studentId })
+        onLogin: (value,user) => dispatch({ type: 'LOGIN', value: value,user:user })
     });
 }
 
@@ -138,7 +139,7 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.isLoggedIn,
         userType: state.userType,
-        studentId:state.studentId
+        user:state.user
     };
 };
 

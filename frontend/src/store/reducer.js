@@ -1,12 +1,15 @@
 
 const initialState={
 
-    isLoggedIn:true,
-    userType:'student',
-    studentId:'1'
+    isLoggedIn:false,
+    userType:'none',
+    user:{
+
+    }
 }
 
 const reducer=(state=initialState,action)=>{
+    console.log(action)
     if(action.type==='LOGOUT'){
         return {
             ...state,
@@ -19,7 +22,7 @@ const reducer=(state=initialState,action)=>{
             ...state,
             isLoggedIn:true,
             userType:action.value,
-            studentId:action.studentId
+            user:action.user
         }
     }
 return state;

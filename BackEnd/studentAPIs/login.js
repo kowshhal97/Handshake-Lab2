@@ -10,6 +10,9 @@ router.post('/', async (req, res) => {
 
   kafka.make_request('studentAuth', req.body, (err, results) => {
 
+    if(results.status!=200){
+      return res.status(results.status).send();
+    }
 
     res.status(results.status).send(JSON.parse(results.data));
   });
