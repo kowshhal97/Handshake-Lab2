@@ -6,7 +6,6 @@ import MainComp from './DetailComponent/DetailComponent'
 
 import './Profile.css'
 
-
 const profile = () => {
     return (<div className="profileMain">
         <div className="profileLayout">

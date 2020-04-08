@@ -1,23 +1,3 @@
-
-// const Login = (props) => {
-
-//     return (<div>
-        
-//         <h1>{props.type} Login</h1>
-//         <form>
-//         <Grid
-//             container
-//             direction="row"
-//             justify="center"
-//             alignItems="center">
-
-//         </Grid>
-//         </form>
-//     </div>)
-// }
-// export default Login
-
-
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';

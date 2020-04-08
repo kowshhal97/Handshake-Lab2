@@ -23,20 +23,20 @@ class AddExperienceForm extends React.Component {
   onSave = (e) => {
     e.preventDefault();
     console.log(this.state);
-    axios
-      .post('http://54.188.68.233:3000/student/studentProfile/experienceDetails/'+this.props.studentId, this.state, {headers: {'Content-Type': 'application/json'}})
-      .then(res => {
-        if (res.status === 200) {
-          console.log(res.data.result.insertId);
-          this.props.onAddExperience({...this.state, experience_id: res.data.result.insertId, student_id: 18});
+    // axios
+    //   .post('http://54.188.68.233:3000/student/studentProfile/experienceDetails/'+this.props.studentId, this.state, {headers: {'Content-Type': 'application/json'}})
+    //   .then(res => {
+    //     if (res.status === 200) {
+    //       console.log(res.data.result.insertId);
+    //       this.props.onAddExperience({...this.state, experience_id: res.data.result.insertId, student_id: 18});
           
-        } else {
-            console.log(res);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    //     } else {
+    //         console.log(res);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   onChangeHandlerCompanyName = (e, {value}) => {

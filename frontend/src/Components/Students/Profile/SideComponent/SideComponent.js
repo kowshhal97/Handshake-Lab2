@@ -19,73 +19,40 @@ class SideComponent extends Component {
     changed = (e) => {
 
     }
-
-
-
     
     changCity = (e) => {
-        let newBasicDetails = { ...this.state.extraDetails }
-        newBasicDetails.city_name = e.target.value
-        this.setState({ extraDetails: newBasicDetails })
+        this.setState({ city: e.target.value })
     }
     changeSta = (e) => {
-        let newBasicDetails = { ...this.state.extraDetails }
-        newBasicDetails.state_name = e.target.value
-        this.setState({ extraDetails: newBasicDetails })
+        
+        this.setState({ state: e.target.value })
     }
     changeCon = (e) => {
-        let newBasicDetails = { ...this.state.extraDetails }
-        newBasicDetails.country_name = e.target.value
-        this.setState({ extraDetails: newBasicDetails })
+        this.setState({ country: e.target.value})
     }
     changePh = (e) => {
-        let newBasicDetails = { ...this.state.extraDetails }
-        newBasicDetails.phone_number = e.target.value
-        this.setState({ extraDetails: newBasicDetails })
+        this.setState({ contactNumber: e.target.value })
     }
     changeDob = (e) => {
-        let newBasicDetails = { ...this.state.extraDetails }
-        newBasicDetails.date_of_birth = e.target.value
-        this.setState({ extraDetails: newBasicDetails })
+        this.setState({ dateOfBirth: e.target.value })
     }
     changeObj = (e) => {
-        let newBasicDetails = { ...this.state.BasicDetails }
-        newBasicDetails.career_objective = e.target.value
-        this.setState({ BasicDetails: newBasicDetails })
+        this.setState({ careerObjective: e.target.value })
     }
-
+    
     save = () => {
-        var headers = new Headers();
-        const data = {
-            date_of_birth: this.state.extraDetails.date_of_birth,
-            city_name: this.state.extraDetails.city_name,
-            state_name: this.state.extraDetails.state_name,
-            country_name: this.state.extraDetails.country_name,
-            phone_number: this.state.extraDetails.phone_number,
-            career_objective: this.state.BasicDetails.career_objective
-        }
-        axios.defaults.withCredentials = true;
-        axios.post('http://54.188.68.233:3000/student/studentProfile/basicDetails/' + this.props.studentId, data)
-            .then(response => {
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+       this.props.onSave(this.state)
     }
 
     componentDidMount = () => {
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/student/studentProfile/' + this.props.studentId)
-            .then(response => {
-                this.setState(response.data.obj)
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+       this.setState(this.props.user)
     }
     render() {
+
+
         return (<div className="sideProfile">
-            {this.state.extraDetails === undefined ? null :
-                (<div><div style={{ marginBottom: 20 }}><Basic BasicDetails={this.state.BasicDetails} extraDetails={this.state.extraDetails}
+            {this.state._id === undefined ? null :
+                (<div><div style={{ marginBottom: 20 }}><Basic user={this.state}
                      changeCity={this.changCity} changeSta={this.changeSta} changeCon={this.changeCon} changePh={this.changePh} changeDob={this.changeDob} changeObj={this.changeObj} save={this.save}
                 /></div>
                     <Grid container direction="row" justify="center">
@@ -99,17 +66,13 @@ class SideComponent extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, studentId) => dispatch({ type: 'LOGIN', value: value, studentId: studentId })
+        onSave:(user)=>dispatch({type:"saveToProfile",user:user})
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

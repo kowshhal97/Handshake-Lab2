@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 const initialState={
 
     isLoggedIn:false,
@@ -24,6 +24,18 @@ const reducer=(state=initialState,action)=>{
             userType:action.value,
             user:action.user
         }
+    }
+    if(action.type==='saveToProfile'){
+        console.log(action.user)
+        axios.put('http://localhost:3000/student/studentProfile/' + action.user._id, action.user)
+            .then(response => {
+                return {
+                    ...state,
+                    ...response.data
+                }
+            }).catch(() => {
+                window.alert("FAIL")
+            })
     }
 return state;
 }

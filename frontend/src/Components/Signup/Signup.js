@@ -41,76 +41,85 @@ class SimpleTabs extends React.Component {
     handleChange = (event, value) => {
         this.setState({ value });
     };
-    state={
+    state = {
         value: 0,
-        name:"",
-        emailId:"",
-        password:"",
-        collegeName:"",
-        major:"",
+        name: "",
+        emailId: "",
+        password: "",
+        collegeName: "",
+        major: "",
 
 
-}
+    }
 
-emailHandler=(e)=>{
-    this.setState({emailId:e.target.value})
-}
-passwordHandler=(e)=>{
+    emailHandler = (e) => {
+        this.setState({ emailId: e.target.value })
+    }
+    passwordHandler = (e) => {
 
-    this.setState({password:e.target.value})
-}
+        this.setState({ password: e.target.value })
+    }
 
-collegeNameHandler=(e)=>{
+    collegeNameHandler = (e) => {
 
-    this.setState({collegeName:e.target.value})
-}
+        this.setState({ collegeName: e.target.value })
+    }
 
-nameHandler=(e)=>{
+    nameHandler = (e) => {
 
-    this.setState({name:e.target.value})
-}
+        this.setState({ name: e.target.value })
+    }
 
-MajorHandler=(e)=>{
-    this.setState({major:e.target.value})
-}
+    MajorHandler = (e) => {
+        this.setState({ major: e.target.value })
+    }
 
-signup=(e,userType)=>{
-    var headers = new Headers();
+    signup = (e, userType) => {
+        var headers = new Headers();
         e.preventDefault();
-        if(userType==='student'){
-        const data = {
-            email : this.state.emailId,
-            password : this.state.password,
-            name:this.state.name,
-            collegeName:this.state.collegeName,
-            major:this.state.major
-        }
-        axios.defaults.withCredentials = true;
-        axios.post('http://localhost:3000/student/signUp',data)
-            .then(response => {
-                let user=response.data
-                this.props.onLogin(userType,user);
-            }).catch(()=>{
-                window.alert("FAIL")
-            })}
-            else{
-                const data = {
-                    email : this.state.emailId,
-                    password : this.state.password,
-                    name:this.state.name,
-                    location:this.state.collegeName,
-                }
-                axios.defaults.withCredentials = true;
-                axios.post('http://localhost:3000/company/signUp',data)
-                    .then(response => {
-                        let user=response.data
-                        this.props.onLogin(userType,user);
-                        console.log("Status Code : ",response.status);
-                    }).catch(()=>{
-                        window.alert("FAIL")
-                    })
+        if (userType === 'student') {
+            const data = {
+                email: this.state.emailId,
+                password: this.state.password,
+                name: this.state.name,
+                collegeName: this.state.collegeName,
+                major: this.state.major,
+                contactNumber: "",
+                dateOfBirth: "",
+                city: "",
+                state: "",
+                country: "",
+                careerObjective: ""
             }
-}
+            axios.defaults.withCredentials = true;
+            console.log(data)
+            axios.post('http://localhost:3000/student/signUp', data)
+                .then(response => {
+                    console.log(response.data)
+                    let user = response.data
+                    this.props.onLogin(userType, user);
+                }).catch(() => {
+                    window.alert("FAIL")
+                })
+        }
+        else {
+            const data = {
+                email: this.state.emailId,
+                password: this.state.password,
+                name: this.state.name,
+                location: this.state.collegeName
+            }
+            axios.defaults.withCredentials = true;
+            axios.post('http://localhost:3000/company/signUp', data)
+                .then(response => {
+                    let user = response.data
+                    this.props.onLogin(userType, user);
+                    console.log("Status Code : ", response.status);
+                }).catch(() => {
+                    window.alert("FAIL")
+                })
+        }
+    }
 
     render() {
         const { classes } = this.props;
@@ -126,8 +135,8 @@ signup=(e,userType)=>{
                                 <Tab label="Company" />
                             </Tabs>
                         </AppBar>
-                        {value === 0 && <TabContainer><Signup type="student" par="CollegeName" changeEmail={this.emailHandler} changePassword={this.passwordHandler} changeCollege={this.collegeNameHandler} changeName={this.nameHandler}  signup={this.signup} major={this.MajorHandler} /></TabContainer>}
-                        {value === 1 && <TabContainer><Signup type="company" par="Location" changeEmail={this.emailHandler} changePassword={this.passwordHandler} changeCollege={this.collegeNameHandler} changeName={this.nameHandler}  signup={this.signup} major={this.MajorHandler}/></TabContainer>}
+                        {value === 0 && <TabContainer><Signup type="student" par="CollegeName" changeEmail={this.emailHandler} changePassword={this.passwordHandler} changeCollege={this.collegeNameHandler} changeName={this.nameHandler} signup={this.signup} major={this.MajorHandler} /></TabContainer>}
+                        {value === 1 && <TabContainer><Signup type="company" par="Location" changeEmail={this.emailHandler} changePassword={this.passwordHandler} changeCollege={this.collegeNameHandler} changeName={this.nameHandler} signup={this.signup} major={this.MajorHandler} /></TabContainer>}
                     </Paper>
                 </Grid>
             </div>
@@ -142,7 +151,7 @@ SimpleTabs.propTypes = {
 const mapDispatchToProps = dispatch => {
     return ({
         onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value,user) => dispatch({ type: 'LOGIN', value: value,user:user })
+        onLogin: (value, user) => dispatch({ type: 'LOGIN', value: value, user: user })
     });
 }
 
@@ -150,8 +159,8 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.isLoggedIn,
         userType: state.userType,
-        user:state.user
+        user: state.user
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(SimpleTabs));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SimpleTabs));

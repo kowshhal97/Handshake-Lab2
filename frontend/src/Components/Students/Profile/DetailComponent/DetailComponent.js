@@ -25,23 +25,25 @@ class DetailComponent extends Component {
 
     componentDidMount = () => {
         this._isMounted = true;
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/student/studentProfile/educationDetails/' + this.props.studentId)
-            .then(response => {
 
-                this.setState({ educationDetails: response.data.result });
-            }).catch(() => {
-                window.alert("FAIL")
-            });
-        axios.get('http://54.188.68.233:3000/student/studentProfile/experienceDetails/' + this.props.studentId)
-            .then(response => {
-                console.log(response.data)
-                this.setState({ experienceDetails: response.data.result })
-                console.log(this.state)
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+        
+
+        // var headers = new Headers();
+        // axios.defaults.withCredentials = true;
+        // axios.get('http://54.188.68.233:3000/student/studentProfile/educationDetails/' + this.props.studentId)
+        //     .then(response => {
+        //         this.setState({ educationDetails: response.data.result });
+        //     }).catch(() => {
+        //         window.alert("FAIL")
+        //     });
+        // axios.get('http://54.188.68.233:3000/student/studentProfile/experienceDetails/' + this.props.studentId)
+        //     .then(response => {
+        //         console.log(response.data)
+        //         this.setState({ experienceDetails: response.data.result })
+        //         console.log(this.state)
+        //     }).catch(() => {
+        //         window.alert("FAIL")
+        //     })
     }
 
     componentWillUnmount() {

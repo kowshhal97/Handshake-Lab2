@@ -81,7 +81,7 @@ class SimpleTabs extends React.Component {
              e.preventDefault();
             const data = {
                 email : this.state.emailId,
-                password : this.state.password
+                password : this.state.password,
             }
             axios.defaults.withCredentials = true;
             axios.post('http://localhost:3000/company/login',data)

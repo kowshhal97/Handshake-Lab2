@@ -11,33 +11,31 @@ class Skills extends React.Component {
 
     componentDidMount() {
         if(this.props.skillSet != null) {
-            this.setState({skills: this.props.skillSet.split(",")})
+            this.setState({skills: this.props.skillSet})
         }
     }
 
     onAdd = (e) => {
         e.preventDefault();
         const list = [...this.state.skills, this.state.current_skill];
-        const str = list.join();
         const data = {...this.props.skillSet};
-        data.skillSet = str;
-        axios
-        .post('http://54.188.68.233:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
-        .then(res => {
-            if (res.status === 200) {
-                console.log(res.data.result);
+        data.skillSet = list;
+        // axios
+        // .post('http://54.188.68.233:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
+        // .then(res => {
+        //     if (res.status === 200) {
+        //         console.log(res.data.result);
           
-            } else {
-                window.alert("huyu")
-                console.log(res);
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        //     } else {
+        //         window.alert("huyu")
+        //         console.log(res);
+        //     }
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // });
         this.setState({skills: list})
         this.setState({current_skill: ''});
-
     }
 
     onChangeHandler = (e) => {
@@ -45,30 +43,28 @@ class Skills extends React.Component {
         
     }
     onDeleteSkill = (e) => {
-        console.log(e.target.id)
         const list = this.state.skills.filter(item => {
             if (e.target.id !== item) {
                 return item;
             }
         })
-        const str = list.join();
         const data = {...this.props.skillSet};
-        data.skillSet = str;
-        axios
-        .post('http://54.188.68.233:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
-        .then(res => {
-            if (res.status === 200) {
+        data.skillSet = list;
+        // axios
+        // .post('http://54.188.68.233:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
+        // .then(res => {
+        //     if (res.status === 200) {
                 
-                console.log(res.data.result);
+        //         console.log(res.data.result);
           
-            } else {
+        //     } else {
                 
-                console.log(res);
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        //         console.log(res);
+        //     }
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // });
         this.setState({skills: list})
     }
 

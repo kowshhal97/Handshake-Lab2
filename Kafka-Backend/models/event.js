@@ -13,8 +13,8 @@ const EventPostSchema = new Schema({
     },
     eventLocation: String,
     eligibility: String,
-    fromDate: Date,
-    toDate: Date,
+    fromDate: String,
+    toDate: String,
     students: [{
         name: String,
         studentId: Schema.Types.ObjectId,
