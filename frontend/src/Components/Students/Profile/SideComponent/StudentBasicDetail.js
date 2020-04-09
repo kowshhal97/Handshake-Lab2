@@ -66,10 +66,11 @@ const styles = theme => ({
 
 class RecipeReviewCard extends React.Component {
     state = {
-        img:"https://handshake-project.s3-us-west-2.amazonaws.com/profile_"+("1"),
+        img: "https://handshake-project.s3-us-west-2.amazonaws.com/profile_" + (this.props.user._id),
         expanded: false,
         editBasicDetails: false,
-        profilePicUpdated:true
+        profilePicUpdated: true,
+        imageHash: Date.now()
     };
 
     editBasicDetails = () => {
@@ -90,20 +91,19 @@ class RecipeReviewCard extends React.Component {
 
 
     onFileSelect = (e) => {
-    const fd = new FormData();
-    fd.append('upl', e.target.files[0]);
-    axios
-      .post(`http://54.188.68.233:3000/student/studentProfile/upload/${(this.props.studentId+1)}`, fd)
-      .then(res => {
-        if (res.status === 200) {
-          this.setState({profilePicUpdated:!this.state.profilePicUpdated})
-        }
-      })
-      .catch(err => {
-        window.alert("Fail")
-      });
-
-      }
+        const fd = new FormData();
+        fd.append('upl', e.target.files[0]);
+        axios
+            .post(`http://localhost:3000/student/studentProfile/upload/${this.props.user._id}`, fd)
+            .then(res => {
+                if (res.status === 200) {
+                    this.setState(this.state)
+                }
+            })
+            .catch(err => {
+                window.alert("Fail")
+            });
+    }
 
     render() {
         console.log(this.props.user)
@@ -114,11 +114,11 @@ class RecipeReviewCard extends React.Component {
                 <CardHeader
                     action={
                         <IconButton>
-                            <Button variant="contained" component="label"  color="primary">
-                            <EditIcon >
-                            </EditIcon>
-                                    <input type="file" style={{ display: "none" }} onChange={this.onFileSelect}
-                                    />
+                            <Button variant="contained" component="label" color="primary">
+                                <EditIcon >
+                                </EditIcon>
+                                <input type="file" style={{ display: "none" }} onChange={this.onFileSelect}
+                                />
                             </Button>
                         </IconButton>
                     }
@@ -128,7 +128,7 @@ class RecipeReviewCard extends React.Component {
                 />
                 <CardMedia
                     className={classes.media}
-                    image={this.state.img}
+                    image={`${this.state.img}?${this.state.imageHash}`}
                     title="Profile Pic" />
                 <CardContent>
 
@@ -314,23 +314,14 @@ RecipeReviewCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = dispatch => {
-    return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, studentId) => dispatch({ type: 'LOGIN', value: value, studentId: studentId })
-    });
-}
 
 const mapStateToProps = state => {
     return {
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user: state.user
     };
 };
 
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(RecipeReviewCard));
+export default connect(mapStateToProps)(withStyles(styles)(RecipeReviewCard));

@@ -24,6 +24,7 @@ const StudentSchema = new Schema({
     collegeName:String,
     skillSet: [],
     education: [{
+        id:String,
         institution_name: String,
         location: String,
         degree: String,
@@ -32,6 +33,7 @@ const StudentSchema = new Schema({
         cgpa: String
     }],
     experience: [{
+        id:String,
         company_name: String,
         designation: String,
         company_location: String,
@@ -48,7 +50,6 @@ const StudentSchema = new Schema({
         salary: String,
         jobDescription: String,
         category: String
-
     }],
     registeredEvents: []
 })

@@ -68,13 +68,13 @@ class Events extends Component {
     componentDidMount = () => {
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/events')
-            .then(response => {
-                this.setState({ getEventData: [...response.data.result] })
-                console.log(this.state.getEventData)
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+        // axios.get('http://54.188.68.233:3000/events')
+        //     .then(response => {
+        //         this.setState({ getEventData: [...response.data.result] })
+        //         console.log(this.state.getEventData)
+        //     }).catch(() => {
+        //         window.alert("FAIL")
+        //     })
     }
 
 

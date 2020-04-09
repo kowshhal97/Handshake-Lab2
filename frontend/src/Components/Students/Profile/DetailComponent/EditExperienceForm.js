@@ -28,6 +28,7 @@ class EditExperienceForm extends React.Component {
             company_location: this.state.company_location == ''? this.props.data.company_location: this.state.company_location,
             work_summary: this.state.work_summary===''?this.props.data.work_summary: this.state.work_summary
           }
+          this.props.onUpdateExperience(data)
 
 
     // const id = this.props.data.experience_id;

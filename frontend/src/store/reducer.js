@@ -26,18 +26,14 @@ const reducer=(state=initialState,action)=>{
         }
     }
     if(action.type==='saveToProfile'){
-        console.log(action.user)
-        axios.put('http://localhost:3000/student/studentProfile/' + action.user._id, action.user)
-            .then(response => {
-                return {
-                    ...state,
-                    ...response.data
-                }
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+       return {
+           ...state,
+           user:action.user
+       }
     }
 return state;
 }
+
+
 
 export default reducer;

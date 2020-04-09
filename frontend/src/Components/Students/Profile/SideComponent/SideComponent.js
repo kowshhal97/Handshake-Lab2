@@ -41,7 +41,12 @@ class SideComponent extends Component {
     }
     
     save = () => {
-       this.props.onSave(this.state)
+        axios.put('http://localhost:3000/student/studentProfile/' + this.state._id, this.state)
+        .then(response => {
+           this.props.onSave(response.data)
+        }).catch(() => {
+            window.alert("FAIL")
+        })
     }
 
     componentDidMount = () => {

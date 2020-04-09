@@ -77,15 +77,15 @@ class DashBoard extends Component {
 
     componentDidMount = () => {
         var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/jobs')
-            .then(response => {
+        // axios.defaults.withCredentials = true;
+        // axios.get('http://54.188.68.233:3000/jobs')
+        //     .then(response => {
 
-                this.setState({data:[...response.data.result]});
+        //         this.setState({data:[...response.data.result]});
 
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+        //     }).catch(() => {
+        //         window.alert("FAIL")
+        //     })
     }
     options = {
         selectableRowsOnClick: true,
