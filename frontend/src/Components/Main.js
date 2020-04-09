@@ -13,6 +13,8 @@ import companyEvents from "./Company/Events/Events";
 import companyProfile from './Company/Profile/Profile';
 import companyStudentsTab from './Company/StudentsTab/StudentsTab';
 
+import Messages from './Messages/messages'
+
 import CompanyProfile from './CompanyProfile'
 
 
@@ -28,7 +30,7 @@ class Main extends Component {
 
 
     render() {
-        let NavBarVar, dashBoardVar, studentsTabVar, eventsVar, profileVar = null;
+        let NavBarVar, dashBoardVar, studentsTabVar,messagesTab, eventsVar, profileVar = null;
 
         if (!this.props.isLoggedIn) {
             NavBarVar = GlobalNavbar;
@@ -36,8 +38,10 @@ class Main extends Component {
             studentsTabVar = Home;
             eventsVar = Home;
             profileVar = Home;
+            messagesTab=Home;
         }
         else {
+            messagesTab=Messages;
             NavBarVar = StudentNavBar;
             studentsTabVar = companyStudentsTab;
             if (this.props.userType === 'student') {
@@ -64,6 +68,7 @@ class Main extends Component {
                 <Route exact path="/dashboard"  component={dashBoardVar} />
                 <Route exact path="/studentsTab" component={studentsTabVar} />
                 <Route exact path="/events"  component={eventsVar} />
+                <Route exact path="/messages"  component={messagesTab} />
                 <Route exact path="/profile" exact component={profileVar} />
                 <Route exact path="/company/profile" exact component={CompanyProfile}/>
 
