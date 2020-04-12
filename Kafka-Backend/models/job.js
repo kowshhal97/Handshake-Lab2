@@ -3,17 +3,18 @@ const Schema = mongoose.Schema;
 
 const JobPostSchema = new Schema({  
     companyName: String,
-    title: String,
-    postingDate: String,
-    deadline: String,
-    location: String,
-    salary: String,
-    jobDescription: String,
-    category: String,
+    job_title: String,
+    job_posting_date: String,
+    job_application_deadline: String,
+    job_location: String,
+    job_salary: String,
+    job_description: String,
+    job_category: String,
+    job_requirements:String,
     students: [{    
         studentId: Schema.Types.ObjectId,
         name: String,
-        university: String,
+        collegeName: String,
         major: String,
         cgpa: String, 
     }]

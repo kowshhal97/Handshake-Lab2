@@ -90,9 +90,9 @@ class CustomizedDialogDemo extends React.Component {
   componentDidMount = () => {
     var headers = new Headers();
     axios.defaults.withCredentials = true;
-    axios.get('http://54.188.68.233:3000/jobs/jobs/'+this.props.jobId)
+    axios.get('http://localhost:3000/jobs/'+this.props.jobId)
         .then(response => {
-            this.setState({data:response.data[0]})
+            this.setState({data:response.data})
             console.log(this.state.data)
         }).catch(() => {
             window.alert("FAIL")

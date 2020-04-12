@@ -3,6 +3,7 @@ import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import ProfileDialog from './../../../StudentProfileDialog/profileDialog'
 import { Collapse } from '@material-ui/core';
+import { connect } from 'react-redux'
 
 
 let Dialog=null;
@@ -70,23 +71,12 @@ class StudentsTab extends Component {
     componentDidMount=()=>{
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        // axios.get('http://54.188.68.233:3000/events/registered/'+this.props.eventId)
-        //     .then(response => {
-        //         let res=response.data;
-        //         for(let i of res){
-        //             axios.get('http://54.188.68.233:3000/events/' + i.event_id)
-        //     .then(response => {
-        //         let obj={...response.data[0]};
-        //         obj.studentId=i.student_id;
-        //         let newData=[...this.state.data,obj];
-        //         this.setState({data:newData});              
-        //     }).catch(() => {
-        //         window.alert("FAIL")
-        //     })
-        //         }
-        //     }).catch(() => {
-        //         window.alert("FAIL")
-        //     })
+        axios.get('http://localhost:3000/events/company/'+this.props.user.name)
+            .then(response => {
+                this.setState({data:response.data});  
+            }).catch(() => {
+                window.alert("FAIL")
+            })
     }
 
 
@@ -115,4 +105,21 @@ class StudentsTab extends Component {
     }
 }
 
-export default StudentsTab;
+
+const mapDispatchToProps = dispatch => {
+    return ({
+        onLogout: () => dispatch({ type: 'LOGOUT' }),
+        onLogin: (value,user) => dispatch({ type: 'LOGIN', value: value,user:user })
+    });
+}
+
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: state.isLoggedIn,
+        userType: state.userType,
+        user:state.user
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentsTab);

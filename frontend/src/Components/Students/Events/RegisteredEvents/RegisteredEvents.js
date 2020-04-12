@@ -60,26 +60,7 @@ class PostedEvents extends Component {
 
     componentDidMount=()=>{
         
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/events/registered/'+this.props.studentId)
-            .then(response => {
-                let res=response.data;
-                for(let i of res){
-                    axios.get('http://54.188.68.233:3000/events/' + i.event_id)
-            .then(response => {
-                let obj={...response.data[0]};
-                
-                let newData=[...this.state.data,obj];
-                this.setState({data:newData});
-                
-            }).catch(() => {
-                window.alert("FAIL")
-            })
-                }
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+        this.setState({data:this.props.user.registeredEvents})
 
     }
     options = {
@@ -87,7 +68,7 @@ class PostedEvents extends Component {
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
            
-            let eventId=this.state.data[cellMeta.dataIndex].event_id
+            let eventId=this.state.data[cellMeta.dataIndex].eventId
             Dialog=(<EventsDialog display={true} eventId={eventId} close={this.dialogCloseHandler}/>)
             this.setState({showDialog:true})
         },
@@ -119,18 +100,12 @@ class PostedEvents extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

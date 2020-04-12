@@ -1,5 +1,6 @@
 
 const EventPost = require('../models/event')
+const Student=require('../models/student')
 
 getAllEvents = async (msg, callback) => {
     var res = {}
@@ -67,12 +68,12 @@ postRegisterForEvent = async (msg, callback) => {
             }
             post.students.push(student)
             await post.save()
-            const user = await Student.findById(student.studentId)
-            const { companyName, eventName, eventDescription, eventLocation, eligibility, fromDate, toDate } = post
+            const user = await Student.findById(student._id)
+            const { companyName, event_name, event_description, event_location, event_eligibility_criteria, event_from_date, event_to_date,event_major,event_timing } = post
             const registeredEventId = post.students[post.students.length - 1]._id;
             const eventId = post._id;
             console.log(registeredEventId);
-            user.registeredEvents.push({ eventId, registeredEventId, companyName, eventName, eventDescription, eventLocation, eligibility, fromDate, toDate })
+            user.registeredEvents.push({ eventId, registeredEventId, companyName, event_name, event_description, event_location, event_eligibility_criteria, event_from_date, event_to_date,event_major,event_timing })
             await user.save()
             res.status = 200
             res.data = JSON.stringify(user)
@@ -88,6 +89,7 @@ postRegisterForEvent = async (msg, callback) => {
             callback(null, res)
         }
     } catch (e) {
+        console.log(e)
         res.status = 400
         callback(null, res)
     }

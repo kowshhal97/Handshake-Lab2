@@ -77,16 +77,14 @@ class CustomizedDialogDemo extends React.Component {
       var headers = new Headers();
           // e.preventDefault();
           const data = {
-            event_id : this.state.event_id,
-            company_id : this.state.company_id,
+            student:this.props.user
           }
-          console.log(data)
           axios.defaults.withCredentials = true;
-          axios.post('http://54.188.68.233:3000/events/registered/'+this.props.studentId,data)
+          axios.post('http://localhost:3000/events/registered/'+this.props.eventId,data)
               .then(response => {
                 this.setState({ open: false });
                 this.props.close(e);
-                  console.log("Status Code : ",response.status);
+                this.props.onSave(response.data)
               }).catch(()=>{
                   window.alert("FAIL")
               })
@@ -97,13 +95,13 @@ class CustomizedDialogDemo extends React.Component {
   componentDidMount = () => {
     var headers = new Headers();
     axios.defaults.withCredentials = true;
-    // axios.get('http://54.188.68.233:3000/events/'+this.props.eventId)
-    //     .then(response => {
-    //         this.setState(response.data[0])
-    //         console.log(this.state.eventDetails)
-    //     }).catch(() => {
-    //         window.alert("FAIL")
-    //     })
+   
+    axios.get('http://localhost:3000/events/'+this.props.eventId)
+        .then(response => {
+            this.setState(response.data)
+        }).catch(() => {
+            window.alert("FAIL")
+        })
 }
   render() {
 
@@ -152,18 +150,13 @@ class CustomizedDialogDemo extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return ({
-      onLogout: () => dispatch({ type: 'LOGOUT' }),
-      onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
+      onSave:(user)=>dispatch({type:"saveToProfile",user:user})
   });
 }
 
 const mapStateToProps = state => {
   return {
-
-
-      isLoggedIn: state.isLoggedIn,
-      userType: state.userType,
-      studentId: state.studentId
+      user:state.user
   };
 };
 

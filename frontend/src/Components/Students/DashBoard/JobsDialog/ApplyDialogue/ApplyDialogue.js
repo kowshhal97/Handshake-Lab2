@@ -86,15 +86,11 @@ let year = newDate.getFullYear();
 
 let currentDate= `${year}-${month<10?`0${month}`:`${month}`}-${date}`
         const data = {
-            application_status: "Submitted",
-            company_id: this.props.companyId,
-            job_id: this.props.jobId,
-            application_date: currentDate,
-            student_id: this.props.studentId
+            student:this.props.user
         }
         console.log(data)
         axios.defaults.withCredentials = true;
-        axios.post('http://54.188.68.233:3000/applications', data)
+        axios.post('http://localhost:3000/applications/apply/'+this.props.jobId, data)
             .then(response => {
                 this.setState({ open: false });
                 this.props.close(e);
@@ -105,7 +101,7 @@ let currentDate= `${year}-${month<10?`0${month}`:`${month}`}-${date}`
             const fd = new FormData();
             fd.append('upl', this.state.Resume);
             axios
-              .post(`http://54.188.68.233:3000/student/studentProfile/upload/resume/${(this.props.studentId+1)}`, fd)
+              .post(`http://localhost:3000/student/studentProfile/upload/resume/${(this.props.user._id)}`, fd)
               .then(res => {
                 if (res.status === 200) {
                     window.alert("success")
@@ -167,19 +163,14 @@ let currentDate= `${year}-${month<10?`0${month}`:`${month}`}-${date}`
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomizedDialogDemo);

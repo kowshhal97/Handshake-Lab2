@@ -30,7 +30,8 @@ router.get('/:job_id', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/:companyName', (req, res) => {
+  req.body.companyName=req.params.companyName;
     req.body.path="post-job";
  
    kafka.make_request('jobs', req.body, (err, results) => {
@@ -42,6 +43,17 @@ router.post('/', (req, res) => {
    });
 });
 
+router.get('/company/:companyName', (req, res) => {
+  req.body.companyName = req.params.companyName;
+  req.body.path="get-jobs-by-company-name"
+
+ kafka.make_request('jobs', req.body, (err, results) => {
+
+
+   res.status(results.status).send(JSON.parse(results.data));
+
+ });
+});
 
 
   

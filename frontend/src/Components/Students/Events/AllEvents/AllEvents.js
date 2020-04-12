@@ -8,14 +8,6 @@ import { connect } from 'react-redux';
 let Dialog=null;
 const column = [
     {
-        name: "event_id",
-        label: "Sno",
-        options: {
-            filter: false,
-            sort: true,
-        }
-    },
-    {
         name: "event_name",
         label: "event Name",
         options: {
@@ -69,7 +61,7 @@ class PostedEvents extends Component {
     componentDidMount = () => {
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/events')
+        axios.get('http://localhost:3000/events')
             .then(response => {
                 this.setState({data:[...response.data]})
                 console.log(this.state.data)
@@ -81,7 +73,7 @@ class PostedEvents extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
-            Dialog=(<EventsDialog registerAllowed={true} display={true} eventId={cellMeta.dataIndex+1} close={this.dialogCloseHandler}/>)
+            Dialog=(<EventsDialog registerAllowed={true} display={true} eventId={this.state.data[cellMeta.dataIndex]._id} close={this.dialogCloseHandler}/>)
             this.setState({showDialog:true})
         },
         selectableRows: "none",

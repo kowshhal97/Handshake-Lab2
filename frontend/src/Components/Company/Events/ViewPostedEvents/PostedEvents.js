@@ -7,14 +7,6 @@ import { connect } from 'react-redux';
 let Dialog=null;
 const column = [
     {
-        name: "event_id",
-        label: "Sno",
-        options: {
-            filter: false,
-            sort: true,
-        }
-    },
-    {
         name: "event_name",
         label: "event Name",
         options: {
@@ -80,7 +72,7 @@ class PostedEvents extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
-            Dialog=(<EventsDialog display={true} eventId={cellMeta.dataIndex+1} close={this.dialogCloseHandler}/>)
+            Dialog=(<EventsDialog display={true} eventId={this.state.data[cellMeta.dataIndex]._id} close={this.dialogCloseHandler}/>)
             this.setState({showDialog:true})
         },
         selectableRows: "none",

@@ -64,20 +64,6 @@ class Events extends Component {
 
 
 
-
-    componentDidMount = () => {
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        // axios.get('http://54.188.68.233:3000/events')
-        //     .then(response => {
-        //         this.setState({ getEventData: [...response.data] })
-        //         console.log(this.state.getEventData)
-        //     }).catch(() => {
-        //         window.alert("FAIL")
-        //     })
-    }
-
-
     render() {
         const { classes } = this.props;
         const { value } = this.state;
@@ -108,25 +94,10 @@ Events.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = dispatch => {
-    return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, studentId) => dispatch({ type: 'LOGIN', value: value, studentId: studentId })
-    });
-}
-
-const mapStateToProps = state => {
-    return {
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
-    };
-};
 
 
 
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Events));
+export default (withStyles(styles)(Events));

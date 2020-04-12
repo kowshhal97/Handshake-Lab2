@@ -90,7 +90,7 @@ class DashBoard extends React.Component {
             job_category: this.state.job_category
         }
         axios.defaults.withCredentials = true;
-        axios.post('http://54.188.68.233:3000/jobs/' + this.props.studentId, data)
+        axios.post('http://localhost:3000/jobs/' + this.props.user.name, data)
             .then(response => {
 
             }).catch(() => {
@@ -99,14 +99,14 @@ class DashBoard extends React.Component {
     }
 
     componentDidMount = () => {
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/jobs/postings/' + this.props.studentId)
-            .then(response => {
-                this.setState({jobPostings:response.data});
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+        // var headers = new Headers();
+        // axios.defaults.withCredentials = true;
+        // axios.get('http://54.188.68.233:3000/jobs/postings/' + this.props.studentId)
+        //     .then(response => {
+        //         this.setState({jobPostings:response.data});
+        //     }).catch(() => {
+        //         window.alert("FAIL")
+        //     })
     }
 
 
@@ -149,17 +149,13 @@ DashBoard.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, studentId) => dispatch({ type: 'LOGIN', value: value, studentId: studentId })
+
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

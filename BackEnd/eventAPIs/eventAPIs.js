@@ -55,16 +55,19 @@ router.post('/:companyName', (req, res) => {
 
 
 
-router.post('/registered/:student_id', (req, res) => {
+router.post('/registered/:eventId', (req, res) => {
 
-  req.body.id = req.params.student_id;
+  req.body.id = req.params.eventId;
   req.body.path = "post-register-for-event"
 
+  console.log(req.body)
   kafka.make_request('events', req.body, (err, results) => {
 
 
-
+    if(results.status===200)
     res.status(results.status).send(JSON.parse(results.data));
+    else
+    res.status(results.status).send();
   });
 });
 

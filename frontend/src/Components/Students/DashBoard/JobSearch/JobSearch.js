@@ -19,14 +19,6 @@ import Typography from '@material-ui/core/Typography';
 let Dialog=null;
 const column = [
     {
-        name: "job_id",
-        label: "Sno",
-        options: {
-            filter: false,
-            sort: true,
-        }
-    },
-    {
         name: "job_title",
         label: "Title",
         options: {
@@ -77,28 +69,21 @@ class DashBoard extends Component {
 
     componentDidMount = () => {
         var headers = new Headers();
-        // axios.defaults.withCredentials = true;
-        // axios.get('http://54.188.68.233:3000/jobs')
-        //     .then(response => {
+        axios.defaults.withCredentials = true;
+        axios.get('http://localhost:3000/jobs')
+            .then(response => {
 
-        //         this.setState({data:[...response.data]});
+                this.setState({data:[...response.data]});
 
-        //     }).catch(() => {
-        //         window.alert("FAIL")
-        //     })
+            }).catch(() => {
+                window.alert("FAIL")
+            })
     }
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
-        
-            let companyId;
-            for(let i of this.state.data){
-                if(i.job_id==cellMeta.dataIndex+1){
-                    companyId=i.company_id;
-                }
-            }
-            Dialog=(<JobsDialog display={true} jobId={cellMeta.dataIndex+1} close={this.dialogCloseHandler} companyId={companyId}/>)
+            Dialog=(<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex]._id} close={this.dialogCloseHandler}/>)
             this.setState({showDialog:true})
         },
         selectableRows: "none",
