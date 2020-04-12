@@ -86,7 +86,8 @@ let year = newDate.getFullYear();
 
 let currentDate= `${year}-${month<10?`0${month}`:`${month}`}-${date}`
         const data = {
-            student:this.props.user
+            student:this.props.user,
+            application_date:currentDate
         }
         console.log(data)
         axios.defaults.withCredentials = true;

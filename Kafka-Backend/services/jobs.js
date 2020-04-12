@@ -16,20 +16,24 @@ try {
 }
 
 const getJobByIdHandler = async(msg, callback) => {
+    console.log(msg)
     var res = {}
     const _id = msg.id
 
+    console.log(msg)
     try {
         const post = await JobPost.findById(_id)
-
+        
         if (!post) {
             res.status=404
             callback(null,res)
         }
         res.status=200
         res.data=JSON.stringify(post)
+        console.log(res)
         callback(null,res)
     } catch (e) {
+        console.log(e)
         res.status=200
         callback(null,"err")
     }

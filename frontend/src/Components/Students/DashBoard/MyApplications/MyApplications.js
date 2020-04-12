@@ -12,16 +12,16 @@ import JobsDialog from './JobDetails/JobsDialog';
 let Dialog=null;
 const column = [
     {
-        name: "job_id",
-        label: "job_id",
+        name: "job_title",
+        label: "Job Title",
         options: {
-            filter: false,
+            filter: true,
             sort: true,
         }
     },
     {
-        name: "company_id",
-        label: "company_id",
+        name: "companyName",
+        label: "Company Name",
         options: {
             filter: true,
             sort: true,
@@ -36,7 +36,7 @@ const column = [
         }
     },
     {
-        name: "application_status",
+        name: "status",
         label: "Status",
         options: {
             filter: true,
@@ -67,13 +67,7 @@ class DashBoard extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
-            let companyId;
-            for(let i of this.state.data){
-                if(i.job_id===cellMeta.dataIndex+1){
-                    companyId=i.company_id;
-                }
-            }
-            Dialog=(<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex].applicationId} close={this.dialogCloseHandler} companyId={companyId}/>)
+            Dialog=(<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex].applicationId} close={this.dialogCloseHandler}/>)
             this.setState({showDialog:true})
         },
         selectableRows: "none",

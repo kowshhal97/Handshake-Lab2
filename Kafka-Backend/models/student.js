@@ -67,7 +67,8 @@ const StudentSchema = new Schema({
         event_eligibility_criteria: String,
         event_from_date: String,
         event_to_date: String,
-        event_major: String
+        event_major: String,
+        application_date:String
     }]
 })
 

@@ -45,7 +45,7 @@ applyHandler = async (msg, callback) => {
             await post.save()
             const user = await Student.findById(student._id)
             const { companyName, job_title, job_posting_date, job_application_deadline, job_location, job_salary, job_description, job_category,job_requirements } = post
-            const applicationId = post.students[post.students.length - 1]._id
+            const applicationId = post._id
             const status = 'Pending'
             user.applications.push({ applicationId, status, companyName, job_title, job_location, job_salary, job_description, job_category,job_posting_date,job_application_deadline,job_requirements });
             console.log(user.applications);

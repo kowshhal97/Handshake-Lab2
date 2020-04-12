@@ -18,14 +18,14 @@ router.get('/', (req, res) => {
 
 
 router.get('/:job_id', (req, res) => {
+  console.log("GET JOB BY ID")
     req.body.id = req.params.job_id;
-    req.body.path="get-job-by-jobId"
+    req.body.path="get-job-by-jobId";
  
    kafka.make_request('jobs', req.body, (err, results) => {
  
- 
+
      res.status(results.status).send(JSON.parse(results.data));
- 
    });
 });
 
