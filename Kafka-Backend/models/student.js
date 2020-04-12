@@ -12,11 +12,11 @@ const StudentSchema = new Schema({
         unique: true
     },
     password: {
-        type: String, 
+        type: String,
         required: true
     },
     major: String,
-    collegeName:String,
+    collegeName: String,
     contactNumber: Number,
     dateOfBirth: Date,
     city: String,
@@ -25,7 +25,7 @@ const StudentSchema = new Schema({
     careerObjective: String,
     skillSet: [],
     education: [{
-        id:String,
+        id: String,
         institution_name: String,
         location: String,
         degree: String,
@@ -34,7 +34,7 @@ const StudentSchema = new Schema({
         cgpa: String
     }],
     experience: [{
-        id:String,
+        id: String,
         company_name: String,
         designation: String,
         company_location: String,
@@ -46,11 +46,14 @@ const StudentSchema = new Schema({
         applicationId: Schema.Types.ObjectId,
         status: String,
         companyName: String,
-        title: String,
-        location: String,
-        salary: String,
-        jobDescription: String,
-        category: String
+        job_title: String,
+        job_posting_date: String,
+        job_application_deadline: String,
+        job_location: String,
+        job_salary: String,
+        job_description: String,
+        job_category: String,
+        job_requirements: String,
 
     }],
     registeredEvents: [{
@@ -59,12 +62,12 @@ const StudentSchema = new Schema({
         companyName: String,
         event_name: String,
         event_description: String,
-        event_timing:String,
+        event_timing: String,
         event_location: String,
         event_eligibility_criteria: String,
         event_from_date: String,
         event_to_date: String,
-        event_major:String
+        event_major: String
     }]
 })
 

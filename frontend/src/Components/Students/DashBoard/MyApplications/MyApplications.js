@@ -61,16 +61,7 @@ class DashBoard extends Component {
 
 
     componentDidMount = () => {
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/applications/'+this.props.studentId)
-            .then(response => {
-
-                this.setState({data:[...response.data]});
-
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+    this.setState({data:this.props.user.applications})
     }
     options = {
         selectableRowsOnClick: true,
@@ -82,7 +73,7 @@ class DashBoard extends Component {
                     companyId=i.company_id;
                 }
             }
-            Dialog=(<JobsDialog display={true} jobId={cellMeta.dataIndex+1} close={this.dialogCloseHandler} companyId={companyId}/>)
+            Dialog=(<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex].applicationId} close={this.dialogCloseHandler} companyId={companyId}/>)
             this.setState({showDialog:true})
         },
         selectableRows: "none",
@@ -114,18 +105,12 @@ class DashBoard extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

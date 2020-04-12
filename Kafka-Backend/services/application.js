@@ -34,19 +34,20 @@ applyHandler = async (msg, callback) => {
 
     try {
         if (student) {
-            const post = await JobPost.findById(req.params.id)
+            const post = await JobPost.findById(msg.id)
             if (!post) {
                 res.status = 404
                 callback(null, res)
                 return
             }
+           
             post.students.push(student)
             await post.save()
-            const user = await Student.findById(student.studentId)
-            const { companyName, title, postingDate, deadline, location, salary, jobDescription, category } = post
+            const user = await Student.findById(student._id)
+            const { companyName, job_title, job_posting_date, job_application_deadline, job_location, job_salary, job_description, job_category,job_requirements } = post
             const applicationId = post.students[post.students.length - 1]._id
             const status = 'Pending'
-            user.applications.push({ applicationId, status, companyName, title, location, salary, jobDescription, category });
+            user.applications.push({ applicationId, status, companyName, job_title, job_location, job_salary, job_description, job_category,job_posting_date,job_application_deadline,job_requirements });
             console.log(user.applications);
             await user.save()
             res.status = 200
@@ -54,7 +55,7 @@ applyHandler = async (msg, callback) => {
             callback(null, res)
             return
         } else {
-            const post = await JobPost.findByIdAndUpdate(req.params.id, req.body)
+            const post = await JobPost.findByIdAndUpdate(msg.id, msg)
 
             if (!post) {
                 res.status = 404
@@ -66,6 +67,7 @@ applyHandler = async (msg, callback) => {
             callback(null, res)
         }
     } catch (e) {
+        console.log(e)
         res.status = 400
         callback(null, res)
         return

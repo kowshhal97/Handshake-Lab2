@@ -104,7 +104,7 @@ class CustomizedDialogDemo extends React.Component {
   e.preventDefault()
   this.redirectVar=(<Redirect to={{
     pathname: '/company/profile',
-    companyId:this.props.companyId
+    companyName:this.state.data.companyName
   }}
 
   />)
@@ -116,7 +116,7 @@ class CustomizedDialogDemo extends React.Component {
     this.setState({showDialog:false})
 }
   apply=()=>{
-    Diaalog=(<ApplyDialogue  display={true}  close={this.dialogCloseHandler} companyId={this.props.companyId} jobId={this.props.jobId}/>)
+    Diaalog=(<ApplyDialogue  display={true}  close={this.dialogCloseHandler} jobId={this.props.jobId}/>)
             this.setState({showDialog:true})
   }
   render() {
@@ -182,18 +182,12 @@ class CustomizedDialogDemo extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return ({
-      onLogout: () => dispatch({ type: 'LOGOUT' }),
-      onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
   });
 }
 
 const mapStateToProps = state => {
   return {
-
-
-      isLoggedIn: state.isLoggedIn,
-      userType: state.userType,
-      studentId: state.studentId
+      user: state.user
   };
 };
 

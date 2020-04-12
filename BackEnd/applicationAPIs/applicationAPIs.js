@@ -21,6 +21,7 @@ router.put('/:applicationId', (req, res) => {
 router.put('/apply/:jobId', (req, res) => {
   req.body.id=req.params.jobId;
   req.body.path="apply"
+  console.log(req.body)
  kafka.make_request('applications', req.body, (err, results) => {
 
   console.log(results)
