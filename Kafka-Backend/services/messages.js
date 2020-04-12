@@ -5,7 +5,7 @@ createAMessage = async (msg, callback) => {
     const chat = new Chat(msg)
     try {
         await chat.save()
-        res.status=201
+        res.status=200
         res.data=JSON.stringify(chat)
         callback(null,res)
     } catch (e) {

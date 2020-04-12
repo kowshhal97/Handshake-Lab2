@@ -30,7 +30,7 @@ const signupHandler = async (msg, callback) => {
     await user.save()
     res.data = JSON.stringify(user)
     console.log(res)
-    res.status = 201
+    res.status = 200
     callback(null, res)
   } catch (e) {
     res.status = 400

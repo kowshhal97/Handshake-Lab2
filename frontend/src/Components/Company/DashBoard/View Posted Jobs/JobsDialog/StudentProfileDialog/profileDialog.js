@@ -73,7 +73,7 @@ class CustomizedDialogDemo extends React.Component {
 
 updateStatus=(e)=>{
   e.preventDefault();
-  Dialoog=(<UpdateStatus student_id={this.props.studentId} display={true}  close={this.dialogCloseHandler}/>);
+  Dialoog=(<UpdateStatus studentId={this.props.studentId} display={true}  close={this.dialogCloseHandler} jobId={this.props.jobId}/>);
   this.setState({showDialog:true})
 }
 
@@ -88,6 +88,7 @@ updateStatus=(e)=>{
     this.setState({ open: false });
     this.props.close(e);
   };
+
 
   
   render() {
@@ -117,7 +118,7 @@ updateStatus=(e)=>{
             <Profile studentId={this.props.studentId}/>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.updateStatus} studentId={this.props.studentId}>update Status</Button>
+            <Button onClick={this.updateStatus} studentId={this.props.studentId} jobId={this.props.jobId}>update Status</Button>
             <Button onClick={this.handleClose} color="primary">
               Close
             </Button>

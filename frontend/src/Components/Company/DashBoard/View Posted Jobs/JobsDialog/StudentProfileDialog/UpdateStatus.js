@@ -13,7 +13,6 @@ import axios from 'axios';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { connect } from 'react-redux';
 
-import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -91,13 +90,13 @@ class CustomizedDialogDemo extends React.Component {
          e.preventDefault();
         axios.defaults.withCredentials = true;
         let data={
-            student_id:this.props.student_id,
-            application_status:this.state.selectedStatus
+            studentId:this.props.studentId,
+            status:this.state.selectedStatus
         }
-        window.alert(data.student_id)
-        axios.post('http://54.188.68.233:3000/applications/'+this.props.studentId, data)
+
+
+        axios.put('http://localhost:3000/applications/'+this.props.jobId, data)
             .then(response => {
-                
                 this.setState({ open: false });
                 this.props.close(e);
                 console.log("Status Code : ", response.status);
@@ -108,6 +107,10 @@ class CustomizedDialogDemo extends React.Component {
 
     onSelectStatus = (e) => {
         this.setState({ selectedStatus: e.target.value });
+    }
+    componentDidMount=()=>{
+        window.alert(this.props.studentId)
+        window.alert(this.props.jobId)
     }
 
     render() {
@@ -169,18 +172,12 @@ class CustomizedDialogDemo extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
     });
 }
 
 const mapStateToProps = state => {
     return {
 
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
     };
 };
 

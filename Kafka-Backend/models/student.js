@@ -18,7 +18,7 @@ const StudentSchema = new Schema({
     major: String,
     collegeName: String,
     contactNumber: Number,
-    dateOfBirth: Date,
+    dateOfBirth: String,
     city: String,
     state: String,
     country: String,

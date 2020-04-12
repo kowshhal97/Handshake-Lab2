@@ -45,7 +45,7 @@ postEventHandler = async (msg, callback) => {
 
     try {
         await post.save()
-        res.status = 201
+        res.status = 200
         res.data = JSON.stringify(post)
         console.log(res)
         callback(null, res)

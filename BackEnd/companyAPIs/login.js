@@ -11,11 +11,13 @@ router.post('/', async (req, res) => {
  
    kafka.make_request('companyAuth', req.body, (err, results) => {
  
-    
-    
- 
-     res.status(results.status).send(JSON.parse(results.data));
- 
+    if(results.status!=200){
+      return res.status(results.status).send();
+    }
+
+    if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
    });
   });
   

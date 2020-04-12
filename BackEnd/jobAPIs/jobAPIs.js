@@ -11,7 +11,9 @@ router.get('/', (req, res) => {
  
  
  
-     res.status(results.status).send(JSON.parse(results.data));
+     if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
  
    });
 });
@@ -25,7 +27,9 @@ router.get('/:job_id', (req, res) => {
    kafka.make_request('jobs', req.body, (err, results) => {
  
 
-     res.status(results.status).send(JSON.parse(results.data));
+     if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
    });
 });
 
@@ -38,7 +42,9 @@ router.post('/:companyName', (req, res) => {
  
  
  
-     res.status(results.status).send(JSON.parse(results.data));
+     if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
  
    });
 });
@@ -50,7 +56,9 @@ router.get('/company/:companyName', (req, res) => {
  kafka.make_request('jobs', req.body, (err, results) => {
 
 
-   res.status(results.status).send(JSON.parse(results.data));
+   if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
 
  });
 });

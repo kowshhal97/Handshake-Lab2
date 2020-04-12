@@ -55,7 +55,9 @@ router.get('/', (req, res) => {
 
     console.log(results)
     
-    res.status(results.status).send(JSON.parse(results.data));
+    if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
   });
 });
 
@@ -66,7 +68,9 @@ router.get('/:student_id', (req, res) => {
   kafka.make_request('studentProfile', req.body, (err, results) => {
 
     console.log(results);
-    res.status(results.status).send(JSON.parse(results.data));
+    if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
   });
 });
 
@@ -79,7 +83,9 @@ router.put('/:student_id', (req, res) => {
 
 
     console.log(results)
-    res.status(results.status).send(JSON.parse(results.data));
+    if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
   });
 });
 

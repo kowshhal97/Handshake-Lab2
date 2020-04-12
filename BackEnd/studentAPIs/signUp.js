@@ -17,7 +17,9 @@ router.post('/', async (req, res) => {
     if(results.status!=201){
       return res.status(results.status).send();
     }
-     res.status(results.status).send(JSON.parse(results.data));
+     if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
 
   });
 

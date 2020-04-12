@@ -99,14 +99,14 @@ class DashBoard extends React.Component {
     }
 
     componentDidMount = () => {
-        // var headers = new Headers();
-        // axios.defaults.withCredentials = true;
-        // axios.get('http://54.188.68.233:3000/jobs/postings/' + this.props.studentId)
-        //     .then(response => {
-        //         this.setState({jobPostings:response.data});
-        //     }).catch(() => {
-        //         window.alert("FAIL")
-        //     })
+        var headers = new Headers();
+        axios.defaults.withCredentials = true;
+        axios.get('http://localhost:3000/jobs/company/' + this.props.user.name)
+            .then(response => {
+                this.setState({jobPostings:response.data});
+            }).catch(() => {
+                window.alert("FAIL")
+            })
     }
 
 

@@ -10,7 +10,9 @@ router.post('/', async (req, res) => {
  
  
     
-     res.status(results.status).send(JSON.parse(results.data));
+     if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
  
    });
 
@@ -33,7 +35,9 @@ router.get('/students/:id', async (req, res) => {
  
  
     console.log(results)
-      res.status(results.status).send(JSON.parse(results.data));
+      if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
  
    });
     // const userId = req.params.id
@@ -53,7 +57,9 @@ router.get('/:id', async (req, res) => {
    kafka.make_request('messages', req.body, (err, results) => {
  
  
-     res.status(results.status).send(JSON.parse(results.data));
+     if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
  
    });
     // const _id = req.params.id
@@ -78,7 +84,9 @@ router.put('/:id', async (req, res) => {
    kafka.make_request('messages', req.body, (err, results) => {
  
  
-     res.status(results.status).send(JSON.parse(results.data));
+     if(results.status!=200){
+      return res.status(results.status).send();
+    }    res.status(results.status).send(JSON.parse(results.data));
  
    });
     // const message = req.body

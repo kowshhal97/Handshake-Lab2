@@ -8,7 +8,7 @@ import ProfileDialog from './StudentProfileDialog/profileDialog'
 let Dialog=null;
 const column = [
     {
-        name: "student_name",
+        name: "name",
         label: "Name",
         options: {
             filter: false,
@@ -24,7 +24,7 @@ const column = [
         }
     },
     {
-        name: "student_college_name",
+        name: "collegeName",
         label: "College Name",
         options: {
             filter: true,
@@ -32,8 +32,6 @@ const column = [
         }
     },
 ];
-
-
 
 
  
@@ -51,28 +49,10 @@ class PostedJobs extends Component {
     }
 
     componentDidMount=()=>{
-        
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/applications/job/' + this.props.jobId)
-            .then(response => {
-                let res=response.data;
-                for(let i of res){
-                    axios.get('http://54.188.68.233:3000/student/studentProfile/' + i.student_id)
-            .then(response => {
-                let obj={...response.data.obj.BasicDetails};
-                 obj.application_status=i.application_status;
-                 obj.student_id=i.student_id;
-                let newData=[...this.state.data,obj];
-                this.setState({data:newData});
-            }).catch(() => {
-                window.alert("FAIL")
-            })
-                }
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+     this.setState({data:this.props.studentsApplied})
 
+        window.alert(this.props.jobId)
+      
     }
 
 
@@ -81,8 +61,8 @@ class PostedJobs extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
-            let studentId=this.state.data[cellMeta.dataIndex].student_id
-            Dialog=(<ProfileDialog  display={true} studentId={studentId} close={this.dialogCloseHandler}/>)
+            let studentId=this.state.data[cellMeta.dataIndex]._id
+            Dialog=(<ProfileDialog  display={true} studentId={studentId} close={this.dialogCloseHandler} jobId={this.props.jobId}/>)
             this.setState({showDialog:true})
         },
         selectableRows: "none",

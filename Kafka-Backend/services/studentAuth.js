@@ -26,7 +26,7 @@ const signupHandler = async (msg, callback) => {
   try {
     await user.save()
     res.data = JSON.stringify(user)
-    res.status = 201;
+    res.status = 200;
     callback(null, res)
   } catch (e) {
     console.log(e)
