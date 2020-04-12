@@ -39,7 +39,7 @@ class EditExperienceForm extends React.Component {
     //     if (res.status === 200) {
     //       window.alert("success")
     //       this.props.onUpdateExperience({...data, experience_id: id})
-    //       console.log(res.data.result);
+    //       console.log(res.data);
           
     //     } else {
     //         console.log(res);

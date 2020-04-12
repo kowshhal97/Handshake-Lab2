@@ -9,9 +9,11 @@ const loginHandler = async (msg, callback) => {
     console.log(user)
     if (!user) {
       res.status = 404
+      res,data=null
       callback(null, res)
     }
     res.data = JSON.stringify(user)
+    console.log(res)
     res.status = 200
     return callback(null, res)
   } catch (e) {
@@ -27,6 +29,7 @@ const signupHandler = async (msg, callback) => {
   try {
     await user.save()
     res.data = JSON.stringify(user)
+    console.log(res)
     res.status = 201
     callback(null, res)
   } catch (e) {

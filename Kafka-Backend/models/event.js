@@ -3,23 +3,25 @@ const Schema = mongoose.Schema;
 
 const EventPostSchema = new Schema({
     companyName: String,
-    eventName: {
+    event_name: {
         type: String,
         required: true,
     },
-    eventDescription: {
+    event_description: {
         type: String,
         required: true,
     },
-    eventLocation: String,
-    eligibility: String,
-    fromDate: String,
-    toDate: String,
+    event_timing:String,
+    event_location: String,
+    event_eligibility_criteria: String,
+    event_from_date: String,
+    event_to_date: String,
+    event_major:String,
     students: [{
         name: String,
         studentId: Schema.Types.ObjectId,
         major: String,
-        university: String
+        collegeName: String
     }]
 })
 

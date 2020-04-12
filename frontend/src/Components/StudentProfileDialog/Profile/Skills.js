@@ -26,7 +26,7 @@ class Skills extends React.Component {
         .post('http://54.188.68.233:3000/api/student/skill/17', data, {headers: {'Content-Type': 'application/json'}})
         .then(res => {
             if (res.status === 200) {
-                console.log(res.data.result);
+                console.log(res.data);
           
             } else {
                 console.log(res);
@@ -58,7 +58,7 @@ class Skills extends React.Component {
         .post('http://54.188.68.233:3000/api/student/skill/17', data, {headers: {'Content-Type': 'application/json'}})
         .then(res => {
             if (res.status === 200) {
-                console.log(res.data.result);
+                console.log(res.data);
           
             } else {
                 console.log(res);

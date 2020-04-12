@@ -27,8 +27,8 @@ class AddForm extends React.Component {
       .post('http://54.188.68.233:3000/student/studentProfile/educationDetails/'+this.props.studentId,this.state, {headers: {'Content-Type': 'application/json'}})
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data.result.insertId);
-          this.props.onAddSchool({...this.state, education_id: res.data.result.insertId, student_id: 17});
+          console.log(res.data.insertId);
+          this.props.onAddSchool({...this.state, education_id: res.data.insertId, student_id: 17});
         } else {
             console.log(res);
         }

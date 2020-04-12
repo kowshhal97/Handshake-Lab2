@@ -7,15 +7,7 @@ import ProfileDialog from './../../StudentProfileDialog/profileDialog'
 let Dialog=null;
 const columns = [
     {
-        name: "student_id",
-        label: "Sno",
-        options: {
-            filter: false,
-            sort: true,
-        }
-    },
-    {
-        name: "student_name",
+        name: "name",
         label: "Name",
         options: {
             filter: false,
@@ -23,7 +15,7 @@ const columns = [
         }
     },
     {
-        name: "student_college_name",
+        name: "collegeName",
         label: "College Name",
         options: {
             filter: true,
@@ -39,7 +31,7 @@ const columns = [
         }
     },
     {
-        name: "country_name",
+        name: "country",
         label: "State",
         options: {
             filter: true,
@@ -88,9 +80,11 @@ class StudentsTab extends Component {
     componentDidMount = () => {
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/student/studentProfile/')
+        axios.get('http://localhost:3000/student/studentProfile/')
             .then(response => {
-                this.setState({data:[...response.data.result]})
+                let str=response.data.skillSet.join();
+                window.alert(str)
+                this.setState({data:[...response.data]})
             }).catch(() => {
                 window.alert("FAIL")
             })

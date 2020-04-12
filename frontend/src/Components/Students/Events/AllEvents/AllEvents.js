@@ -71,7 +71,7 @@ class PostedEvents extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://54.188.68.233:3000/events')
             .then(response => {
-                this.setState({data:[...response.data.result]})
+                this.setState({data:[...response.data]})
                 console.log(this.state.data)
             }).catch(() => {
                 window.alert("FAIL")

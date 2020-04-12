@@ -9,19 +9,20 @@ const StudentSchema = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String, 
         required: true
     },
     major: String,
-    contactNumber: String,
-    dateOfBirth: String,
+    collegeName:String,
+    contactNumber: Number,
+    dateOfBirth: Date,
     city: String,
     state: String,
     country: String,
     careerObjective: String,
-    collegeName:String,
     skillSet: [],
     education: [{
         id:String,
@@ -50,8 +51,21 @@ const StudentSchema = new Schema({
         salary: String,
         jobDescription: String,
         category: String
+
     }],
-    registeredEvents: []
+    registeredEvents: [{
+        registeredEventId: Schema.Types.ObjectId,
+        eventId: Schema.Types.ObjectId,
+        companyName: String,
+        event_name: String,
+        event_description: String,
+        event_timing:String,
+        event_location: String,
+        event_eligibility_criteria: String,
+        event_from_date: String,
+        event_to_date: String,
+        event_major:String
+    }]
 })
 
 const Student = mongoose.model('student', StudentSchema);

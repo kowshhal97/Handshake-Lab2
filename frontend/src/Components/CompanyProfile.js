@@ -69,7 +69,7 @@ class Profile extends Component {
         axios.get('http://54.188.68.233:3000/company/companyProfile/' + this.props.studentId)
             .then(response => {
 
-                this.setState(response.data.result[0])
+                this.setState(response.data[0])
             }).catch(() => {
                 window.alert("FAIL")
             })

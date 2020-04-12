@@ -19,7 +19,7 @@ class DetailComponent extends Component {
         axios.get('http://54.188.68.233:3000/student/studentProfile/educationDetails/' + this.props.studentId)
             .then(response => {
 
-                this.setState({ education: response.data.result })
+                this.setState({ education: response.data })
                 console.log(this.state)
             }).catch(() => {
                 window.alert("FAIL")
@@ -27,7 +27,7 @@ class DetailComponent extends Component {
         axios.get('http://54.188.68.233:3000/student/studentProfile/experienceDetails/' + this.props.studentId)
             .then(response => {
                 console.log(response.data)
-                this.setState({ experience: response.data.result })
+                this.setState({ experience: response.data })
                 console.log(this.state)
             }).catch(() => {
                 window.alert("FAIL")

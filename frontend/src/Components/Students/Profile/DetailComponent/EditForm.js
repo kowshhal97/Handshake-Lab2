@@ -31,7 +31,7 @@ class EditForm extends React.Component {
       .then(res => {
         if (res.status === 200) {
           this.props.onUpdateEducation({...data, education_id: id})
-          console.log(res.data.result);
+          console.log(res.data);
           
         } else {
             console.log(res);

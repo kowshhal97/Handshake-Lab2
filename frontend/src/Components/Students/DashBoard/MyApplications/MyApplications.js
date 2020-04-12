@@ -66,7 +66,7 @@ class DashBoard extends Component {
         axios.get('http://54.188.68.233:3000/applications/'+this.props.studentId)
             .then(response => {
 
-                this.setState({data:[...response.data.result]});
+                this.setState({data:[...response.data]});
 
             }).catch(() => {
                 window.alert("FAIL")

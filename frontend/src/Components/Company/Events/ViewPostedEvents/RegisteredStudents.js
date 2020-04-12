@@ -70,23 +70,23 @@ class StudentsTab extends Component {
     componentDidMount=()=>{
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/events/registered/'+this.props.eventId)
-            .then(response => {
-                let res=response.data.result;
-                for(let i of res){
-                    axios.get('http://54.188.68.233:3000/events/' + i.event_id)
-            .then(response => {
-                let obj={...response.data.result[0]};
-                obj.studentId=i.student_id;
-                let newData=[...this.state.data,obj];
-                this.setState({data:newData});              
-            }).catch(() => {
-                window.alert("FAIL")
-            })
-                }
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+        // axios.get('http://54.188.68.233:3000/events/registered/'+this.props.eventId)
+        //     .then(response => {
+        //         let res=response.data;
+        //         for(let i of res){
+        //             axios.get('http://54.188.68.233:3000/events/' + i.event_id)
+        //     .then(response => {
+        //         let obj={...response.data[0]};
+        //         obj.studentId=i.student_id;
+        //         let newData=[...this.state.data,obj];
+        //         this.setState({data:newData});              
+        //     }).catch(() => {
+        //         window.alert("FAIL")
+        //     })
+        //         }
+        //     }).catch(() => {
+        //         window.alert("FAIL")
+        //     })
     }
 
 

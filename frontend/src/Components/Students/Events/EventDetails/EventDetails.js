@@ -47,7 +47,7 @@ state={
         axios.defaults.withCredentials = true;
         axios.get('http://54.188.68.233:3000/events/'+this.props.eventId)
             .then(response => {
-                this.setState(response.data.result[0])
+                this.setState(response.data[0])
                 console.log(this.state.eventDetails)
             }).catch(() => {
                 window.alert("FAIL")

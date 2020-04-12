@@ -68,9 +68,9 @@ class PostedEvents extends Component {
     componentDidMount = () => {
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/events/events/'+this.props.studentId)
+        axios.get('http://localhost:3000/events/company/'+this.props.user.name)
             .then(response => {
-                this.setState({data:[...response.data.result]})
+                this.setState({data:[...response.data]})
                 console.log(this.state.data)
             }).catch(() => {
                 window.alert("FAIL")
@@ -111,18 +111,13 @@ class PostedEvents extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
+
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

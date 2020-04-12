@@ -25,7 +25,7 @@ class Skills extends React.Component {
         .post('http://54.188.68.233:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
         .then(res => {
             if (res.status === 200) {
-                console.log(res.data.result);
+                console.log(res.data);
           
             } else {
                 window.alert("huyu")
@@ -59,7 +59,7 @@ class Skills extends React.Component {
         .then(res => {
             if (res.status === 200) {
                 
-                console.log(res.data.result);
+                console.log(res.data);
           
             } else {
                 

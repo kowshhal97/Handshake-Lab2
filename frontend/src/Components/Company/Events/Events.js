@@ -103,7 +103,7 @@ class Events extends Component {
         }
         console.log(data);
         axios.defaults.withCredentials = true;
-        axios.post('http://54.188.68.233:3000/events/' + this.props.studentId, data)
+        axios.post('http://localhost:3000/events/' + this.props.user.name, data)
             .then(response => {
                 console.log("Status Code : ", response.status);
             }).catch(() => {
@@ -115,17 +115,17 @@ class Events extends Component {
 
 
 
-    componentDidMount = () => {
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/events')
-            .then(response => {
-                this.setState({ getEventData: [...response.data.result] })
-                console.log(this.state.getEventData)
-            }).catch(() => {
-                window.alert("FAIL")
-            })
-    }
+    // componentDidMount = () => {
+    //     var headers = new Headers();
+    //     axios.defaults.withCredentials = true;
+    //     axios.get('http://localhost:3000/events')
+    //         .then(response => {
+    //             this.setState({ getEventData: [...response.data] })
+    //             console.log(this.state.getEventData)
+    //         }).catch(() => {
+    //             window.alert("FAIL")
+    //         })
+    // }
 
 
     render() {
@@ -160,17 +160,13 @@ Events.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, studentId) => dispatch({ type: 'LOGIN', value: value, studentId: studentId })
+
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

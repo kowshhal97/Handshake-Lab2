@@ -103,7 +103,7 @@ class DashBoard extends React.Component {
         axios.defaults.withCredentials = true;
         axios.get('http://54.188.68.233:3000/jobs/postings/' + this.props.studentId)
             .then(response => {
-                this.setState({jobPostings:response.data.result});
+                this.setState({jobPostings:response.data});
             }).catch(() => {
                 window.alert("FAIL")
             })

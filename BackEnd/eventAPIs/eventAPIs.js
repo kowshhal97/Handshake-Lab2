@@ -28,13 +28,26 @@ router.get('/:event_id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  req.body.path = "post-event"
+router.get('/company/:companyName', (req, res) => {
+  req.body.companyName = req.params.companyName;
+  req.body.path = "get-event-by-companyName"
 
   kafka.make_request('events', req.body, (err, results) => {
 
+    res.status(results.status).send(JSON.parse(results.data));
 
-    
+  });
+});
+
+router.post('/:companyName', (req, res) => {
+  req.body.path = "post-event"
+
+  req.body.companyName=req.params.companyName
+  kafka.make_request('events', req.body, (err, results) => {
+
+
+    console.log(results);
+
     res.status(results.status).send(JSON.parse(results.data));
   });
 });

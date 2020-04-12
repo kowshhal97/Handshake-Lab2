@@ -56,7 +56,7 @@ class PostedJobs extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://54.188.68.233:3000/applications/job/' + this.props.jobId)
             .then(response => {
-                let res=response.data.result;
+                let res=response.data;
                 for(let i of res){
                     axios.get('http://54.188.68.233:3000/student/studentProfile/' + i.student_id)
             .then(response => {

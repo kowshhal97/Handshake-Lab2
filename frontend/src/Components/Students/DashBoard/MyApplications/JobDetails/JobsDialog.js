@@ -95,7 +95,7 @@ class CustomizedDialogDemo extends React.Component {
     axios.defaults.withCredentials = true;
     axios.get('http://54.188.68.233:3000/jobs/jobs/'+this.props.jobId)
         .then(response => {
-            this.setState({data:response.data.result[0]})
+            this.setState({data:response.data[0]})
             console.log(this.state.data)
         }).catch(() => {
             window.alert("FAIL")
@@ -103,7 +103,7 @@ class CustomizedDialogDemo extends React.Component {
 
         axios.get('http://54.188.68.233:3000/applications/getJob/'+this.props.studentId+'/'+this.props.jobId)
         .then(response => {
-            this.setState({status:response.data.result[0]})
+            this.setState({status:response.data[0]})
             console.log(this.state.data)
         }).catch(() => {
             window.alert("FAIL")

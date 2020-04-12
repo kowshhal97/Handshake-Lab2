@@ -46,6 +46,7 @@ postEventHandler = async (msg, callback) => {
         await post.save()
         res.status = 201
         res.data = JSON.stringify(post)
+        console.log(res)
         callback(null, res)
     } catch (e) {
         res.status = 400
@@ -59,7 +60,7 @@ postRegisterForEvent = async (msg, callback) => {
     const student = msg.student
     try {
         if (student) {
-            const post = await EventPost.findById(req.params.id)
+            const post = await EventPost.findById(msg.id)
             if (!post) {
                 res.status = 404
                 callback(null, res)
@@ -67,14 +68,17 @@ postRegisterForEvent = async (msg, callback) => {
             post.students.push(student)
             await post.save()
             const user = await Student.findById(student.studentId)
-            const { companyName, eventName, eventDescription, eventLocation } = post
-            user.registeredEvents.push({ companyName, eventName, eventDescription, eventLocation })
+            const { companyName, eventName, eventDescription, eventLocation, eligibility, fromDate, toDate } = post
+            const registeredEventId = post.students[post.students.length - 1]._id;
+            const eventId = post._id;
+            console.log(registeredEventId);
+            user.registeredEvents.push({ eventId, registeredEventId, companyName, eventName, eventDescription, eventLocation, eligibility, fromDate, toDate })
             await user.save()
             res.status = 200
             res.data = JSON.stringify(user)
             callback(null, res)
         } else {
-            const post = await EventPost.findByIdAndUpdate(req.params.id, req.body)
+            const post = await EventPost.findByIdAndUpdate(msg.id, msg)
 
             if (!post) {
                 return res.status(404).send()
@@ -88,6 +92,22 @@ postRegisterForEvent = async (msg, callback) => {
         callback(null, res)
     }
 
+}
+
+
+getEventByCompanyIdHandler = async (msg, callback) => {
+    res = {}
+    const { companyName } = msg;
+    try {
+        const companyEvents = await EventPost.find({ companyName: companyName });
+        res.status = 200
+        res.data = JSON.stringify(companyEvents)
+        console.log(res)
+        callback(null, res)
+    } catch (e) {
+        res.status = 500
+        callback(null, res)
+    }
 }
 
 
@@ -110,6 +130,11 @@ function handle_request(msg, callback) {
         delete msg.path
         postRegisterForEvent(msg, callback)
     }
+    else if (msg.path === 'get-event-by-companyName') {
+        delete msg.path
+        getEventByCompanyIdHandler(msg, callback)
+    }
+
 };
 
 exports.handle_request = handle_request;
