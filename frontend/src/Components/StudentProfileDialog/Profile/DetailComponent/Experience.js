@@ -38,7 +38,6 @@ class Experience extends React.Component {
               </div>
               <div className='middle aligned content'>
                 <div className='header'>
-                
                     <h4>{this.props.experience.company_name}</h4>
                 </div>
                 <div className='meta'>

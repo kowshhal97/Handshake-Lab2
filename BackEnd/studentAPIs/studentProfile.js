@@ -77,7 +77,7 @@ router.get('/:student_id', (req, res) => {
 router.put('/:student_id', (req, res) => {
   
   req.body.id = req.params.student_id;
-  req.body.path="update-student-by-id"
+  req.body.path="update-student-by-id";
  
   kafka.make_request('studentProfile', req.body, (err, results) => {
 

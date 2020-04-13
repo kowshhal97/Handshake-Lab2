@@ -23,7 +23,7 @@
 //         const data = {...this.props.skill};
 //         data.skillSet = str;
 //         axios
-//         .post('http://54.188.68.233:3000/api/student/skill/17', data, {headers: {'Content-Type': 'application/json'}})
+//         .post('http://localhost:3000/api/student/skill/17', data, {headers: {'Content-Type': 'application/json'}})
 //         .then(res => {
 //             if (res.status === 200) {
 //                 console.log(res.data);
@@ -55,7 +55,7 @@
 //         const data = {...this.props.skill};
 //         data.skillSet = str;
 //         axios
-//         .post('http://54.188.68.233:3000/api/student/skill/17', data, {headers: {'Content-Type': 'application/json'}})
+//         .post('http://localhost:3000/api/student/skill/17', data, {headers: {'Content-Type': 'application/json'}})
 //         .then(res => {
 //             if (res.status === 200) {
 //                 console.log(res.data);

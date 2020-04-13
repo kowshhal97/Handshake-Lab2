@@ -2,10 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux'
-import Card from './../Card'
-import Grid from '@material-ui/core/Grid';
 import './DetailComponent.css'
-import AddIcon from '@material-ui/icons/Add';
 import Education from './Education'
 import AddForm from './AddForm';
 import Experience from './Experience';
@@ -13,121 +10,142 @@ import AddExperienceForm from './AddExperienceForm'
 
 
 class DetailComponent extends Component {
-    _isMounted = false;
-    state = {
-        educationDetails: [],
-      experienceDetails: [],
-      showAddForm: false,
-      showTextFrom: false,
-      showAddExperienceForm: false,
+  _isMounted = false;
+  state = {
+    education:[],
+    experience:[],
+    showAddForm: false,
+    showTextFrom: false,
+    showAddExperienceForm: false,
 
-    }
+  }
 
-    componentDidMount = () => {
-        this._isMounted = true;
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/student/studentProfile/educationDetails/' + this.props.studentId)
-            .then(response => {
+  componentDidMount = () => {
+    this._isMounted = true;
 
-                this.setState({ educationDetails: response.data });
-            }).catch(() => {
-                window.alert("FAIL")
-            });
-        axios.get('http://54.188.68.233:3000/student/studentProfile/experienceDetails/' + this.props.studentId)
-            .then(response => {
-                console.log(response.data)
-                this.setState({ experienceDetails: response.data })
-                console.log(this.state)
-            }).catch(() => {
-                window.alert("FAIL")
-            })
-    }
+    console.log(this.props.user)
 
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
 
-    onAddSchoolClick = () => {
-        this.setState({showAddForm: !this.state.showAddForm});
+    axios.get('http://localhost:3000/student/studentProfile/' +this.props.studentId)
+    .then(response => {
+       this.setState(response.data)
+    }).catch(() => {
+        window.alert("FAIL")
+    })
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  onAddSchoolClick = () => {
+    this.setState({ showAddForm: !this.state.showAddForm });
+  }
+
+  onAddSchool = (school) => {
+    school.id=this.state.education.length;
+    const list = [...this.state.education, school];
+    console.log(list);
+    this.setState({ education: list });
+    this.setState({ showAddForm: !this.state.showAddForm },()=>{
+      this.save()
+    });
+  }
+
+  onUpdateEducation = (education) => {
+    const data = this.state.education.map((item) => {
+      if (item.id === education.id) {
+        return education
       }
+      return item;
+    })
+    this.setState({ education: data },()=>{
+      this.save()
+    });
+  }
+  onUpdateExperience = (experience) => {
+    console.log(experience)
+    const data = this.state.experience.map((item) => {
+      if (item.id === experience.id) {
+        return experience
+      }
+      return item;
+    })
+    this.setState({ experience: data },()=>{
+      this.save()
+    });
     
-      onAddSchool = (school) => {
-        console.log('new', school);
-        const list = [...this.state.educationDetails, school];
-        console.log(list);
-        this.setState({educationDetails: list});
-        this.setState({showAddForm: !this.state.showAddForm});
-      }
+  }
+  save=()=>{
+    let obj=this.state
+    delete obj.showAddForm;
+    delete obj.showTextFrom;
+    delete obj.showAddExperienceForm;
+    axios.put('http://localhost:3000/student/studentProfile/' + obj._id, obj)
+    .then(response => {
+       this.props.onSave(response.data)
+    }).catch(() => {
+        window.alert("FAIL")
+    })
+  }
+  onAddExperience = (experience) => {
+    experience.id=this.state.experience.length
+    window.alert(experience.id)
+    const list = [...this.state.experience, experience];
+    console.log(list)
+    this.setState({ experience: list },()=>{
+      this.save()
+    });
+    
+    this.setState({ showAddExperienceForm: !this.state.showAddExperienceForm });
+    
+  }
+  onAddExperienceClick = () => {
+    this.setState({ showAddExperienceForm: !this.state.showAddExperienceForm });
+  }
 
-      onUpdateEducation = (education) => {
-        const data = this.state.educationDetails.map((item) => {
-          if(item.education_id === education.education_id) {
-            return education
-          }
-          return item;
-        })
-        this.setState({educationDetails: data});
-      }
-      onUpdateExperience = (experience) => {
-        console.log(experience)
-        const data = this.state.experienceDetails.map((item) => {
-          if(item.experience_id === experience.experience_id) {
-            return experience
-          }
-          return item;
-        })
-        this.setState({experienceDetails: data});
-      }
-      onAddExperience = (experience) => {
-        console.log('new', experience);
-        const list = [...this.state.experienceDetails, experience];
-        console.log(list);
-        this.setState({experienceDetails: list});
-        this.setState({showAddExperienceForm: !this.state.showAddExperienceForm});
-      }
-      onAddExperienceClick = () => {
-        this.setState({showAddExperienceForm: !this.state.showAddExperienceForm});
-      }
+  render() {
 
-
-    render() {
-
-        let exp = []
-        if (this.state.experience) {
-            for (let i of this.state.experience) {
-                exp.push(<Card obj={i} />)
-            }
-        }
-        return (<div className="DetailCompMain">
+    return (<div className="DetailCompMain">
 
 
 
-<div style={{marginBottom: '20px'}}>
-            <div className='ui raised segment'>
-                <h4>Education</h4>
-                <div className='ui items'>
-                {this.state.educationDetails.map(education => {
-                  return <Education key={education} onUpdateEducation={this.onUpdateEducation} education={education} />;
-                })}
-                </div>
-                
-            </div>
+      <div style={{ marginBottom: '20px' }}>
+        <div className='ui raised segment'>
+          <h4>Education</h4>
+          <div className='ui items'>
+            {this.state.education.map(education => {
+              return <Education key={education} onUpdateEducation={this.onUpdateEducation} education={education} />;
+            })}
           </div>
-          <div style={{marginBottom: '20px'}}>
-            <div className='ui segment'>
-                <b>Work Experience</b>
-              <div className='ui items'>
-              {this.state.experienceDetails.map(experience => {
-                return <Experience key={experience} onUpdateExperience={this.onUpdateExperience} experience={experience} studentId={this.props.studentId}/>;
-              })}
-              </div>
-            </div>
+          
+        </div>
+      </div>
+      <div style={{ marginBottom: '20px' }}>
+        <div className='ui segment'>
+          <b>Work Experience</b>
+          <div className='ui items'>
+            {this.state.experience.map(experience => {
+              return <Experience key={experience} onUpdateExperience={this.onUpdateExperience} experience={experience} studentId={this.props.studentId} />;
+            })}
           </div>
         </div>
-        );
-    }
+      </div>
+    </div>
+    );
+  }
 }
 
+const mapDispatchToProps = dispatch => {
+  return ({
+    onSave: (user) => dispatch({ type: "saveToProfile", user: user })
+  });
+}
 
-export default (DetailComponent);
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailComponent);

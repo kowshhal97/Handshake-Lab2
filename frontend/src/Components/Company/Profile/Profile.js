@@ -81,7 +81,7 @@ class Profile extends Component {
     componentDidMount = () => {
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        axios.get('http://54.188.68.233:3000/company/companyProfile/' + this.props.studentId)
+        axios.get('http://localhost:3000/company/companyProfile/' + this.props.studentId)
             .then(response => {
 
                 this.setState(response.data[0])
@@ -127,7 +127,7 @@ class Profile extends Component {
                 company_contact:this.state.company_contact
             }
             axios.defaults.withCredentials = true;
-            axios.put('http://54.188.68.233:3000/company/companyProfile/'+this.props.studentId,data)
+            axios.put('http://localhost:3000/company/companyProfile/'+this.props.studentId,data)
                 .then(response => {
                 }).catch(()=>{
                     window.alert("FAIL")

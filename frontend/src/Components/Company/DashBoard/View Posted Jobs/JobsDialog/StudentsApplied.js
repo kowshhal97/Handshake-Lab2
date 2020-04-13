@@ -51,7 +51,7 @@ class PostedJobs extends Component {
     componentDidMount=()=>{
      this.setState({data:this.props.studentsApplied})
 
-        window.alert(this.props.jobId)
+   
       
     }
 

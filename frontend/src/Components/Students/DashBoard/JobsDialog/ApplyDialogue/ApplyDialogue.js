@@ -91,7 +91,6 @@ let currentDate= `${year}-${month<10?`0${month}`:`${month}`}-${date}`
         }
         console.log(data)
         axios.defaults.withCredentials = true;
-        window.alert(this.props.jobId);
         axios.put('http://localhost:3000/applications/apply/'+this.props.jobId, data)
             .then(response => {
                 this.setState({ open: false });

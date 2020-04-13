@@ -9,32 +9,24 @@ import { connect } from 'react-redux'
 let Dialog=null;
 const columns = [
     {
-        name: "event_name",
-        label: "event Name",
+        name: "name",
+        label: "Student Name",
         options: {
             filter: false,
             sort: true,
         }
     },
     {
-        name: "event_timing",
-        label: "Time",
+        name: "collegeName",
+        label: "College Name",
         options: {
             filter: true,
             sort: true,
         }
     },
     {
-        name: "event_from_date",
-        label: "Start Date",
-        options: {
-            filter: true,
-            sort: true,
-        }
-    },
-    {
-        name: "event_to_date",
-        label: "End Date",
+        name: "major",
+        label: "Major",
         options: {
             filter: true,
             sort: true,
@@ -59,7 +51,7 @@ class StudentsTab extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
-            let studentId=this.state.data[cellMeta.dataIndex].studentId;
+            let studentId=this.state.data[cellMeta.dataIndex]._id;
             Dialog=(<ProfileDialog display={true} studentId={studentId} close={this.dialogCloseHandler}/>)
             this.setState({showDialog:true})
         },
@@ -71,9 +63,9 @@ class StudentsTab extends Component {
     componentDidMount=()=>{
         var headers = new Headers();
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:3000/events/company/'+this.props.user.name)
+        axios.get('http://localhost:3000/events/'+this.props.eventId)
             .then(response => {
-                this.setState({data:response.data});  
+                this.setState({data:response.data.students});  
             }).catch(() => {
                 window.alert("FAIL")
             })

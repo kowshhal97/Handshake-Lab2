@@ -26,26 +26,30 @@ class EditExperienceForm extends React.Component {
             starting_date: this.state.starting_date == ''?this.props.data.starting_date: this.state.starting_date,
             ending_date: this.state.ending_date == ''? this.props.data.ending_date: this.state.ending_date,
             company_location: this.state.company_location == ''? this.props.data.company_location: this.state.company_location,
-            work_summary: this.state.work_summary===''?this.props.data.work_summary: this.state.work_summary,
-            student_id:this.props.studentId,}
-    const id = this.props.data.experience_id;
-    axios
-      .put(`http://54.188.68.233:3000/student/studentProfile/experienceDetails/${id}`, data, {headers: {'Content-Type': 'application/json'}})
-      .then(res => {
-          console.log(res)
-        if (res.status === 200) {
-          window.alert("success")
-          this.props.onUpdateExperience({...data, experience_id: id})
-          console.log(res.data);
+            work_summary: this.state.work_summary===''?this.props.data.work_summary: this.state.work_summary
+          }
+          this.props.onUpdateExperience(data)
+
+
+    // const id = this.props.data.experience_id;
+    // axios
+    //   .put(`http://localhost:3000/student/studentProfile/experienceDetails/${id}`, data, {headers: {'Content-Type': 'application/json'}})
+    //   .then(res => {
+    //       console.log(res)
+    //     if (res.status === 200) {
+    //       window.alert("success")
+    //       this.props.onUpdateExperience({...data, experience_id: id})
+    //       console.log(res.data);
           
-        } else {
-            console.log(res);
-        }
-      })
-      .catch(err => {
-        window.alert("Fail")
-        console.log(err);
-      });   
+    //     } else {
+    //         console.log(res);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     window.alert("Fail")
+    //     console.log(err);
+    //   });
+    
     this.props.toggle();
   };
 

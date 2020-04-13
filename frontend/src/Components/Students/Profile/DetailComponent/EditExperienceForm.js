@@ -33,7 +33,7 @@ class EditExperienceForm extends React.Component {
 
     // const id = this.props.data.experience_id;
     // axios
-    //   .put(`http://54.188.68.233:3000/student/studentProfile/experienceDetails/${id}`, data, {headers: {'Content-Type': 'application/json'}})
+    //   .put(`http://localhost:3000/student/studentProfile/experienceDetails/${id}`, data, {headers: {'Content-Type': 'application/json'}})
     //   .then(res => {
     //       console.log(res)
     //     if (res.status === 200) {

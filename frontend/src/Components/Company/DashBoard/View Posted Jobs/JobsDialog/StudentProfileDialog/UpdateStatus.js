@@ -109,8 +109,7 @@ class CustomizedDialogDemo extends React.Component {
         this.setState({ selectedStatus: e.target.value });
     }
     componentDidMount=()=>{
-        window.alert(this.props.studentId)
-        window.alert(this.props.jobId)
+        
     }
 
     render() {

@@ -93,7 +93,6 @@ class CustomizedDialogDemo extends React.Component {
   componentDidMount = () => {
     var headers = new Headers();
     axios.defaults.withCredentials = true;
-    window.alert(this.props.jobId)
     axios.get('http://localhost:3000/jobs/'+this.props.jobId)
         .then(response => {
             this.setState({data:response.data})

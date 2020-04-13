@@ -5,11 +5,10 @@ import MainComp from './DetailComponent/DetailComponent'
 
 
 import './Profile.css'
-import { getThemeProps } from '@material-ui/styles';
-
 
 const profile = (props) => {
-    return (<div>
+    return (<div >
+        <div>
             <Grid container >
                 <Grid item xs={4}>
                     <SideBar studentId={props.studentId} ></SideBar>
@@ -18,7 +17,8 @@ const profile = (props) => {
                     <MainComp studentId={props.studentId}></MainComp>
                 </Grid>
             </Grid>
-        </div>)
+        </div>
+    </div>)
 }
 
 export default profile;

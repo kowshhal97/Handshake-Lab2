@@ -43,9 +43,8 @@ getAllStudents=async(msg,callback)=>{
       res.status=200
       callback(null,res)
     } catch (e) {
-      callback(null,"err")
+      callback(null,"err");
     }
-  callback(err,"Hello-from-handshake!")
   }
 
   

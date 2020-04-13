@@ -72,6 +72,7 @@ class PostedEvents extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick:  (colData, cellMeta)=> {
+            
             Dialog=(<EventsDialog display={true} eventId={this.state.data[cellMeta.dataIndex]._id} close={this.dialogCloseHandler}/>)
             this.setState({showDialog:true})
         },
