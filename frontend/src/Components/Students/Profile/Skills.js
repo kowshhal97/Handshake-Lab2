@@ -27,7 +27,7 @@
 //         .then(res => {
 //             if (res.status === 200) {
 //                 console.log(res.data);
-          
+
 //             } else {
 //                 console.log(res);
 //             }
@@ -42,12 +42,12 @@
 
 //     onChangeHandler = (e) => {
 //         this.setState({current_skill: e.target.value});
-        
+
 //     }
 //     onDeleteSkill = (e) => {
 //         console.log(e.target.id)
 //         const list = this.state.skills.filter(item => {
-//             if (e.target.id !== item) {
+//             if (e.target.id !=== item) {
 //                 return item;
 //             }
 //         })
@@ -59,7 +59,7 @@
 //         .then(res => {
 //             if (res.status === 200) {
 //                 console.log(res.data);
-          
+
 //             } else {
 //                 console.log(res);
 //             }

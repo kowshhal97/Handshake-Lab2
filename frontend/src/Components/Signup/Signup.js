@@ -6,20 +6,18 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import './Signup.css';
 import axios from 'axios';
-import { connect } from 'react-redux';
-
-
+import {connect} from 'react-redux';
 
 
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 
 import Typography from '@material-ui/core/Typography';
 
 function TabContainer(props) {
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
+        <Typography component="div" style={{padding: 8 * 3}}>
             {props.children}
         </Typography>
     );
@@ -38,9 +36,6 @@ const styles = theme => ({
 
 class SimpleTabs extends React.Component {
 
-    handleChange = (event, value) => {
-        this.setState({ value });
-    };
     state = {
         value: 0,
         name: "",
@@ -52,26 +47,30 @@ class SimpleTabs extends React.Component {
 
     }
 
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
+
     emailHandler = (e) => {
-        this.setState({ emailId: e.target.value })
+        this.setState({emailId: e.target.value})
     }
     passwordHandler = (e) => {
 
-        this.setState({ password: e.target.value })
+        this.setState({password: e.target.value})
     }
 
     collegeNameHandler = (e) => {
 
-        this.setState({ collegeName: e.target.value })
+        this.setState({collegeName: e.target.value})
     }
 
     nameHandler = (e) => {
 
-        this.setState({ name: e.target.value })
+        this.setState({name: e.target.value})
     }
 
     MajorHandler = (e) => {
-        this.setState({ major: e.target.value })
+        this.setState({major: e.target.value})
     }
 
     signup = (e, userType) => {
@@ -99,10 +98,9 @@ class SimpleTabs extends React.Component {
                     let user = response.data
                     this.props.onLogin(userType, user);
                 }).catch(() => {
-                    window.alert("FAIL")
-                })
-        }
-        else {
+                window.alert("FAIL")
+            })
+        } else {
             const data = {
                 email: this.state.emailId,
                 password: this.state.password,
@@ -116,14 +114,14 @@ class SimpleTabs extends React.Component {
                     this.props.onLogin(userType, user);
                     console.log("Status Code : ", response.status);
                 }).catch(() => {
-                    window.alert("FAIL")
-                })
+                window.alert("FAIL")
+            })
         }
     }
 
     render() {
-        const { classes } = this.props;
-        const { value } = this.state;
+        const {classes} = this.props;
+        const {value} = this.state;
 
         return (
             <div className={classes.root}>
@@ -131,12 +129,20 @@ class SimpleTabs extends React.Component {
                     <Paper square className='main'>
                         <AppBar position="static" color="default">
                             <Tabs value={value} onChange={this.handleChange}>
-                                <Tab label="Student" />
-                                <Tab label="Company" />
+                                <Tab label="Student"/>
+                                <Tab label="Company"/>
                             </Tabs>
                         </AppBar>
-                        {value === 0 && <TabContainer><Signup type="student" par="CollegeName" changeEmail={this.emailHandler} changePassword={this.passwordHandler} changeCollege={this.collegeNameHandler} changeName={this.nameHandler} signup={this.signup} major={this.MajorHandler} /></TabContainer>}
-                        {value === 1 && <TabContainer><Signup type="company" par="Location" changeEmail={this.emailHandler} changePassword={this.passwordHandler} changeCollege={this.collegeNameHandler} changeName={this.nameHandler} signup={this.signup} major={this.MajorHandler} /></TabContainer>}
+                        {value === 0 &&
+                        <TabContainer><Signup type="student" par="CollegeName" changeEmail={this.emailHandler}
+                                              changePassword={this.passwordHandler}
+                                              changeCollege={this.collegeNameHandler} changeName={this.nameHandler}
+                                              signup={this.signup} major={this.MajorHandler}/></TabContainer>}
+                        {value === 1 &&
+                        <TabContainer><Signup type="company" par="Location" changeEmail={this.emailHandler}
+                                              changePassword={this.passwordHandler}
+                                              changeCollege={this.collegeNameHandler} changeName={this.nameHandler}
+                                              signup={this.signup} major={this.MajorHandler}/></TabContainer>}
                     </Paper>
                 </Grid>
             </div>
@@ -150,8 +156,8 @@ SimpleTabs.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, user) => dispatch({ type: 'LOGIN', value: value, user: user })
+        onLogout: () => dispatch({type: 'LOGOUT'}),
+        onLogin: (value, user) => dispatch({type: 'LOGIN', value: value, user: user})
     });
 }
 

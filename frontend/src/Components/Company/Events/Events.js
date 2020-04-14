@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import axios from 'axios';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 
 import PostEvents from './PostEvents/PostEvents'
 import PostedEvents from './ViewPostedEvents/PostedEvents'
 
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 
 import Typography from '@material-ui/core/Typography';
@@ -19,7 +19,7 @@ import Typography from '@material-ui/core/Typography';
 
 function TabContainer(props) {
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
+        <Typography component="div" style={{padding: 8 * 3}}>
             {props.children}
         </Typography>
     );
@@ -37,56 +37,54 @@ const styles = theme => ({
 });
 
 class Events extends Component {
-    handleChange = (event, value) => {
-        this.setState({ value });
-    };
-
-
     constructor(props) {
         super(props);
-    
+
         this.state = {
             value: 0,
             eventName: "",
             description: "",
             time: "",
-            toDate:"",
+            toDate: "",
             fromDate: "",
             eligibility: "",
-            location:"",
-            major:"",
-            getEventData: [
-            ]
-      };
+            location: "",
+            major: "",
+            getEventData: []
+        };
     }
 
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
+
     eventNameHandler = (e) => {
-        this.setState({ eventName: e.target.value })
+        this.setState({eventName: e.target.value})
     }
 
     descriptionHandler = (e) => {
-        this.setState({ description: e.target.value })
+        this.setState({description: e.target.value})
     }
     timeHandler = (e) => {
-        this.setState({ time: e.target.value })
+        this.setState({time: e.target.value})
     }
     fromDateHandler = (e) => {
-        
-        this.setState({ fromDate: e.target.value })
-        
+
+        this.setState({fromDate: e.target.value})
+
     }
     toDateHandler = (e) => {
-        this.setState({ toDate: e.target.value })
-        
+        this.setState({toDate: e.target.value})
+
     }
     eligibilityHandler = (e) => {
-        this.setState({ eligibility: e.target.value })
+        this.setState({eligibility: e.target.value})
     }
     locationHandler = (e) => {
-        this.setState({ location: e.target.value })
+        this.setState({location: e.target.value})
     }
     majorHandler = (e) => {
-        this.setState({ major: e.target.value })
+        this.setState({major: e.target.value})
     }
     postEvent = (e) => {
         var headers = new Headers();
@@ -107,12 +105,9 @@ class Events extends Component {
             .then(response => {
                 console.log("Status Code : ", response.status);
             }).catch(() => {
-                window.alert("FAIL")
-            })
+            window.alert("FAIL")
+        })
     }
-
-
-
 
 
     // componentDidMount = () => {
@@ -129,8 +124,8 @@ class Events extends Component {
 
 
     render() {
-        const { classes } = this.props;
-        const { value } = this.state;
+        const {classes} = this.props;
+        const {value} = this.state;
 
 
         return (
@@ -141,38 +136,42 @@ class Events extends Component {
                             <Paper square className='main'>
                                 <AppBar position="static" color="default">
                                     <Tabs value={value} onChange={this.handleChange}>
-                                        <Tab label="Posted Events" />
-                                        <Tab label="Post Events" />
+                                        <Tab label="Posted Events"/>
+                                        <Tab label="Post Events"/>
                                     </Tabs>
                                 </AppBar>
-                                {value === 0 && <TabContainer><PostedEvents /></TabContainer>}
-                                {value === 1 && <TabContainer><PostEvents changeEventName={this.eventNameHandler} changeDescription={this.descriptionHandler} changeTime={this.timeHandler} changeLocation={this.locationHandler} changeFromDate={this.fromDateHandler} changeToDate={this.toDateHandler} ChangeEligibility={this.eligibilityHandler} ChangeMajor={this.majorHandler} postEvent={this.postEvent}/></TabContainer>}
+                                {value === 0 && <TabContainer><PostedEvents/></TabContainer>}
+                                {value === 1 && <TabContainer><PostEvents changeEventName={this.eventNameHandler}
+                                                                          changeDescription={this.descriptionHandler}
+                                                                          changeTime={this.timeHandler}
+                                                                          changeLocation={this.locationHandler}
+                                                                          changeFromDate={this.fromDateHandler}
+                                                                          changeToDate={this.toDateHandler}
+                                                                          ChangeEligibility={this.eligibilityHandler}
+                                                                          ChangeMajor={this.majorHandler}
+                                                                          postEvent={this.postEvent}/></TabContainer>}
                             </Paper>
                         </Grid>
                     </div>
-                </div></div>
+                </div>
+            </div>
         );
     }
 }
+
 Events.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = dispatch => {
-    return ({
-
-    });
+    return ({});
 }
 
 const mapStateToProps = state => {
     return {
-        user:state.user
+        user: state.user
     };
 };
-
-
-
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Events));

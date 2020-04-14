@@ -1,24 +1,21 @@
-import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
+import {withStyles} from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
-import axios from 'axios';
-import { connect } from 'react-redux'
-
-
-import PostJobs from './PostJobs/PostJobs'
-import PostedJobs from './View Posted Jobs/PostedJobs'
-
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-
+import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {connect} from 'react-redux';
+import PostJobs from './PostJobs/PostJobs';
+import PostedJobs from './View Posted Jobs/PostedJobs';
+
 
 function TabContainer(props) {
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
+        <Typography component="div" style={{padding: 8 * 3}}>
             {props.children}
         </Typography>
     );
@@ -38,42 +35,42 @@ const styles = theme => ({
 class DashBoard extends React.Component {
     state = {
         value: 0,
-        jobPostings:[],
-        job_title:"",
-        job_posting_date:"",
-        job_application_deadline:"",
-        job_location:"",
-        job_salary:"",
-        job_description:"",
-        job_requirements:"",
-        job_category:"",
+        jobPostings: [],
+        job_title: "",
+        job_posting_date: "",
+        job_application_deadline: "",
+        job_location: "",
+        job_salary: "",
+        job_description: "",
+        job_requirements: "",
+        job_category: "",
 
     }
 
 
-    jobTitleHandler=(e)=>{
-        this.setState({job_title:e.target.value})
+    jobTitleHandler = (e) => {
+        this.setState({job_title: e.target.value})
     }
-    jobPostingHandler=(e)=>{
-        this.setState({job_posting_date:e.target.value})
+    jobPostingHandler = (e) => {
+        this.setState({job_posting_date: e.target.value})
     }
-    jobDeadlineHandler=(e)=>{
-        this.setState({job_application_deadline:e.target.value})
+    jobDeadlineHandler = (e) => {
+        this.setState({job_application_deadline: e.target.value})
     }
-    jobLocationHandler=(e)=>{
-        this.setState({job_location:e.target.value})
+    jobLocationHandler = (e) => {
+        this.setState({job_location: e.target.value})
     }
-    jobSalaryHandler=(e)=>{
-        this.setState({job_salary:e.target.value})
+    jobSalaryHandler = (e) => {
+        this.setState({job_salary: e.target.value})
     }
-    jobDescriptionHandler=(e)=>{
-        this.setState({job_description:e.target.value})
+    jobDescriptionHandler = (e) => {
+        this.setState({job_description: e.target.value})
     }
-    jobRequirementsHandler=(e)=>{
-        this.setState({job_requirements:e.target.value})
+    jobRequirementsHandler = (e) => {
+        this.setState({job_requirements: e.target.value})
     }
-    jobCategoryHandler=(e)=>{
-        this.setState({job_category:e.target.value})
+    jobCategoryHandler = (e) => {
+        this.setState({job_category: e.target.value})
     }
 
     postJob = (e) => {
@@ -92,24 +89,21 @@ class DashBoard extends React.Component {
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/jobs/' + this.props.user.name, data)
             .then(response => {
-                
+
             }).catch(() => {
-                window.alert("FAIL")
-            })
+            window.alert("FAIL")
+        })
     }
 
 
-
-
     handleChange = (event, value) => {
-        this.setState({ value });
+        this.setState({value});
     };
 
-    
 
     render() {
-        const { classes } = this.props;
-        const { value } = this.state;
+        const {classes} = this.props;
+        const {value} = this.state;
 
 
         return (
@@ -120,16 +114,26 @@ class DashBoard extends React.Component {
                             <Paper square className='main'>
                                 <AppBar position="static" color="default">
                                     <Tabs value={value} onChange={this.handleChange}>
-                                        <Tab label="Posted Jobs" />
-                                        <Tab label="Post Jobs" />
+                                        <Tab label="Posted Jobs"/>
+                                        <Tab label="Post Jobs"/>
                                     </Tabs>
                                 </AppBar>
-                                {value === 0 && <TabContainer>< PostedJobs jobPostings={this.state.jobPostings}/></TabContainer>}
-                                {value === 1 && <TabContainer><PostJobs changeJobTitle={this.jobTitleHandler}  changePostingDate={this.jobPostingHandler} deadlineDate={this.jobDeadlineHandler}  changeSalary={this.jobSalaryHandler} changeLocation={this.jobLocationHandler} changeDescription={this.jobDescriptionHandler}  changeQualification={this.jobRequirementsHandler} changeCategory={this.jobCategoryHandler} postJob={this.postJob} /></TabContainer>}
+                                {value === 0 &&
+                                <TabContainer>< PostedJobs jobPostings={this.state.jobPostings}/></TabContainer>}
+                                {value === 1 && <TabContainer><PostJobs changeJobTitle={this.jobTitleHandler}
+                                                                        changePostingDate={this.jobPostingHandler}
+                                                                        deadlineDate={this.jobDeadlineHandler}
+                                                                        changeSalary={this.jobSalaryHandler}
+                                                                        changeLocation={this.jobLocationHandler}
+                                                                        changeDescription={this.jobDescriptionHandler}
+                                                                        changeQualification={this.jobRequirementsHandler}
+                                                                        changeCategory={this.jobCategoryHandler}
+                                                                        postJob={this.postJob}/></TabContainer>}
                             </Paper>
                         </Grid>
                     </div>
-                </div></div>
+                </div>
+            </div>
         );
     }
 }
@@ -139,14 +143,12 @@ DashBoard.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => {
-    return ({
-
-    });
+    return ({});
 }
 
 const mapStateToProps = state => {
     return {
-        user:state.user
+        user: state.user
     };
 };
 

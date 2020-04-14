@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import MUIDataTable from "mui-datatables";
 import JobsDialog from './JobsDialog/JobsDialog'
 import axios from 'axios';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 
-let Dialog=null;
+let Dialog = null;
 const column = [
     {
         name: "job_title",
@@ -58,14 +58,10 @@ const column = [
 ];
 
 
-
-
- 
-
 class PostedJobs extends Component {
-    state={
-        data:[],
-        showDialog:false
+    state = {
+        data: [],
+        showDialog: false
     }
 
 
@@ -74,70 +70,65 @@ class PostedJobs extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:3000/jobs/company/' + this.props.user.name)
             .then(response => {
-                this.setState({data:response.data});
+                this.setState({data: response.data});
             }).catch(() => {
-                window.alert("FAIL")
-            })
+            window.alert("FAIL")
+        })
     }
 
 
-    dialogCloseHandler =(e)=>{
+    dialogCloseHandler = (e) => {
 
         e.preventDefault();
-        this.setState({showDialog:false})
+        this.setState({showDialog: false})
     }
-
-
 
 
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
-        onCellClick:  (colData, cellMeta)=> {
+        onCellClick: (colData, cellMeta) => {
             console.log(this.props.jobPostings[cellMeta.dataIndex].students);
-            Dialog=(<JobsDialog display={true} jobId={this.props.jobPostings[cellMeta.dataIndex]._id} studentApplied={this.props.jobPostings[cellMeta.dataIndex].students} close={this.dialogCloseHandler}/>)
-            this.setState({showDialog:true})
+            Dialog = (<JobsDialog display={true} jobId={this.props.jobPostings[cellMeta.dataIndex]._id}
+                                  studentApplied={this.props.jobPostings[cellMeta.dataIndex].students}
+                                  close={this.dialogCloseHandler}/>)
+            this.setState({showDialog: true})
         },
         selectableRows: "none",
         download: false,
         print: false
     };
 
-      
-    
+
     render() {
 
 
-
-        
-        if(!this.state.showDialog){
-            Dialog=null
+        if (!this.state.showDialog) {
+            Dialog = null
         }
         return (
             <div>
                 {Dialog}
-                    <MUIDataTable
-                        title={"Posted Job"}
-                        data={this.state.data}
-                        columns={column}
-                        options={this.options}
-                    />
-                </div>)
+                <MUIDataTable
+                    title={"Posted Job"}
+                    data={this.state.data}
+                    columns={column}
+                    options={this.options}
+                />
+            </div>)
     }
 }
 
 
 const mapDispatchToProps = dispatch => {
-    return ({
-
-    });
+    return ({});
 }
 
 const mapStateToProps = state => {
     return {
-        user:state.user
+        user: state.user
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (PostedJobs);
+export default connect(mapStateToProps, mapDispatchToProps)(PostedJobs);
 

@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 
 import JobSearch from './JobSearch/JobSearch';
 import MyApplication from './MyApplications/MyApplications'
 
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 
 import Typography from '@material-ui/core/Typography';
 
 function TabContainer(props) {
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
+        <Typography component="div" style={{padding: 8 * 3}}>
             {props.children}
         </Typography>
     );
@@ -35,11 +35,6 @@ const styles = theme => ({
 });
 
 class Events extends Component {
-    handleChange = (event, value) => {
-        this.setState({ value });
-    };
-
-
     constructor(props) {
         super(props);
 
@@ -53,17 +48,17 @@ class Events extends Component {
             eligibility: "",
             location: "",
             major: "",
-            getEventData: [
-            ]
+            getEventData: []
         };
     }
 
-
-
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
 
     render() {
-        const { classes } = this.props;
-        const { value } = this.state;
+        const {classes} = this.props;
+        const {value} = this.state;
 
 
         return (
@@ -74,27 +69,29 @@ class Events extends Component {
                             <Paper square className='main'>
                                 <AppBar position="static" color="default">
                                     <Tabs value={value} onChange={this.handleChange}>
-                                        <Tab label="Job Search" />
-                                        <Tab label="Applications" />
+                                        <Tab label="Job Search"/>
+                                        <Tab label="Applications"/>
                                     </Tabs>
                                 </AppBar>
-                                {value === 0 && <TabContainer><JobSearch /></TabContainer>}
-                                {value === 1 && <TabContainer><MyApplication /></TabContainer>}
+                                {value === 0 && <TabContainer><JobSearch/></TabContainer>}
+                                {value === 1 && <TabContainer><MyApplication/></TabContainer>}
                             </Paper>
                         </Grid>
                     </div>
-                </div></div>
+                </div>
+            </div>
         );
     }
 }
+
 Events.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, studentId) => dispatch({ type: 'LOGIN', value: value, studentId: studentId })
+        onLogout: () => dispatch({type: 'LOGOUT'}),
+        onLogin: (value, studentId) => dispatch({type: 'LOGIN', value: value, studentId: studentId})
     });
 }
 
@@ -106,10 +103,6 @@ const mapStateToProps = state => {
         studentId: state.studentId
     };
 };
-
-
-
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Events));

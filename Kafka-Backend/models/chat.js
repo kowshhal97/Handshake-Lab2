@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ChatSchema = new Schema({
     messages: [{
         text: String,
-        deliverAt: Date,
+        deliverAt: String,
         sender: {type: String, required: true }
     }],
     users: [{

@@ -39,8 +39,8 @@ const StudentSchema = new Schema({
         designation: String,
         company_location: String,
         work_summary: String,
-        starting_date: Date,
-        ending_date: Date
+        starting_date: String,
+        ending_date: String
     }],
     applications: [{
         applicationId: Schema.Types.ObjectId,
@@ -54,6 +54,7 @@ const StudentSchema = new Schema({
         job_description: String,
         job_category: String,
         job_requirements: String,
+        application_date:String
 
     }],
     registeredEvents: [{

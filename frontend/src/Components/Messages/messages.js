@@ -1,7 +1,7 @@
 import React from 'react';
 
-const messages=()=>{
-    return(
+const messages = () => {
+    return (
         <div>
             <h1>
                 Messages Tab!

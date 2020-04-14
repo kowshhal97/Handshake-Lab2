@@ -1,39 +1,35 @@
-import axios from 'axios';
-const initialState={
+const initialState = {
 
-    isLoggedIn:false,
-    userType:'none',
-    user:{
-
-    }
+    isLoggedIn: false,
+    userType: 'none',
+    user: {}
 }
 
-const reducer=(state=initialState,action)=>{
+const reducer = (state = initialState, action) => {
     console.log(action)
-    if(action.type==='LOGOUT'){
+    if (action.type === 'LOGOUT') {
         return {
             ...state,
-            isLoggedIn:false,
-            userType:"none"
+            isLoggedIn: false,
+            userType: "none"
         }
     }
-    if(action.type==='LOGIN'){
+    if (action.type === 'LOGIN') {
         return {
             ...state,
-            isLoggedIn:true,
-            userType:action.value,
-            user:action.user
+            isLoggedIn: true,
+            userType: action.value,
+            user: action.user
         }
     }
-    if(action.type==='saveToProfile'){
-       return {
-           ...state,
-           user:action.user
-       }
+    if (action.type === 'saveToProfile') {
+        return {
+            ...state,
+            user: action.user
+        }
     }
-return state;
+    return state;
 }
-
 
 
 export default reducer;

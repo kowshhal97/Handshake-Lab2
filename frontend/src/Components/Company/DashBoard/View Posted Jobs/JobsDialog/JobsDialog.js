@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -11,99 +11,99 @@ import Typography from '@material-ui/core/Typography';
 import StudentsApplied from './StudentsApplied';
 
 const DialogTitle = withStyles(theme => ({
-  root: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    margin: 0,
-    padding: theme.spacing.unit * 2,
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing.unit,
-    top: theme.spacing.unit,
-    color: theme.palette.grey[500],
-  },
+    root: {
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        margin: 0,
+        padding: theme.spacing.unit * 2,
+    },
+    closeButton: {
+        position: 'absolute',
+        right: theme.spacing.unit,
+        top: theme.spacing.unit,
+        color: theme.palette.grey[500],
+    },
 }))(props => {
-  const { children, classes, onClose } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="Close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
+    const {children, classes, onClose} = props;
+    return (
+        <MuiDialogTitle disableTypography className={classes.root}>
+            <Typography variant="h6">{children}</Typography>
+            {onClose ? (
+                <IconButton aria-label="Close" className={classes.closeButton} onClick={onClose}>
+                    <CloseIcon/>
+                </IconButton>
+            ) : null}
+        </MuiDialogTitle>
+    );
 });
 
 const DialogContent = withStyles(theme => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing.unit * 2,
-  },
-  diaglogWidth:{
-    maxWidth:10
-  },
+    root: {
+        margin: 0,
+        padding: theme.spacing.unit * 2,
+    },
+    diaglogWidth: {
+        maxWidth: 10
+    },
 }))(MuiDialogContent);
 
 const DialogActions = withStyles(theme => ({
-  root: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-    margin: 0,
-    padding: theme.spacing.unit,
-  },
+    root: {
+        borderTop: `1px solid ${theme.palette.divider}`,
+        margin: 0,
+        padding: theme.spacing.unit,
+    },
 }))(MuiDialogActions);
 
 class CustomizedDialogDemo extends React.Component {
-  state = {
-    open: false
-  };
+    state = {
+        open: false
+    };
 
-  handleClickOpen = () => {
-    this.setState({
-      open: true,
-    });
-  };
+    handleClickOpen = () => {
+        this.setState({
+            open: true,
+        });
+    };
 
-  handleClose = (e) => {
-    this.setState({ open: false });
-    this.props.close(e);
-  };
+    handleClose = (e) => {
+        this.setState({open: false});
+        this.props.close(e);
+    };
 
-  render() {
+    render() {
 
 
-    if(this.props.display===true&&this.state.open===false ){
-      this.setState({
-        open: true,
-      });
+        if (this.props.display === true && this.state.open === false) {
+            this.setState({
+                open: true,
+            });
 
+        }
+        return (
+            <div>
+
+                <Dialog
+                    onClose={this.handleClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={this.state.open}
+                    fullWidth={true}
+                    maxWidth={"md"}
+                >
+                    <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+                        Students Applied for the Job
+                    </DialogTitle>
+                    <DialogContent>
+                        <StudentsApplied studentsApplied={this.props.studentApplied} jobId={this.props.jobId}/>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
     }
-    return (
-      <div >
-        
-        <Dialog
-          onClose={this.handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={this.state.open}
-          fullWidth={true}
-          maxWidth={"md"}
-        >
-          <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            Students Applied for the Job
-          </DialogTitle>
-          <DialogContent>
-            <StudentsApplied studentsApplied={this.props.studentApplied} jobId={this.props.jobId}/>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
-  }
 }
 
 export default CustomizedDialogDemo;

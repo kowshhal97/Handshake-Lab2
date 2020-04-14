@@ -1,15 +1,10 @@
-import React,{Component} from 'react';
-
-import axios from 'axios';
-import { connect } from 'react-redux'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import MUIDataTable from "mui-datatables";
 import JobsDialog from './JobDetails/JobsDialog';
 
 
-
-
-
-let Dialog=null;
+let Dialog = null;
 const column = [
     {
         name: "job_title",
@@ -45,67 +40,64 @@ const column = [
     },
 ];
 
- 
 
 class DashBoard extends Component {
-    state={
-        data:[],
-        showDialog:false
+    state = {
+        data: [],
+        showDialog: false
     }
 
-    dialogCloseHandler =(e)=>{
+    dialogCloseHandler = (e) => {
 
         e.preventDefault();
-        this.setState({showDialog:false})
+        this.setState({showDialog: false})
     }
 
-
-    componentDidMount = () => {
-    this.setState({data:this.props.user.applications})
-    }
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
-        onCellClick:  (colData, cellMeta)=> {
-            Dialog=(<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex].applicationId} close={this.dialogCloseHandler}/>)
-            this.setState({showDialog:true})
+        onCellClick: (colData, cellMeta) => {
+            Dialog = (<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex].applicationId}
+                                  close={this.dialogCloseHandler}/>)
+            this.setState({showDialog: true})
         },
         selectableRows: "none",
         download: false,
         print: false
     };
 
-      
-    
+    componentDidMount = () => {
+        this.setState({data: this.props.user.applications})
+    }
+
     render() {
-        
-        if(!this.state.showDialog){
-            Dialog=null
+
+        if (!this.state.showDialog) {
+            Dialog = null
         }
         return (
             <div>
                 {Dialog}
-                    <MUIDataTable
-                        title={"Applications"}
-                        data={this.state.data}
-                        columns={column}
-                        options={this.options}
-                    />
-                    </div>
-               )
+                <MUIDataTable
+                    title={"Applications"}
+                    data={this.state.data}
+                    columns={column}
+                    options={this.options}
+                />
+            </div>
+        )
     }
 }
 
 
 const mapDispatchToProps = dispatch => {
-    return ({
-    });
+    return ({});
 }
 
 const mapStateToProps = state => {
     return {
-        user:state.user
+        user: state.user
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (DashBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

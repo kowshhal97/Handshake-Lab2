@@ -1,21 +1,17 @@
-import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
-
-
-import WorkIcon from '@material-ui/icons/Work';
-import Grid from '@material-ui/core/Grid';
+import {makeStyles} from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import WorkIcon from '@material-ui/icons/Work';
+import React from 'react';
 
 
 const useStyles = makeStyles(theme => ({
@@ -51,24 +47,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-
-
-
-
 export default function PostEvents(props) {
     const classes = useStyles();
 
-    
+
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <WorkIcon />
+                    <WorkIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                     Job Posting Form
-        </Typography>
+                    Job Posting Form
+                </Typography>
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -187,7 +179,7 @@ export default function PostEvents(props) {
                         className={classes.submit}
                         onClick={props.postJob}>
                         Post Job
-          </Button>
+                    </Button>
                 </form>
             </div>
         </Container>

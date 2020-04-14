@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Route} from 'react-router-dom';
 import GlobalNavbar from './NavBar/NavBar';
 import StudentNavBar from './Students/NavBar/NavBar';
 
@@ -18,19 +18,18 @@ import Messages from './Messages/messages'
 import CompanyProfile from './CompanyProfile'
 
 
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 
 import Home from './Home';
 import Login from './Login/Login'
 
 
-
 class Main extends Component {
 
 
     render() {
-        let NavBarVar, dashBoardVar, studentsTabVar,messagesTab, eventsVar, profileVar = null;
+        let NavBarVar, dashBoardVar, studentsTabVar, messagesTab, eventsVar, profileVar = null;
 
         if (!this.props.isLoggedIn) {
             NavBarVar = GlobalNavbar;
@@ -38,18 +37,16 @@ class Main extends Component {
             studentsTabVar = Home;
             eventsVar = Home;
             profileVar = Home;
-            messagesTab=Home;
-        }
-        else {
-            messagesTab=Messages;
+            messagesTab = Home;
+        } else {
+            messagesTab = Messages;
             NavBarVar = StudentNavBar;
             studentsTabVar = companyStudentsTab;
             if (this.props.userType === 'student') {
                 dashBoardVar = studentDashBoard;
                 eventsVar = studentEvents;
                 profileVar = studentProfile;
-            }
-            else {
+            } else {
                 dashBoardVar = companyDashBoard;
                 eventsVar = companyEvents;
                 profileVar = companyProfile;
@@ -57,19 +54,20 @@ class Main extends Component {
         }
 
         return (
-            <div >
-                
-                
-        <Route path="/" render={(props) => <NavBarVar {...props} onLogout={this.props.onLogout} userType={this.props.userType} />}/>
+            <div>
 
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/dashboard"  component={dashBoardVar} />
-                <Route exact path="/studentsTab" component={studentsTabVar} />
-                <Route exact path="/events"  component={eventsVar} />
-                <Route exact path="/messages"  component={messagesTab} />
-                <Route exact path="/profile" exact component={profileVar} />
+
+                <Route path="/" render={(props) => <NavBarVar {...props} onLogout={this.props.onLogout}
+                                                              userType={this.props.userType}/>}/>
+
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/signup" component={Signup}/>
+                <Route exact path="/dashboard" component={dashBoardVar}/>
+                <Route exact path="/studentsTab" component={studentsTabVar}/>
+                <Route exact path="/events" component={eventsVar}/>
+                <Route exact path="/messages" component={messagesTab}/>
+                <Route exact path="/profile" exact component={profileVar}/>
                 <Route exact path="/company/profile" exact component={CompanyProfile}/>
 
             </div>
@@ -79,8 +77,8 @@ class Main extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
+        onLogout: () => dispatch({type: 'LOGOUT'}),
+        onLogin: (value) => dispatch({type: 'LOGIN', value: value})
     });
 }
 

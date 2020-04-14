@@ -10,7 +10,7 @@ class Skills extends React.Component {
     }
 
     componentDidMount() {
-        if(this.props.skillSet != null) {
+        if(this.props.skillSet !== null) {
             this.setState({skills: this.props.skillSet})
         }
     }

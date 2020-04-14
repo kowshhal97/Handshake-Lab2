@@ -1,22 +1,11 @@
-import React,{Component} from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import React, {Component} from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import MUIDataTable from "mui-datatables";
 import JobsDialog from '../JobsDialog/JobDetails/JobsDialog'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-
-import Typography from '@material-ui/core/Typography';
 
 
-
-
-let Dialog=null;
+let Dialog = null;
 const column = [
     {
         name: "job_title",
@@ -60,20 +49,31 @@ const column = [
     },
 ];
 
- 
 
 class DashBoard extends Component {
-    state={
-        data:[],
-        showDialog:false
+    state = {
+        data: [],
+        showDialog: false
     }
 
-    dialogCloseHandler =(e)=>{
+    dialogCloseHandler = (e) => {
 
         e.preventDefault();
-        this.setState({showDialog:false})
+        this.setState({showDialog: false})
     }
 
+    options = {
+        selectableRowsOnClick: true,
+        disableToolbarSelect: true,
+        onCellClick: (colData, cellMeta) => {
+            Dialog = (<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex]._id}
+                                  close={this.dialogCloseHandler}/>)
+            this.setState({showDialog: true})
+        },
+        selectableRows: "none",
+        download: false,
+        print: false
+    };
 
     componentDidMount = () => {
         var headers = new Headers();
@@ -81,50 +81,37 @@ class DashBoard extends Component {
         axios.get('http://localhost:3000/jobs')
             .then(response => {
 
-                this.setState({data:[...response.data]});
+                this.setState({data: [...response.data]});
 
             }).catch(() => {
-                window.alert("FAIL")
-            })
+            window.alert("FAIL")
+        })
     }
-    options = {
-        selectableRowsOnClick: true,
-        disableToolbarSelect: true,
-        onCellClick:  (colData, cellMeta)=> {
-            Dialog=(<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex]._id} close={this.dialogCloseHandler}/>)
-            this.setState({showDialog:true})
-        },
-        selectableRows: "none",
-        download: false,
-        print: false
-    };
 
-      
-    
     render() {
-        
-        if(!this.state.showDialog){
-            Dialog=null
+
+        if (!this.state.showDialog) {
+            Dialog = null
         }
         return (
             <div>
                 {Dialog}
-                    <MUIDataTable
-                        title={"All Jobs"}
-                        data={this.state.data}
-                        columns={column}
-                        options={this.options}
-                    />
-                    </div>
-               )
+                <MUIDataTable
+                    title={"All Jobs"}
+                    data={this.state.data}
+                    columns={column}
+                    options={this.options}
+                />
+            </div>
+        )
     }
 }
 
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
+        onLogout: () => dispatch({type: 'LOGOUT'}),
+        onLogin: (value) => dispatch({type: 'LOGIN', value: value})
     });
 }
 
@@ -138,4 +125,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (DashBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

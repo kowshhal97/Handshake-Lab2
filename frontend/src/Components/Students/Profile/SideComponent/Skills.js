@@ -10,7 +10,7 @@ class Skills extends React.Component {
     }
 
     componentDidMount() {
-        if(this.props.skillSet != null) {
+        if(this.props.skillSet !== null) {
             this.setState({skills: this.props.skillSet})
         }
     }
@@ -23,7 +23,7 @@ class Skills extends React.Component {
         // axios
         // .post('http://localhost:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
         // .then(res => {
-        //     if (res.status === 200) {
+        //     if (res.status ==== 200) {
         //         console.log(res.data);
           
         //     } else {
@@ -53,7 +53,7 @@ class Skills extends React.Component {
         // axios
         // .post('http://localhost:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
         // .then(res => {
-        //     if (res.status === 200) {
+        //     if (res.status ==== 200) {
                 
         //         console.log(res.data);
           

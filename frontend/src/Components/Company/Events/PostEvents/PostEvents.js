@@ -7,9 +7,8 @@ import TextField from '@material-ui/core/TextField';
 
 import EventIcon from '@material-ui/icons/Event';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
@@ -39,22 +38,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-
-
-
 export default function PostEvents(props) {
     const classes = useStyles();
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <EventIcon />
+                    <EventIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                     Event Form
-        </Typography>
+                    Event Form
+                </Typography>
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -97,8 +93,8 @@ export default function PostEvents(props) {
                                     step: 300, // 5 min
                                 }}
                             />
-                            </Grid>
-                            <Grid item xs={6}>
+                        </Grid>
+                        <Grid item xs={6}>
                             <TextField
                                 variant="outlined"
                                 required
@@ -111,7 +107,7 @@ export default function PostEvents(props) {
                                 onChange={props.changeLocation}
                             />
                         </Grid>
-                           
+
                         <Grid item xs={6}>
                             <TextField
                                 id="date"
@@ -136,8 +132,8 @@ export default function PostEvents(props) {
                                 }}
                             />
                         </Grid>
-                        
-                        
+
+
                         <Grid item xs={6}>
                             <TextField
                                 variant="outlined"
@@ -173,7 +169,7 @@ export default function PostEvents(props) {
                         className={classes.submit}
                         onClick={props.postEvent}>
                         Post Event
-          </Button>
+                    </Button>
                 </form>
             </div>
         </Container>

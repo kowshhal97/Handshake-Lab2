@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -11,16 +11,12 @@ import Typography from '@material-ui/core/Typography';
 
 import axios from 'axios';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 const DialogTitle = withStyles(theme => ({
     root: {
@@ -35,13 +31,13 @@ const DialogTitle = withStyles(theme => ({
         color: theme.palette.grey[500],
     },
 }))(props => {
-    const { children, classes, onClose } = props;
+    const {children, classes, onClose} = props;
     return (
         <MuiDialogTitle disableTypography className={classes.root}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="Close" className={classes.closeButton} onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
             ) : null}
         </MuiDialogTitle>
@@ -80,36 +76,36 @@ class CustomizedDialogDemo extends React.Component {
     };
 
     handleClose = (e) => {
-        this.setState({ open: false });
+        this.setState({open: false});
         this.props.close(e);
     };
 
 
     updateStatus = (e) => {
         var headers = new Headers();
-         e.preventDefault();
+        e.preventDefault();
         axios.defaults.withCredentials = true;
-        let data={
-            studentId:this.props.studentId,
-            status:this.state.selectedStatus
+        let data = {
+            studentId: this.props.studentId,
+            status: this.state.selectedStatus
         }
 
 
-        axios.put('http://localhost:3000/applications/'+this.props.jobId, data)
+        axios.put('http://localhost:3000/applications/' + this.props.jobId, data)
             .then(response => {
-                this.setState({ open: false });
+                this.setState({open: false});
                 this.props.close(e);
                 console.log("Status Code : ", response.status);
             }).catch(() => {
-                window.alert("FAIL")
-            })
+            window.alert("FAIL")
+        })
     }
 
     onSelectStatus = (e) => {
-        this.setState({ selectedStatus: e.target.value });
+        this.setState({selectedStatus: e.target.value});
     }
-    componentDidMount=()=>{
-        
+    componentDidMount = () => {
+
     }
 
     render() {
@@ -123,7 +119,7 @@ class CustomizedDialogDemo extends React.Component {
 
 
         return (
-            <div >
+            <div>
                 <Dialog
                     onClose={this.handleClose}
                     aria-labelledby="customized-dialog-title"
@@ -133,12 +129,13 @@ class CustomizedDialogDemo extends React.Component {
                 >
                     <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
                         Set the status of the Application
-          </DialogTitle>
+                    </DialogTitle>
                     <DialogContent>
-<div className="setStyleforIframe" >
+                        <div className="setStyleforIframe">
 
-                    <iframe src={"https://handshake-project.s3-us-west-2.amazonaws.com/resume_"+this.props.studentId}> </iframe>
-                    <FormControl >
+                            <iframe
+                                src={"https://handshake-project.s3-us-west-2.amazonaws.com/resume_" + this.props.studentId}></iframe>
+                            <FormControl>
                                 <InputLabel id="demo-controlled-open-select-label" className="selectWidth"></InputLabel>
                                 <Select
                                     labelId="demo-controlled-open-select-label"
@@ -146,22 +143,22 @@ class CustomizedDialogDemo extends React.Component {
                                     className="selectWidth"
                                     onChange={this.onSelectStatus}>
 
-                                    <MenuItem value={"Accept"}><p style={{color:"green"}}>Accept </p></MenuItem>
-                                    <MenuItem value={"Reject"}><p style={{color:"red"}}>Reject</p></MenuItem>
+                                    <MenuItem value={"Accept"}><p style={{color: "green"}}>Accept </p></MenuItem>
+                                    <MenuItem value={"Reject"}><p style={{color: "red"}}>Reject</p></MenuItem>
                                 </Select>
                             </FormControl>
-                            </div>
+                        </div>
                     </DialogContent>
                     <DialogActions>
                         <Button
                             variant="contained"
                             color="primary"
-                            startIcon={<CheckBoxIcon />}
+                            startIcon={<CheckBoxIcon/>}
                             onClick={this.updateStatus}
                         > Update Status</Button>
                         <Button onClick={this.handleClose} color="primary">
                             Close
-            </Button>
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -170,14 +167,11 @@ class CustomizedDialogDemo extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-    return ({
-    });
+    return ({});
 }
 
 const mapStateToProps = state => {
-    return {
-
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomizedDialogDemo);

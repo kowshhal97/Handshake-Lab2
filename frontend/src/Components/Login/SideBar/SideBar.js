@@ -1,5 +1,4 @@
 import React from 'react'
-import { minWidth } from '@material-ui/system'
 import './Sidebar.css'
 
 const sideBar = () => {

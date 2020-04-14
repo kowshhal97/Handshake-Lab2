@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import ProfileDialog from './../../StudentProfileDialog/profileDialog'
 
 
-let Dialog=null;
+let Dialog = null;
 const columns = [
     {
         name: "name",
@@ -49,28 +49,26 @@ const columns = [
 ];
 
 
-
- 
-
 class StudentsTab extends Component {
     _isMounted = false;
-    state={
-        data:[],
-        showDialog:false
+    state = {
+        data: [],
+        showDialog: false
     }
 
-    dialogCloseHandler =(e)=>{
+    dialogCloseHandler = (e) => {
 
         e.preventDefault();
-        this.setState({showDialog:false})
+        this.setState({showDialog: false})
     }
 
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
-        onCellClick:  (colData, cellMeta)=> {
-            Dialog=(<ProfileDialog display={true} studentId={this.state.data[cellMeta.dataIndex]._id} close={this.dialogCloseHandler}/>)
-            this.setState({showDialog:true})
+        onCellClick: (colData, cellMeta) => {
+            Dialog = (<ProfileDialog display={true} studentId={this.state.data[cellMeta.dataIndex]._id}
+                                     close={this.dialogCloseHandler}/>)
+            this.setState({showDialog: true})
         },
         selectableRows: "none",
         download: false,
@@ -84,38 +82,37 @@ class StudentsTab extends Component {
             .then(response => {
                 window.alert("success")
                 // let str=response.data.skillSet.join();
-                this.setState({data:[...response.data]})
+                this.setState({data: [...response.data]})
             }).catch(() => {
-                window.alert("FAIL")
-            })
+            window.alert("FAIL")
+        })
     }
 
     componentWillUnmount() {
         this._isMounted = false;
-      }
+    }
 
-      
-    
+
     render() {
-        
-        if(!this.state.showDialog){
-            Dialog=null
+
+        if (!this.state.showDialog) {
+            Dialog = null
         }
-        let data=[]
-        data=this.state.data
+        let data = []
+        data = this.state.data
         return (
             <div>
                 {Dialog}
-            <div className="handShakeMain">
-                <div className="handShakeLayout">
-                    <MUIDataTable
-                        title={"Registered Students"}
-                        data={data}
-                        columns={columns}
-                        options={this.options}
-                    />
+                <div className="handShakeMain">
+                    <div className="handShakeLayout">
+                        <MUIDataTable
+                            title={"Registered Students"}
+                            data={data}
+                            columns={columns}
+                            options={this.options}
+                        />
+                    </div>
                 </div>
-            </div>
             </div>)
     }
 }
