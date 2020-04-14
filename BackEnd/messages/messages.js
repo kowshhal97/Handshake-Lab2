@@ -57,6 +57,7 @@ router.get('/:id', async (req, res) => {
    kafka.make_request('messages', req.body, (err, results) => {
  
  
+    console.log(results)
      if(results.status!=200){
       return res.status(results.status).send();
     }    res.status(results.status).send(JSON.parse(results.data));

@@ -13,7 +13,7 @@ import companyEvents from "./Company/Events/Events";
 import companyProfile from './Company/Profile/Profile';
 import companyStudentsTab from './Company/StudentsTab/StudentsTab';
 
-import Messages from './Messages/messages'
+import Messages from './Messages/Messages'
 
 import CompanyProfile from './CompanyProfile'
 

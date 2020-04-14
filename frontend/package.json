@@ -19,7 +19,9 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
-    "semantic-ui-react": "^0.88.2"
+    "semantic-ui-react": "^0.88.2",
+    "react-chat-elements": "^10.8.0",
+    "react-chat-ui": "^0.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
