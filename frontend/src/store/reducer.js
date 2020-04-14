@@ -3,10 +3,10 @@ const initialState = {
     isLoggedIn: false,
     userType: 'none',
     user: {}
-}
+};
 
 const reducer = (state = initialState, action) => {
-    console.log(action)
+    console.log(action);
     if (action.type === 'LOGOUT') {
         return {
             ...state,
@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
         }
     }
     return state;
-}
+};
 
 
 export default reducer;

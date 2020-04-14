@@ -9,7 +9,7 @@ class Experience extends React.Component {
 
     onClickHandler = () => {
         this.setState({showAddExperienceForm: !this.state.showAddExperienceForm});
-    }
+    };
 
 
     render() {
@@ -61,6 +61,6 @@ class Experience extends React.Component {
             </div>
         );
     }
-};
+}
 
 export default Experience;

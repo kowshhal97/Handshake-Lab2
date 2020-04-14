@@ -41,18 +41,18 @@ class EventDetails extends Component {
     state = {
 
         eventDetails: []
-    }
+    };
     componentDidMount = () => {
         var headers = new Headers();
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:3000/events/' + this.props.eventId)
             .then(response => {
-                this.setState(response.data[0])
+                this.setState(response.data[0]);
                 console.log(this.state.eventDetails)
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     render() {
         const {classes} = this.props;

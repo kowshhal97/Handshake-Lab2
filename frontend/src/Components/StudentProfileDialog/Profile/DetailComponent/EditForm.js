@@ -8,13 +8,16 @@ const university = [{
 }, {text: 'University of Southern California', value: 'University of Southern California'}, {
     text: 'Mumbai University',
     value: 'Mumbai University'
-}]
-const degree = [{text: 'Masters', value: 'masters'}, {text: 'Bachelors', value: 'bachelors'}, {text: 'BE', value: 'BE'}]
+}];
+const degree = [{text: 'Masters', value: 'masters'}, {text: 'Bachelors', value: 'bachelors'}, {
+    text: 'BE',
+    value: 'BE'
+}];
 const major = [{text: 'computer science', value: 'computer science'}, {
     text: 'Computer Engineering',
     value: 'Computer Engineering'
-}, {text: 'Software engineering', value: 'Software engineering'}]
-const year = [{text: '2021', value: '2021'}, {text: '2020', value: '2020'}, {text: '2016', value: '2016'}]
+}, {text: 'Software engineering', value: 'Software engineering'}];
+const year = [{text: '2021', value: '2021'}, {text: '2020', value: '2020'}, {text: '2016', value: '2016'}];
 
 class EditForm extends React.Component {
     constructor() {
@@ -34,13 +37,13 @@ class EditForm extends React.Component {
             major: this.state.major === '' ? this.props.data.major : this.state.major,
             passing_year: this.state.passing_year === '' ? this.props.data.passing_year : this.state.passing_year,
             cgpa: this.state.cgpa === '' ? this.props.data.cgpa : this.state.cgpa
-        }
+        };
         const id = this.props.data.education_id;
 
         axios.put(`http://localhost:3000/student/studentProfile/educationDetails/${id}`, data, {headers: {'Content-Type': 'application/json'}})
             .then(res => {
                 if (res.status === 200) {
-                    this.props.onUpdateEducation({...data, education_id: id})
+                    this.props.onUpdateEducation({...data, education_id: id});
                     console.log(res.data);
 
                 } else {
@@ -57,31 +60,31 @@ class EditForm extends React.Component {
         this.setState({institution_name: value}, () => {
             console.log("Dropdown", this.state.institution_name);
         })
-    }
+    };
 
     onChangeHandlerDegree = (e, {value}) => {
         this.setState({degree: value}, () => {
             console.log("Dropdown", this.state.degree);
         })
-    }
+    };
 
     onChangeHandlerMajor = (e, {value}) => {
         this.setState({major: value}, () => {
             console.log("Dropdown", this.state.major);
         })
-    }
+    };
 
     onChangeHandlerYear = (e, {value}) => {
         this.setState({passing_year: value}, () => {
             console.log("Dropdown", this.state.passing_year);
         })
-    }
+    };
 
     onChangeHandlerGPA = (e) => {
         this.setState({cgpa: e.target.value}, () => {
             console.log("input", this.state.cgpa);
         })
-    }
+    };
 
     render() {
         return (

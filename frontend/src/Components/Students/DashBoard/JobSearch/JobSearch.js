@@ -54,20 +54,20 @@ class DashBoard extends Component {
     state = {
         data: [],
         showDialog: false
-    }
+    };
 
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
 
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick: (colData, cellMeta) => {
             Dialog = (<JobsDialog display={true} jobId={this.state.data[cellMeta.dataIndex]._id}
-                                  close={this.dialogCloseHandler}/>)
+                                  close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },
         selectableRows: "none",
@@ -86,7 +86,7 @@ class DashBoard extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     render() {
 
@@ -113,7 +113,7 @@ const mapDispatchToProps = dispatch => {
         onLogout: () => dispatch({type: 'LOGOUT'}),
         onLogin: (value) => dispatch({type: 'LOGIN', value: value})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

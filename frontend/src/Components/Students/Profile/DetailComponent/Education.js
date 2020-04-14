@@ -10,7 +10,7 @@ class Education extends React.Component {
 
     onClickHandler = () => {
         this.setState({showAddForm: !this.state.showAddForm});
-    }
+    };
 
     renderForm = () => {
         return (
@@ -43,7 +43,7 @@ class Education extends React.Component {
                 </div>
             </div>
         )
-    }
+    };
 
     render() {
         return (
@@ -59,6 +59,6 @@ class Education extends React.Component {
         );
     }
 
-};
+}
 
 export default Education;

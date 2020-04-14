@@ -62,7 +62,7 @@ class PostedJobs extends Component {
     state = {
         data: [],
         showDialog: false
-    }
+    };
 
 
     componentDidMount = () => {
@@ -74,14 +74,14 @@ class PostedJobs extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
 
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
 
 
     options = {
@@ -91,7 +91,7 @@ class PostedJobs extends Component {
             console.log(this.props.jobPostings[cellMeta.dataIndex].students);
             Dialog = (<JobsDialog display={true} jobId={this.props.jobPostings[cellMeta.dataIndex]._id}
                                   studentApplied={this.props.jobPostings[cellMeta.dataIndex].students}
-                                  close={this.dialogCloseHandler}/>)
+                                  close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },
         selectableRows: "none",
@@ -122,7 +122,7 @@ class PostedJobs extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {

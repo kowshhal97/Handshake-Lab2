@@ -93,7 +93,7 @@ const mapDispatchToProps = dispatch => {
         onLogout: () => dispatch({type: 'LOGOUT'}),
         onLogin: (value, studentId) => dispatch({type: 'LOGIN', value: value, studentId: studentId})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

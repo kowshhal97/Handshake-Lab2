@@ -36,21 +36,21 @@ class PostedJobs extends Component {
     state = {
         data: [],
         showDialog: false
-    }
+    };
 
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
 
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick: (colData, cellMeta) => {
-            let studentId = this.state.data[cellMeta.dataIndex]._id
+            let studentId = this.state.data[cellMeta.dataIndex]._id;
             Dialog = (<ProfileDialog display={true} studentId={studentId} close={this.dialogCloseHandler}
-                                     jobId={this.props.jobId}/>)
+                                     jobId={this.props.jobId}/>);
             this.setState({showDialog: true})
         },
         selectableRows: "none",
@@ -62,7 +62,7 @@ class PostedJobs extends Component {
         this.setState({data: this.props.studentsApplied})
 
 
-    }
+    };
 
     render() {
 
@@ -89,7 +89,7 @@ const mapDispatchToProps = dispatch => {
         onLogout: () => dispatch({type: 'LOGOUT'}),
         onLogin: (value) => dispatch({type: 'LOGIN', value: value})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

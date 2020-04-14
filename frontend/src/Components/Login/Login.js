@@ -40,7 +40,7 @@ class SimpleTabs extends React.Component {
         value: 0,
         emailId: "",
         password: "",
-    }
+    };
 
     handleChange = (event, value) => {
         this.setState({value});
@@ -49,32 +49,32 @@ class SimpleTabs extends React.Component {
     emailHandler = (e) => {
 
         this.setState({emailId: e.target.value})
-    }
+    };
     passwordHandler = (e) => {
 
         this.setState({password: e.target.value})
-    }
+    };
 
 
     studentLogin = (e, userType) => {
         const header = {
             'Content-Type': 'application/json',
-        }
+        };
         e.preventDefault();
         const data = {
             email: this.state.emailId,
             password: this.state.password
-        }
-        console.log(data)
+        };
+        console.log(data);
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/student/login', data, header)
             .then(response => {
-                let user = response.data
+                let user = response.data;
                 this.props.onLogin(userType, user);
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     companyLogin = (e, userType) => {
         var headers = new Headers();
@@ -82,17 +82,17 @@ class SimpleTabs extends React.Component {
         const data = {
             email: this.state.emailId,
             password: this.state.password,
-        }
+        };
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/company/login', data)
             .then(response => {
                 // window.alert("Successs")
-                let user = response.data
+                let user = response.data;
                 this.props.onLogin(userType, user);
             }).catch(() => {
             window.alert("FAIL");
         })
-    }
+    };
 
 
     render() {
@@ -137,7 +137,7 @@ const mapDispatchToProps = dispatch => {
         onLogout: () => dispatch({type: 'LOGOUT'}),
         onLogin: (value, user) => dispatch({type: 'LOGIN', value: value, user: user})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

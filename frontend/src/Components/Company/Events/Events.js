@@ -60,32 +60,32 @@ class Events extends Component {
 
     eventNameHandler = (e) => {
         this.setState({eventName: e.target.value})
-    }
+    };
 
     descriptionHandler = (e) => {
         this.setState({description: e.target.value})
-    }
+    };
     timeHandler = (e) => {
         this.setState({time: e.target.value})
-    }
+    };
     fromDateHandler = (e) => {
 
         this.setState({fromDate: e.target.value})
 
-    }
+    };
     toDateHandler = (e) => {
         this.setState({toDate: e.target.value})
 
-    }
+    };
     eligibilityHandler = (e) => {
         this.setState({eligibility: e.target.value})
-    }
+    };
     locationHandler = (e) => {
         this.setState({location: e.target.value})
-    }
+    };
     majorHandler = (e) => {
         this.setState({major: e.target.value})
-    }
+    };
     postEvent = (e) => {
         var headers = new Headers();
         e.preventDefault();
@@ -98,7 +98,7 @@ class Events extends Component {
             event_location: this.state.location,
             event_eligibility_criteria: this.state.eligibility,
             event_major: this.state.major
-        }
+        };
         console.log(data);
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/events/' + this.props.user.name, data)
@@ -107,7 +107,7 @@ class Events extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
 
     // componentDidMount = () => {
@@ -165,7 +165,7 @@ Events.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {

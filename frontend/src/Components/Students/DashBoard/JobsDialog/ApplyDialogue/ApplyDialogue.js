@@ -79,17 +79,17 @@ class CustomizedDialogDemo extends React.Component {
     apply = (e) => {
         var headers = new Headers();
         // e.preventDefault();
-        let newDate = new Date()
+        let newDate = new Date();
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
 
-        let currentDate = `${year}-${month < 10 ? `0${month}` : `${month}`}-${date}`
+        let currentDate = `${year}-${month < 10 ? `0${month}` : `${month}`}-${date}`;
         const data = {
             student: this.props.user,
             application_date: currentDate
-        }
-        console.log(data)
+        };
+        console.log(data);
         axios.defaults.withCredentials = true;
         axios.put('http://localhost:3000/applications/apply/' + this.props.jobId, data)
             .then(response => {
@@ -99,7 +99,7 @@ class CustomizedDialogDemo extends React.Component {
                 console.log("Status Code : ", response.status);
             }).catch(() => {
             window.alert("FAIL")
-        })
+        });
         const fd = new FormData();
         fd.append('upl', this.state.Resume);
         axios
@@ -114,11 +114,11 @@ class CustomizedDialogDemo extends React.Component {
             });
 
 
-    }
+    };
 
     onResumeUpload = (e) => {
         this.setState({Resume: e.target.files[0]});
-    }
+    };
 
     render() {
 
@@ -167,7 +167,7 @@ const mapDispatchToProps = dispatch => {
     return ({
         onSave: (user) => dispatch({type: "saveToProfile", user: user})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

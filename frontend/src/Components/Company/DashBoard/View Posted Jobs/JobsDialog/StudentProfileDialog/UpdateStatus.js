@@ -88,7 +88,7 @@ class CustomizedDialogDemo extends React.Component {
         let data = {
             studentId: this.props.studentId,
             status: this.state.selectedStatus
-        }
+        };
 
 
         axios.put('http://localhost:3000/applications/' + this.props.jobId, data)
@@ -99,14 +99,14 @@ class CustomizedDialogDemo extends React.Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     onSelectStatus = (e) => {
         this.setState({selectedStatus: e.target.value});
-    }
+    };
     componentDidMount = () => {
 
-    }
+    };
 
     render() {
 
@@ -168,7 +168,7 @@ class CustomizedDialogDemo extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {};

@@ -13,7 +13,7 @@ import UpdateStatus from './UpdateStatus'
 
 import './profileDialog.css'
 
-let Dialoog = null
+let Dialoog = null;
 const DialogTitle = withStyles(theme => ({
     root: {
         borderBottom: `1px solid ${theme.palette.divider}`,
@@ -69,14 +69,14 @@ class CustomizedDialogDemo extends React.Component {
         e.preventDefault();
         Dialoog = (<div>hello</div>);
         this.setState({showDialog: false})
-    }
+    };
 
     updateStatus = (e) => {
         e.preventDefault();
         Dialoog = (<UpdateStatus studentId={this.props.studentId} display={true} close={this.dialogCloseHandler}
                                  jobId={this.props.jobId}/>);
         this.setState({showDialog: true})
-    }
+    };
 
 
     handleClickOpen = () => {

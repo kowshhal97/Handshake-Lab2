@@ -7,36 +7,36 @@ import Skill from './Skills'
 import Grid from '@material-ui/core/Grid';
 
 class SideComponent extends Component {
-    state = {}
+    state = {};
 
     skillSet = {
         skillSet: ""
-    }
+    };
 
 
     changed = (e) => {
 
-    }
+    };
 
     changCity = (e) => {
         this.setState({city: e.target.value})
-    }
+    };
     changeSta = (e) => {
 
         this.setState({state: e.target.value})
-    }
+    };
     changeCon = (e) => {
         this.setState({country: e.target.value})
-    }
+    };
     changePh = (e) => {
         this.setState({contactNumber: e.target.value})
-    }
+    };
     changeDob = (e) => {
         this.setState({dateOfBirth: e.target.value})
-    }
+    };
     changeObj = (e) => {
         this.setState({careerObjective: e.target.value})
-    }
+    };
 
     save = () => {
         axios.put('http://localhost:3000/student/studentProfile/' + this.state._id, this.state)
@@ -45,7 +45,7 @@ class SideComponent extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     componentDidMount = () => {
         axios.get('http://localhost:3000/student/studentProfile/' + this.props.studentId)
@@ -54,7 +54,7 @@ class SideComponent extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     render() {
 
@@ -79,7 +79,7 @@ class SideComponent extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {};

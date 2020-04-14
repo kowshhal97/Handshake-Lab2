@@ -32,12 +32,12 @@ const useStyles = makeStyles(theme => ({
 
 const ButtonAppBar = (props) => {
     const classes = useStyles();
-    const store = useSelector(store => store)
+    const store = useSelector(store => store);
 
-    let redirectVar = null
+    let redirectVar = null;
     let logout = () => {
         props.onLogout();
-    }
+    };
 
     if (store.isLoggedIn) {
         redirectVar = <Redirect to="/"/>
@@ -101,7 +101,7 @@ const ButtonAppBar = (props) => {
             </AppBar>
         </div>
     );
-}
+};
 
 
 export default ButtonAppBar;

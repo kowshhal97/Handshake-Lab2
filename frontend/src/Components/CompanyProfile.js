@@ -60,7 +60,7 @@ class Profile extends Component {
         editLoc: false,
         editContact: false
 
-    }
+    };
 
 
     componentDidMount = () => {
@@ -73,36 +73,36 @@ class Profile extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
     editDesc = (e) => {
         this.setState({editDes: true})
-    }
+    };
     editDescCancel = () => {
         this.setState({editDes: false})
-    }
+    };
     changeDesc = (e) => {
         this.setState({description: e.target.value})
-    }
+    };
     editLoc = (e) => {
         this.setState({editLoc: true})
-    }
+    };
     editLocCancel = () => {
         this.setState({editLoc: false})
-    }
+    };
     changeLoc = (e) => {
 
         this.setState({location: e.target.value})
-    }
+    };
     editContact = (e) => {
         this.setState({editContact: true})
-    }
+    };
     editContactCancel = () => {
         this.setState({editContact: false})
-    }
+    };
     changeContact = (e) => {
 
         this.setState({contactNumber: e.target.value})
-    }
+    };
     save = () => {
         var headers = new Headers();
         const data = {
@@ -110,24 +110,24 @@ class Profile extends Component {
             location: this.state.location,
             description: this.state.description,
             contactNumber: this.state.contactNumber
-        }
+        };
         axios.defaults.withCredentials = true;
         axios.put('http://localhost:3000/company/companyProfile/' + this.props.user.name, data)
             .then(response => {
                 this.props.onSave(response.data)
             }).catch(() => {
             window.alert("FAIL")
-        })
+        });
         this.editDescCancel();
         this.editContactCancel();
         this.editLocCancel();
-    }
+    };
 
     render() {
         const {classes} = this.props;
-        let desc = null
-        let loc = null
-        let contactInfo = null
+        let desc = null;
+        let loc = null;
+        let contactInfo = null;
         if (this.state.editDes) {
             desc = (
                 <Grid container>
@@ -331,7 +331,7 @@ const mapDispatchToProps = dispatch => {
     return ({
         onSave: (user) => dispatch({type: "saveToProfile", user: user})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

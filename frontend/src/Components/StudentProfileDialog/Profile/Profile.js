@@ -19,6 +19,6 @@ const profile = (props) => {
             </Grid>
         </div>
     </div>)
-}
+};
 
 export default profile;

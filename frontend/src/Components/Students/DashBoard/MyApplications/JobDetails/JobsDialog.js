@@ -67,7 +67,7 @@ class CustomizedDialogDemo extends React.Component {
         redirect: false,
         open: false,
     };
-    redirectVar = null
+    redirectVar = null;
 
     handleClickOpen = () => {
         this.setState({
@@ -88,23 +88,23 @@ class CustomizedDialogDemo extends React.Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:3000/jobs/' + this.props.jobId)
             .then(response => {
-                this.setState({data: response.data})
+                this.setState({data: response.data});
                 console.log(this.state.data)
             }).catch(() => {
             window.alert("failing")
         })
-    }
+    };
 
     viewResume = (e) => {
         e.preventDefault()
 
-    }
+    };
 
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
 
     render() {
 
@@ -166,7 +166,7 @@ class CustomizedDialogDemo extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {

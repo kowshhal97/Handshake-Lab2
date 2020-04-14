@@ -70,7 +70,7 @@ class CustomizedDialogDemo extends React.Component {
         open: false,
         showDialog: false
     };
-    redirectVar = null
+    redirectVar = null;
 
     handleClickOpen = () => {
         this.setState({
@@ -89,32 +89,32 @@ class CustomizedDialogDemo extends React.Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:3000/jobs/' + this.props.jobId)
             .then(response => {
-                this.setState({data: response.data})
+                this.setState({data: response.data});
                 console.log(this.state.data)
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     viewCompany = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         this.redirectVar = (<Redirect to={{
             pathname: '/company/profile',
             companyName: this.state.data.companyName
         }}
 
-        />)
+        />);
         this.setState({redirect: !(this.state.redirect)})
-    }
+    };
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
     apply = () => {
-        Diaalog = (<ApplyDialogue display={true} close={this.dialogCloseHandler} jobId={this.props.jobId}/>)
+        Diaalog = (<ApplyDialogue display={true} close={this.dialogCloseHandler} jobId={this.props.jobId}/>);
         this.setState({showDialog: true})
-    }
+    };
 
     render() {
 
@@ -179,7 +179,7 @@ class CustomizedDialogDemo extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {

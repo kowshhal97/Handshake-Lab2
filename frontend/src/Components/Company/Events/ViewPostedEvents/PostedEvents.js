@@ -45,13 +45,13 @@ class PostedEvents extends Component {
     state = {
         data: [],
         showDialog: false
-    }
+    };
 
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
 
     options = {
         selectableRowsOnClick: true,
@@ -59,7 +59,7 @@ class PostedEvents extends Component {
         onCellClick: (colData, cellMeta) => {
 
             Dialog = (<EventsDialog display={true} eventId={this.state.data[cellMeta.dataIndex]._id}
-                                    close={this.dialogCloseHandler}/>)
+                                    close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },
         selectableRows: "none",
@@ -72,12 +72,12 @@ class PostedEvents extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:3000/events/company/' + this.props.user.name)
             .then(response => {
-                this.setState({data: [...response.data]})
+                this.setState({data: [...response.data]});
                 console.log(this.state.data)
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     render() {
 
@@ -100,7 +100,7 @@ class PostedEvents extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {

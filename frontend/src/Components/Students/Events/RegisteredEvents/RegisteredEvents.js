@@ -45,21 +45,21 @@ class PostedEvents extends Component {
     state = {
         data: [],
         showDialog: false
-    }
+    };
 
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
 
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick: (colData, cellMeta) => {
 
-            let eventId = this.state.data[cellMeta.dataIndex].eventId
-            Dialog = (<EventsDialog display={true} eventId={eventId} close={this.dialogCloseHandler}/>)
+            let eventId = this.state.data[cellMeta.dataIndex].eventId;
+            Dialog = (<EventsDialog display={true} eventId={eventId} close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },
         selectableRows: "none",
@@ -71,7 +71,7 @@ class PostedEvents extends Component {
 
         this.setState({data: this.props.user.registeredEvents})
 
-    }
+    };
 
     render() {
 
@@ -94,7 +94,7 @@ class PostedEvents extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {

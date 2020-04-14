@@ -80,7 +80,7 @@ const mapDispatchToProps = dispatch => {
         onLogout: () => dispatch({type: 'LOGOUT'}),
         onLogin: (value) => dispatch({type: 'LOGIN', value: value})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

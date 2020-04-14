@@ -17,15 +17,15 @@ class DetailComponent extends Component {
         showTextFrom: false,
         showAddExperienceForm: false,
 
-    }
+    };
 
     componentDidMount = () => {
         this._isMounted = true;
 
-        console.log(this.props.user)
+        console.log(this.props.user);
 
         this.setState(this.props.user)
-    }
+    };
 
     componentWillUnmount() {
         this._isMounted = false;
@@ -33,45 +33,45 @@ class DetailComponent extends Component {
 
     onAddSchoolClick = () => {
         this.setState({showAddForm: !this.state.showAddForm});
-    }
+    };
 
     onAddSchool = (school) => {
-        school.id = this.state.education.length
-        console.log(school)
+        school.id = this.state.education.length;
+        console.log(school);
         const list = [...this.state.education, school];
-        console.log(list)
+        console.log(list);
         this.setState({education: list}, () => {
             this.save()
         });
-    }
+    };
 
     onUpdateEducation = (education) => {
-        console.log(education)
+        console.log(education);
         const data = this.state.education.map((item) => {
             if (item.id === education.id) {
                 return education
             }
             return item;
-        })
+        });
         this.setState({education: data}, () => {
             this.save()
         });
-    }
+    };
     onUpdateExperience = (experience) => {
-        console.log(experience)
+        console.log(experience);
         const data = this.state.experience.map((item) => {
             if (item.id === experience.id) {
                 return experience
             }
             return item;
-        })
+        });
         this.setState({experience: data}, () => {
             this.save()
         });
 
-    }
+    };
     save = () => {
-        let obj = this.state
+        let obj = this.state;
         delete obj.showAddForm;
         delete obj.showTextFrom;
         delete obj.showAddExperienceForm;
@@ -81,21 +81,21 @@ class DetailComponent extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
     onAddExperience = (experience) => {
-        experience.id = this.state.experience.length
+        experience.id = this.state.experience.length;
         const list = [...this.state.experience, experience];
-        console.log(list)
+        console.log(list);
         this.setState({experience: list}, () => {
             this.save()
         });
 
         this.setState({showAddExperienceForm: !this.state.showAddExperienceForm});
 
-    }
+    };
     onAddExperienceClick = () => {
         this.setState({showAddExperienceForm: !this.state.showAddExperienceForm});
-    }
+    };
 
     render() {
 
@@ -148,7 +148,7 @@ const mapDispatchToProps = dispatch => {
     return ({
         onSave: (user) => dispatch({type: "saveToProfile", user: user})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

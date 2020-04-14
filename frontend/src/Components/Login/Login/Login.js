@@ -39,7 +39,7 @@ export default function SignIn(props) {
     const loginHelper = (e) => {
         props.login(e, props.type)
 // props.setUser(props.type)
-    }
+    };
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>

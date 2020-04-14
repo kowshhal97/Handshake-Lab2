@@ -15,5 +15,5 @@ const sideBar = () => {
             </div>
         </div>
     </div>)
-}
+};
 export default sideBar

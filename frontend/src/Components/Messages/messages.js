@@ -8,5 +8,5 @@ const messages = () => {
             </h1>
         </div>
     )
-}
+};
 export default messages;

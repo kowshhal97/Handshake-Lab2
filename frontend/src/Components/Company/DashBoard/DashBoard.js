@@ -45,33 +45,33 @@ class DashBoard extends React.Component {
         job_requirements: "",
         job_category: "",
 
-    }
+    };
 
 
     jobTitleHandler = (e) => {
         this.setState({job_title: e.target.value})
-    }
+    };
     jobPostingHandler = (e) => {
         this.setState({job_posting_date: e.target.value})
-    }
+    };
     jobDeadlineHandler = (e) => {
         this.setState({job_application_deadline: e.target.value})
-    }
+    };
     jobLocationHandler = (e) => {
         this.setState({job_location: e.target.value})
-    }
+    };
     jobSalaryHandler = (e) => {
         this.setState({job_salary: e.target.value})
-    }
+    };
     jobDescriptionHandler = (e) => {
         this.setState({job_description: e.target.value})
-    }
+    };
     jobRequirementsHandler = (e) => {
         this.setState({job_requirements: e.target.value})
-    }
+    };
     jobCategoryHandler = (e) => {
         this.setState({job_category: e.target.value})
-    }
+    };
 
     postJob = (e) => {
         var headers = new Headers();
@@ -85,7 +85,7 @@ class DashBoard extends React.Component {
             job_description: this.state.job_description,
             job_requirements: this.state.job_requirements,
             job_category: this.state.job_category
-        }
+        };
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/jobs/' + this.props.user.name, data)
             .then(response => {
@@ -93,7 +93,7 @@ class DashBoard extends React.Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
 
     handleChange = (event, value) => {
@@ -144,7 +144,7 @@ DashBoard.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return ({});
-}
+};
 
 const mapStateToProps = state => {
     return {

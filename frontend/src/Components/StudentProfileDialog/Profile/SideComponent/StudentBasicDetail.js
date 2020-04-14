@@ -72,19 +72,19 @@ class RecipeReviewCard extends React.Component {
 
     editBasicDetails = () => {
         this.setState({editBasicDetails: !this.state.editBasicDetails})
-    }
+    };
 
     editCancel = () => {
         this.setState({editBasicDetails: false})
-    }
+    };
     handleExpandClick = () => {
         this.setState(state => ({expanded: !state.expanded}));
     };
 
     save = () => {
-        this.props.save()
+        this.props.save();
         this.editCancel()
-    }
+    };
 
 
     onFileSelect = (e) => {
@@ -100,10 +100,10 @@ class RecipeReviewCard extends React.Component {
             .catch(err => {
                 window.alert("Fail")
             });
-    }
+    };
 
     render() {
-        console.log(this.props.user)
+        console.log(this.props.user);
         const {classes} = this.props;
 
         return (

@@ -78,7 +78,7 @@ class CustomizedDialogDemo extends React.Component {
         // e.preventDefault();
         const data = {
             student: this.props.user
-        }
+        };
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/events/registered/' + this.props.eventId, data)
             .then(response => {
@@ -89,7 +89,7 @@ class CustomizedDialogDemo extends React.Component {
             window.alert("FAIL")
         })
 
-    }
+    };
 
 
     componentDidMount = () => {
@@ -102,7 +102,7 @@ class CustomizedDialogDemo extends React.Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
     render() {
 
@@ -158,7 +158,7 @@ const mapDispatchToProps = dispatch => {
     return ({
         onSave: (user) => dispatch({type: "saveToProfile", user: user})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {

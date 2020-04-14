@@ -7,13 +7,16 @@ const university = [{
 }, {text: 'University of Southern California', value: 'University of Southern California'}, {
     text: 'Mumbai University',
     value: 'Mumbai University'
-}]
-const degree = [{text: 'Masters', value: 'masters'}, {text: 'Bachelors', value: 'bachelors'}, {text: 'BE', value: 'BE'}]
+}];
+const degree = [{text: 'Masters', value: 'masters'}, {text: 'Bachelors', value: 'bachelors'}, {
+    text: 'BE',
+    value: 'BE'
+}];
 const major = [{text: 'computer science', value: 'computer science'}, {
     text: 'Computer Engineering',
     value: 'Computer Engineering'
-}, {text: 'Software engineering', value: 'Software engineering'}]
-const year = [{text: '2021', value: '2021'}, {text: '2020', value: '2020'}, {text: '2016', value: '2016'}]
+}, {text: 'Software engineering', value: 'Software engineering'}];
+const year = [{text: '2021', value: '2021'}, {text: '2020', value: '2020'}, {text: '2016', value: '2016'}];
 
 class AddForm extends React.Component {
     constructor() {
@@ -41,31 +44,31 @@ class AddForm extends React.Component {
         this.setState({institution_name: value}, () => {
             console.log("Dropdown", this.state.institution_name);
         })
-    }
+    };
 
     onChangeHandlerDegree = (e, {value}) => {
         this.setState({degree: value}, () => {
             console.log("Dropdown", this.state.degree);
         })
-    }
+    };
 
     onChangeHandlerMajor = (e, {value}) => {
         this.setState({major: value}, () => {
             console.log("Dropdown", this.state.major);
         })
-    }
+    };
 
     onChangeHandlerYear = (e, {value}) => {
         this.setState({passing_year: value}, () => {
             console.log("Dropdown", this.state.passing_year);
         })
-    }
+    };
 
     onChangeHandlerGPA = (e) => {
         this.setState({cgpa: e.target.value}, () => {
             console.log("input", this.state.cgpa);
         })
-    }
+    };
 
     render() {
         console.log(this.props.data);

@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import { Label, Icon } from 'semantic-ui-react';
+import {Icon, Label} from 'semantic-ui-react';
 
 
 class Skills extends React.Component {
@@ -10,7 +9,7 @@ class Skills extends React.Component {
     }
 
     componentDidMount() {
-        if(this.props.skillSet !== null) {
+        if (this.props.skillSet !== null) {
             this.setState({skills: this.props.skillSet})
         }
     }
@@ -25,7 +24,7 @@ class Skills extends React.Component {
         // .then(res => {
         //     if (res.status ==== 200) {
         //         console.log(res.data);
-          
+
         //     } else {
         //         window.alert("huyu")
         //         console.log(res);
@@ -34,31 +33,31 @@ class Skills extends React.Component {
         // .catch(err => {
         //     console.log(err);
         // });
-        this.setState({skills: list})
+        this.setState({skills: list});
         this.setState({current_skill: ''});
-    }
+    };
 
     onChangeHandler = (e) => {
         this.setState({current_skill: e.target.value});
-        
-    }
+
+    };
     onDeleteSkill = (e) => {
         const list = this.state.skills.filter(item => {
             if (e.target.id !== item) {
                 return item;
             }
-        })
+        });
         const data = {...this.props.skillSet};
         data.skillSet = list;
         // axios
         // .post('http://localhost:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
         // .then(res => {
         //     if (res.status ==== 200) {
-                
+
         //         console.log(res.data);
-          
+
         //     } else {
-                
+
         //         console.log(res);
         //     }
         // })
@@ -66,16 +65,17 @@ class Skills extends React.Component {
         //     console.log(err);
         // });
         this.setState({skills: list})
-    }
+    };
 
     renderSkills = (skill) => {
         return (
-                <Label as='a' style={{marginBottom:'5px'}}>
-                    {skill}
-                    <Icon name='delete' id={skill} onClick={this.onDeleteSkill}/>
-                </Label>
+            <Label as='a' style={{marginBottom: '5px'}}>
+                {skill}
+                <Icon name='delete' id={skill} onClick={this.onDeleteSkill}/>
+            </Label>
         )
-    }
+    };
+
     render() {
         return (
             <div>
@@ -90,7 +90,8 @@ class Skills extends React.Component {
                     </div>
                     <div>
                         <form className='ui form'>
-                            <input type='text' placeholder='Add more skills' value={this.state.current_skill} onChange={this.onChangeHandler} />
+                            <input type='text' placeholder='Add more skills' value={this.state.current_skill}
+                                   onChange={this.onChangeHandler}/>
                             <div style={{marginTop: '10px'}}>
                                 <button class='ui positive button' onClick={this.onAdd}>Add</button>
                             </div>

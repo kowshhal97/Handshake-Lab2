@@ -38,20 +38,20 @@ class StudentsTab extends Component {
     state = {
         data: [],
         showDialog: false
-    }
+    };
 
     dialogCloseHandler = (e) => {
 
         e.preventDefault();
         this.setState({showDialog: false})
-    }
+    };
 
     options = {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick: (colData, cellMeta) => {
             let studentId = this.state.data[cellMeta.dataIndex]._id;
-            Dialog = (<ProfileDialog display={true} studentId={studentId} close={this.dialogCloseHandler}/>)
+            Dialog = (<ProfileDialog display={true} studentId={studentId} close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },
         selectableRows: "none",
@@ -68,7 +68,7 @@ class StudentsTab extends Component {
             }).catch(() => {
             window.alert("FAIL")
         })
-    }
+    };
 
 
     componentWillUnmount() {
@@ -80,8 +80,8 @@ class StudentsTab extends Component {
         if (!this.state.showDialog) {
             Dialog = null
         }
-        let data = []
-        data = this.state.data
+        let data = [];
+        data = this.state.data;
         return (
             <div>
                 {Dialog}
@@ -102,7 +102,7 @@ const mapDispatchToProps = dispatch => {
         onLogout: () => dispatch({type: 'LOGOUT'}),
         onLogin: (value, user) => dispatch({type: 'LOGIN', value: value, user: user})
     });
-}
+};
 
 const mapStateToProps = state => {
     return {
