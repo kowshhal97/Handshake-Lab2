@@ -79,7 +79,7 @@ postRegisterForEvent = async (msg, callback) => {
             res.data = JSON.stringify(user)
             callback(null, res)
         } else {
-            const post = await EventPost.findByIdAndUpdate(msg.id, msg)
+            const post = await EventPost.findByIdAndUpdate(msg.id, msg,{new:true})
 
             if (!post) {
                 return res.status(404).send()

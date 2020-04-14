@@ -67,7 +67,7 @@ class Profile extends Component {
 
 
     state = {
-        company_name: "",
+        name: "",
         editDes: false,
         editLoc: false,
         editContact: false
@@ -79,15 +79,7 @@ class Profile extends Component {
 
 
     componentDidMount = () => {
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://localhost:3000/company/companyProfile/' + this.props.studentId)
-            .then(response => {
-
-                this.setState(response.data[0])
-            }).catch(() => {
-                window.alert("FAIL")
-            })
+       this.setState(this.props.user)
     }
     editDesc = (e) => {
         this.setState({ editDes: true })
@@ -96,7 +88,7 @@ class Profile extends Component {
         this.setState({ editDes: false })
     }
     changeDesc=(e)=>{
-        this.setState({company_description:e.target.value})
+        this.setState({description:e.target.value})
     }
     editLoc = (e) => {
         this.setState({ editLoc: true })
@@ -106,7 +98,7 @@ class Profile extends Component {
     }
     changeLoc=(e)=>{
         
-        this.setState({company_location:e.target.value})
+        this.setState({location:e.target.value})
     }
     editContact = (e) => {
         this.setState({ editContact: true })
@@ -116,19 +108,20 @@ class Profile extends Component {
     }
     changeContact=(e)=>{
         
-        this.setState({company_contact:e.target.value})
+        this.setState({contactNumber:e.target.value})
     }
     save = () => {
         var headers = new Headers();
             const data = {
-                company_name : this.state.company_name,
-                company_location : this.state.company_location,
-                company_description:this.state.company_description,
-                company_contact:this.state.company_contact
+                name : this.state.name,
+                location : this.state.location,
+                description:this.state.description,
+                contactNumber:this.state.contactNumber
             }
             axios.defaults.withCredentials = true;
-            axios.put('http://localhost:3000/company/companyProfile/'+this.props.studentId,data)
+            axios.put('http://localhost:3000/company/companyProfile/'+this.props.user.name,data)
                 .then(response => {
+                    this.props.onSave(response.data)
                 }).catch(()=>{
                     window.alert("FAIL")
                 })
@@ -145,7 +138,7 @@ class Profile extends Component {
             desc = (
                 <Grid container>
                     <Grid xs={6}>
-                        <TextField className={classes.textStyle} id="outlined-basic" label="Description" variant="outlined" defaultValue={this.state.company_description} helperText="Edit Description Here" onChange={this.changeDesc} />
+                        <TextField className={classes.textStyle} id="outlined-basic" label="Description" variant="outlined" defaultValue={this.state.description} helperText="Edit Description Here" onChange={this.changeDesc} />
                     </Grid>
                     <Grid container xs={6} justify="flex-end" direction="row" alignItems="center">
                         <Button
@@ -185,7 +178,7 @@ class Profile extends Component {
                     </Grid>
                 </Grid>
                 <Grid>
-                    {this.state.company_description}
+                    {this.state.description}
                 </Grid>
             </Grid>)
         }
@@ -199,7 +192,7 @@ class Profile extends Component {
             contactInfo = (
                 <Grid container>
                     <Grid xs={6}>
-                        <TextField className={classes.textStyle} id="outlined-basic" label="Description" variant="outlined" defaultValue={this.state.company_contact} helperText="Edit Contact Information Here" onChange={this.changeContact} />
+                        <TextField className={classes.textStyle} id="outlined-basic" label="Description" variant="outlined" defaultValue={this.state.contactNumber} helperText="Edit Contact Information Here" onChange={this.changeContact} />
                     </Grid>
                     <Grid container xs={6} justify="flex-end" direction="row" alignItems="center">
                         <Button
@@ -239,7 +232,7 @@ class Profile extends Component {
                     </Grid>
                 </Grid>
                 <Grid>
-                    {this.state.company_contact}
+                    {this.state.contactNumber}
                 </Grid>
             </Grid>)
         }
@@ -251,7 +244,7 @@ class Profile extends Component {
             loc = (
                 <Grid container>
                     <Grid xs={6}>
-                        <TextField className={classes.textStyle} id="outlined-basic" label="Description" variant="outlined" defaultValue={this.state.company_location} helperText="Edit Location Here" onChange={this.changeLoc}/>
+                        <TextField className={classes.textStyle} id="outlined-basic" label="Description" variant="outlined" defaultValue={this.state.location} helperText="Edit Location Here" onChange={this.changeLoc}/>
                     </Grid>
                     <Grid container xs={6} justify="flex-end" direction="row" alignItems="center">
                         <Button
@@ -291,7 +284,7 @@ class Profile extends Component {
                     </Grid>
                 </Grid>
                 <Grid>
-                    {this.state.company_location}
+                    {this.state.location}
                 </Grid>
             </Grid>)
         }
@@ -307,7 +300,7 @@ class Profile extends Component {
                                 <Grid container direction="column" justify="flex-start" alignItems="center" className={classes.profileCard}>
                                     <Grid container>
                                         <Grid container xs direction="row" alignItems="flex-end" className="companyName">
-                                            <h2>{this.state.company_name}</h2>
+                                            <h2>{this.state.name}</h2>
                                         </Grid>
                                         <Grid container xs justify="flex-end" direction="row" alignItems="flex-start">
                                             <Button variant="contained" color="default" color="secondary" startIcon={<EditIcon />}>
@@ -352,17 +345,13 @@ class Profile extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value, studentId) => dispatch({ type: 'LOGIN', value: value, studentId: studentId })
+        onSave:(user)=>dispatch({type:"saveToProfile",user:user})
     });
 }
 
 const mapStateToProps = state => {
     return {
-
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

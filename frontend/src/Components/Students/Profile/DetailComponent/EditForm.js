@@ -27,19 +27,7 @@ class EditForm extends React.Component {
                   cgpa: this.state.cgpa === ''? this.props.data.cgpa: this.state.cgpa}
     const id = this.props.data.education_id;
 
-    axios.put(`http://localhost:3000/student/studentProfile/educationDetails/${id}`, data, {headers: {'Content-Type': 'application/json'}})
-      .then(res => {
-        if (res.status === 200) {
-          this.props.onUpdateEducation({...data, education_id: id})
-          console.log(res.data);
-          
-        } else {
-            console.log(res);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });   
+    this.props.onUpdateEducation(data) 
     this.props.toggle();
   };
 

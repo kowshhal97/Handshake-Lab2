@@ -27,6 +27,14 @@ const column = [
         }
     },
     {
+        name: "companyName",
+        label: "Company Name",
+        options: {
+            filter: false,
+            sort: true,
+        }
+    },
+    {
         name: "job_location",
         label: "Location",
         options: {

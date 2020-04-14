@@ -37,16 +37,17 @@ class DetailComponent extends Component {
   }
 
   onAddSchool = (school) => {
-    school.id=this.state.education.length;
+    school.id=this.state.education.length
+    console.log(school)
     const list = [...this.state.education, school];
-    console.log(list);
-    this.setState({ education: list });
-    this.setState({ showAddForm: !this.state.showAddForm },()=>{
+    console.log(list)
+    this.setState({ education: list },()=>{
       this.save()
     });
   }
 
   onUpdateEducation = (education) => {
+    console.log(education)
     const data = this.state.education.map((item) => {
       if (item.id === education.id) {
         return education
@@ -84,7 +85,6 @@ class DetailComponent extends Component {
   }
   onAddExperience = (experience) => {
     experience.id=this.state.experience.length
-    window.alert(experience.id)
     const list = [...this.state.experience, experience];
     console.log(list)
     this.setState({ experience: list },()=>{

@@ -93,6 +93,7 @@ let currentDate= `${year}-${month<10?`0${month}`:`${month}`}-${date}`
         axios.defaults.withCredentials = true;
         axios.put('http://localhost:3000/applications/apply/'+this.props.jobId, data)
             .then(response => {
+                this.props.onSave(response.data);
                 this.setState({ open: false });
                 this.props.close(e);
                 console.log("Status Code : ", response.status);
@@ -164,6 +165,7 @@ let currentDate= `${year}-${month<10?`0${month}`:`${month}`}-${date}`
 
 const mapDispatchToProps = dispatch => {
     return ({
+        onSave:(user)=>dispatch({type:"saveToProfile",user:user})
     });
 }
 

@@ -23,6 +23,7 @@ router.get('/:company_id', (req, res) => {
 });
 
 router.put('/:company_id', (req, res) => {
+  console.log(req.body)
   req.body.path="Update-company-profile"
   req.body.id=req.params.company_id
 

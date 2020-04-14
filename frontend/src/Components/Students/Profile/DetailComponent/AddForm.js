@@ -23,19 +23,8 @@ class AddForm extends React.Component {
 
     e.preventDefault();
     console.log(this.state);
-    // axios
-    //   .post('http://localhost:3000/student/studentProfile/educationDetails/'+this.props.studentId,this.state, {headers: {'Content-Type': 'application/json'}})
-    //   .then(res => {
-    //     if (res.status === 200) {
-    //       console.log(res.data.insertId);
-    //       this.props.onAddSchool({...this.state, education_id: res.data.insertId});
-    //     } else {
-    //         console.log(res);
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    this.props.onAddSchool(this.state);
+    
   };
 
   onChangeHandlerCollege = (e, {value}) => {

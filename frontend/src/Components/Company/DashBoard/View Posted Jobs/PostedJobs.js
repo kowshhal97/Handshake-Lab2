@@ -64,8 +64,22 @@ const column = [
 
 class PostedJobs extends Component {
     state={
+        data:[],
         showDialog:false
     }
+
+
+    componentDidMount = () => {
+        var headers = new Headers();
+        axios.defaults.withCredentials = true;
+        axios.get('http://localhost:3000/jobs/company/' + this.props.user.name)
+            .then(response => {
+                this.setState({data:response.data});
+            }).catch(() => {
+                window.alert("FAIL")
+            })
+    }
+
 
     dialogCloseHandler =(e)=>{
 
@@ -93,6 +107,9 @@ class PostedJobs extends Component {
     
     render() {
 
+
+
+        
         if(!this.state.showDialog){
             Dialog=null
         }
@@ -101,7 +118,7 @@ class PostedJobs extends Component {
                 {Dialog}
                     <MUIDataTable
                         title={"Posted Job"}
-                        data={this.props.jobPostings}
+                        data={this.state.data}
                         columns={column}
                         options={this.options}
                     />
@@ -112,16 +129,13 @@ class PostedJobs extends Component {
 
 const mapDispatchToProps = dispatch => {
     return ({
-        onLogout: () => dispatch({ type: 'LOGOUT' }),
-        onLogin: (value) => dispatch({ type: 'LOGIN', value: value })
+
     });
 }
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.isLoggedIn,
-        userType: state.userType,
-        studentId: state.studentId
+        user:state.user
     };
 };
 

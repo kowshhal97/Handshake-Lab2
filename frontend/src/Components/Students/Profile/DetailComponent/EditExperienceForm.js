@@ -31,24 +31,7 @@ class EditExperienceForm extends React.Component {
           this.props.onUpdateExperience(data)
 
 
-    // const id = this.props.data.experience_id;
-    // axios
-    //   .put(`http://localhost:3000/student/studentProfile/experienceDetails/${id}`, data, {headers: {'Content-Type': 'application/json'}})
-    //   .then(res => {
-    //       console.log(res)
-    //     if (res.status === 200) {
-    //       window.alert("success")
-    //       this.props.onUpdateExperience({...data, experience_id: id})
-    //       console.log(res.data);
-          
-    //     } else {
-    //         console.log(res);
-    //     }
-    //   })
-    //   .catch(err => {
-    //     window.alert("Fail")
-    //     console.log(err);
-    //   });
+  
     
     this.props.toggle();
   };

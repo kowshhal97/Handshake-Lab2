@@ -92,22 +92,13 @@ class DashBoard extends React.Component {
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:3000/jobs/' + this.props.user.name, data)
             .then(response => {
-
+                
             }).catch(() => {
                 window.alert("FAIL")
             })
     }
 
-    componentDidMount = () => {
-        var headers = new Headers();
-        axios.defaults.withCredentials = true;
-        axios.get('http://localhost:3000/jobs/company/' + this.props.user.name)
-            .then(response => {
-                this.setState({jobPostings:response.data});
-            }).catch(() => {
-                window.alert("FAIL")
-            })
-    }
+
 
 
     handleChange = (event, value) => {

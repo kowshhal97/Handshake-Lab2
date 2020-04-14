@@ -22,7 +22,6 @@ class AddExperienceForm extends React.Component {
 
   onSave = (e) => {
     e.preventDefault();
-    console.log(this.state);
     this.props.onAddExperience(this.state);
   };
 
@@ -63,7 +62,6 @@ class AddExperienceForm extends React.Component {
   }
 
   render() {
-      console.log(this.props.data);
     return (
       <div>
         <div>

@@ -55,7 +55,7 @@ applyHandler = async (msg, callback) => {
             callback(null, res)
             return
         } else {
-            const post = await JobPost.findByIdAndUpdate(msg.id, msg)
+            const post = await JobPost.findByIdAndUpdate(msg.id, msg,{new:true})
 
             if (!post) {
                 res.status = 404
