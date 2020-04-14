@@ -9,7 +9,7 @@ class Skills extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.skillSet !== null) {
+        if (this.props.skillSet != null) {
             this.setState({skills: this.props.skillSet})
         }
     }
@@ -19,20 +19,7 @@ class Skills extends React.Component {
         const list = [...this.state.skills, this.state.current_skill];
         const data = {...this.props.skillSet};
         data.skillSet = list;
-        // axios
-        // .post('http://localhost:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
-        // .then(res => {
-        //     if (res.status ==== 200) {
-        //         console.log(res.data);
-
-        //     } else {
-        //         window.alert("huyu")
-        //         console.log(res);
-        //     }
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // });
+      
         this.setState({skills: list});
         this.setState({current_skill: ''});
     };
@@ -49,21 +36,6 @@ class Skills extends React.Component {
         });
         const data = {...this.props.skillSet};
         data.skillSet = list;
-        // axios
-        // .post('http://localhost:3000/student/studentProfile/skills/'+this.props.studentId, data, {headers: {'Content-Type': 'application/json'}})
-        // .then(res => {
-        //     if (res.status ==== 200) {
-
-        //         console.log(res.data);
-
-        //     } else {
-
-        //         console.log(res);
-        //     }
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // });
         this.setState({skills: list})
     };
 

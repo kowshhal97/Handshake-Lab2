@@ -64,6 +64,7 @@ const DialogActions = withStyles(theme => ({
 
 class CustomizedDialogDemo extends React.Component {
     state = {
+      data:{},
         redirect: false,
         open: false,
     };

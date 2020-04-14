@@ -80,7 +80,6 @@ class StudentsTab extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:3000/student/studentProfile/')
             .then(response => {
-                window.alert("success");
                 // let str=response.data.skillSet.join();
                 this.setState({data: [...response.data]})
             }).catch(() => {

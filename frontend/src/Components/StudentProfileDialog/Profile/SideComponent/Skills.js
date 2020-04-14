@@ -9,7 +9,7 @@ class Skills extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.skillSet !== null) {
+        if (this.props.skillSet != null) {
             this.setState({skills: this.props.skillSet})
         }
     }
@@ -43,7 +43,7 @@ class Skills extends React.Component {
     };
     onDeleteSkill = (e) => {
         const list = this.state.skills.filter(item => {
-            if (e.target.id !== item) {
+            if (e.target.id != item) {
                 return item;
             }
         });
