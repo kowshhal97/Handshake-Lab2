@@ -12,12 +12,14 @@ class MessageList extends Component {
     }
 
     onClickHandler = (e) => {
-        this.props.selectMessage(e.id)
+       console.log(e)
+        this.props.selectMessage(e)
     }
     componentDidMount=()=>{
         axios.get('http://localhost:3000/messages/students/'+this.props.user._id)
       .then(response => {
-          this.setState({data:response.data})
+
+          this.setState({data:response.data.reverse()})
       }).catch(()=>{
           window.alert("Fail!")
       })

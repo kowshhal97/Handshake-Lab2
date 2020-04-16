@@ -12,29 +12,36 @@ class Messages extends Component {
     }
 
 
-    selectMessage=(value)=>{
-        this.setState({selectedMessage:value})
+    selectMessage = (value) => {
+        this.setState({ selectedMessage: null },()=>{
+            this.setState({ selectedMessage: value.id })
+        })
     }
     render = () => {
+        let conv;
+        if (this.state.selectedMessage != null) {
+            conv = (<Conversation conversationId={this.state.selectedMessage} />)
+        }
+        else {
+            conv = (<div className="section">
+                <h1 className="selectText">
+                    Please select a Coversation
+    </h1>
+            </div>)
+        }
 
+        console.log(this.state.selectedMessage)
         return (
             <div>
-                <Grid container xs={12}>
-                    <Grid container xs={4}>
-                    <MessageList selectMessage={this.selectMessage}/>
+                <Grid container item xs={12}>
+                    <Grid container item xs={4}>
+                        <MessageList selectMessage={this.selectMessage} />
                     </Grid>
-                
-                    <Grid container xs={8}>
-                        {this.state.selectedMessage!=undefined?<Conversation conversationId={this.state.selectedMessage}/>:
-                        <div className="section">
-                        <h1 className="selectText">
-                            Please select a Coversation
-                            </h1>
-                            </div>
-                            }
-                    
+
+                    <Grid container item xs={8}>
+                        {conv}
                     </Grid>
-                
+
                 </Grid>
             </div>
         )

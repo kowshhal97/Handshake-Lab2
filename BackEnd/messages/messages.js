@@ -16,14 +16,6 @@ router.post('/', async (req, res) => {
  
    });
 
-
-    // const chat = new Chat(req.body)
-    // try {
-    //     await chat.save()
-    //     res.status(201).send(chat)
-    // } catch (e) {
-    //     res.status(400).send(e)
-    // }
 })
 
 router.get('/students/:id', async (req, res) => {

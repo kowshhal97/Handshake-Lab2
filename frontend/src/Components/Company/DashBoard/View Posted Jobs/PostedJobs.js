@@ -88,8 +88,8 @@ class PostedJobs extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick: (colData, cellMeta) => {
-
             Dialog = (<JobsDialog display={true} 
+                studentsApplied={this.state.data[cellMeta.dataIndex].students}
                                   close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },

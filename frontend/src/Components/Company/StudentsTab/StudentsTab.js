@@ -66,7 +66,8 @@ class StudentsTab extends Component {
         selectableRowsOnClick: true,
         disableToolbarSelect: true,
         onCellClick: (colData, cellMeta) => {
-            Dialog = (<ProfileDialog display={true} studentId={this.state.data[cellMeta.dataIndex]._id}
+            console.log(this.state.data[cellMeta.dataIndex])
+            Dialog = (<ProfileDialog display={true} studentId={this.state.data[cellMeta.dataIndex]._id} studentname={this.state.data[cellMeta.dataIndex].name}
                                      close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },

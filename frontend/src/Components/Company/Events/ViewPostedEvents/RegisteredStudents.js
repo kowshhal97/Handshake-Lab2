@@ -51,7 +51,8 @@ class StudentsTab extends Component {
         disableToolbarSelect: true,
         onCellClick: (colData, cellMeta) => {
             let studentId = this.state.data[cellMeta.dataIndex]._id;
-            Dialog = (<ProfileDialog display={true} studentId={studentId} close={this.dialogCloseHandler}/>);
+            let studentName=this.state.data[cellMeta.dataIndex].name
+            Dialog = (<ProfileDialog display={true} studentId={studentId} studentName={studentName} close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },
         selectableRows: "none",
@@ -64,6 +65,7 @@ class StudentsTab extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:3000/events/' + this.props.eventId)
             .then(response => {
+                console.log(response.data)
                 this.setState({data: response.data.students});
             }).catch(() => {
             window.alert("FAIL")

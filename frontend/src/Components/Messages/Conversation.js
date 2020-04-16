@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Input, Button } from 'react-chat-elements'
 import 'react-chat-elements/dist/main.css';
 
+import './Messages.css'
+
 import {connect} from 'react-redux';
 
 class Messages extends Component {
@@ -61,6 +63,7 @@ class Messages extends Component {
     e.preventDefault()
     axios.put('http://localhost:3000/messages/'+this.props.conversationId, this.state.newMessage)
       .then(response => {
+        this.refs.input.clear();
         let messages = []
         for (let i of response.data.messages) {
           if (i.sender === this.props.user.name) {
@@ -90,18 +93,17 @@ class Messages extends Component {
   render = () => {
 
     return <div style={{width: '100%'}}>
-<div>
+<div className="chatFeeed">
 
 
 
       <ChatFeed
-        messages={this.state.messages} // Boolean: list of message objects
-        showSenderName // show the name of the user who sent the message
-        // JSON: Custom bubble styles
+        messages={this.state.messages}
+        showSenderName
         bubbleStyles={
           {
             text: {
-              fontSize: 20
+              fontSize: 17
             },
             chatbubble: {
               borderRadius: 20,
@@ -115,6 +117,7 @@ class Messages extends Component {
         placeholder="Type here..."
         multiline={true}
         onChange={this.typeMessage}
+        ref='input'
         rightButtons={
           <Button
             color='white'

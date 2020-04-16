@@ -93,7 +93,7 @@ class CustomizedDialogDemo extends React.Component {
                         Students Applied for the Job
                     </DialogTitle>
                     <DialogContent>
-                        <StudentsApplied studentsApplied={this.props.studentApplied} jobId={this.props.jobId}/>
+                        <StudentsApplied studentsApplied={this.props.studentsApplied} jobId={this.props.jobId}/>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
