@@ -3,8 +3,12 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const kafka = require('../kafka/client');
+const { checkAuth } = require("./../passport");
 
-router.get('/', (req, res) => {
+
+const { checkAuth } = require("./../passport");
+
+router.get('/',checkAuth, (req, res) => {
   req.body.path = "get-all-events"
 
   
@@ -20,7 +24,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/:event_id', (req, res) => {
+router.get('/:event_id',checkAuth, (req, res) => {
   req.body.id = req.params.event_id;
   req.body.path = "get-event-by-id"
 
@@ -34,7 +38,7 @@ router.get('/:event_id', (req, res) => {
   });
 });
 
-router.get('/company/:companyName', (req, res) => {
+router.get('/company/:companyName',checkAuth, (req, res) => {
   req.body.companyName = req.params.companyName;
   req.body.path = "get-event-by-companyName"
 
@@ -48,7 +52,7 @@ router.get('/company/:companyName', (req, res) => {
   });
 });
 
-router.post('/:companyName', (req, res) => {
+router.post('/:companyName',checkAuth, (req, res) => {
   req.body.path = "post-event"
 
   req.body.companyName=req.params.companyName
@@ -67,7 +71,7 @@ router.post('/:companyName', (req, res) => {
 
 
 
-router.post('/registered/:eventId', (req, res) => {
+router.post('/registered/:eventId',checkAuth, (req, res) => {
 
   req.body.id = req.params.eventId;
   req.body.path = "post-register-for-event"

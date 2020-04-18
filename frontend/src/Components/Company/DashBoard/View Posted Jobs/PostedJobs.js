@@ -90,6 +90,7 @@ class PostedJobs extends Component {
         onCellClick: (colData, cellMeta) => {
             Dialog = (<JobsDialog display={true} 
                 studentsApplied={this.state.data[cellMeta.dataIndex].students}
+                jobId={this.state.data[cellMeta.dataIndex]._id}
                                   close={this.dialogCloseHandler}/>);
             this.setState({showDialog: true})
         },

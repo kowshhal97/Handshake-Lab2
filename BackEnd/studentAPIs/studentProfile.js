@@ -6,6 +6,7 @@ const multerS3 = require('multer-s3');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const kafka=require('./../kafka/client')
+const { checkAuth } = require("./../passport");
 
 
 aws.config.update({
@@ -48,7 +49,7 @@ const upload2 = multer({
 
 
 
-router.get('/', (req, res) => {
+router.get('/', checkAuth,(req, res) => {
   req.body.path="get-all-students"
  
   kafka.make_request('studentProfile', req.body, (err, results) => {
@@ -61,7 +62,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/:student_id', (req, res) => {
+router.get('/:student_id',checkAuth, (req, res) => {
   req.body.id = req.params.student_id;
   req.body.path="get-student-by-id"
  
@@ -74,7 +75,7 @@ router.get('/:student_id', (req, res) => {
   });
 });
 
-router.put('/:student_id', (req, res) => {
+router.put('/:student_id',checkAuth, (req, res) => {
   
   req.body.id = req.params.student_id;
   req.body.path="update-student-by-id";
@@ -90,7 +91,7 @@ router.put('/:student_id', (req, res) => {
 });
 
 
-router.post('/upload/:id', upload.array('upl',1), (req, res, next) => {
+router.post('/upload/:id',checkAuth, upload.array('upl',1), (req, res, next) => {
   const id = req.params.id;
   const profile_path = 'https://handshake-project.s3-us-west-2.amazonaws.com/profile_' + id;
   res.status(200).json({msg: 'uploaded!'})

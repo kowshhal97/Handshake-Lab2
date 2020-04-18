@@ -1,8 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
-const kafka = require('../kafka/client');
+const pool = require('../utils/mysqlConnection');
+const kafka = require("../kafka/client");
+const { auth } = require("../utils/passport");
+
+
+
+
 
 router.post('/', async (req, res) => {
 
@@ -11,7 +17,12 @@ router.post('/', async (req, res) => {
   kafka.make_request('studentAuth', req.body, (err, results) => {
 
     if(results.status!=200){
-      return res.status(results.status).send();
+      const token = jwt.sign(payload, secret, {
+        expiresIn: 900000 // in seconds
+      });
+      let jwtToken = 'JWT ' + token;
+      msg.token = jwtToken;
+      return res.status(results.status).send(jwtToken);
     }
 
     if(results.status!=200){

@@ -1,17 +1,17 @@
 import React from 'react';
 import {Dropdown} from 'semantic-ui-react';
 
-const companyName = [{text: 'Google', value: 'Google'}, {text: 'Tesla', value: 'Tesla'}, {
+const companyName = [{text: 'Fortunata Fashions', value: 'Fortunata Fashions'}, {text: 'Central perk', value: 'Central perk'}, {
     text: 'Facebook',
     value: 'Facebook'
 }];
-const designation = [{text: 'Application Developer', value: 'Application Developer'}, {
-    text: 'Performance Engineer',
-    value: 'Performance Engineer'
+const designation = [{text: 'Assistant', value: 'Assistant'}, {
+    text: 'Waitress',
+    value: 'Waitress'
 }, {text: 'Software Engineer', value: 'Software Engineer'}];
 const fromDate = [{text: '2015', value: '2015'}, {text: '2016', value: '2016'}, {text: '2017', value: '2017'}];
 const toDate = [{text: '2018', value: '2018'}, {text: '2019', value: '2019'}, {text: '2020', value: '2020'}];
-const location = [{text: 'Mumbai', value: 'Mumbai'}, {text: 'San Jose', value: 'San Jose'}, {
+const location = [{text: 'New York', value: 'New York'}, {text: 'San Jose', value: 'San Jose'}, {
     text: 'San Andreas',
     value: 'San Andreas'
 }];

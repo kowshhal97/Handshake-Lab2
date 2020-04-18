@@ -6,8 +6,13 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 import reducer from './store/reducer';
+import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
+const store = createStore(reducer, /* preloadedState, */ devToolsEnhancer(
+    // options like actionSanitizer, stateSanitizer
+  ));
 
-const store = createStore(reducer);
+
+// const store = createStore(reducer);
 // const store = createStore(reducer);
 
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
