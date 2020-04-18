@@ -298,7 +298,7 @@ class Profile extends Component {
                                     </Grid>
                                     <Grid container direction="row" justify="center" alignItems="stretch">
                                         <img
-                                            src="https://www.ezcomsoftware.com/wp-content/uploads/2017/12/big-polo.png"
+                                            src="https://pbs.twimg.com/profile_images/1216813945408966663/vkVajfRz_400x400.jpg"
                                             className={classes.bigAvatar}/>
                                     </Grid>
                                 </Grid>

@@ -3,12 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const kafka = require('../kafka/client');
-const { checkAuth } = require("./../passport");
 
 
 
-
-router.get('/:company_id', checkAuth,(req, res) => {
+router.get('/:company_id', (req, res) => {
   req.body.path="get-company-profile"
   req.body.id=req.params.company_id
 
@@ -24,7 +22,7 @@ router.get('/:company_id', checkAuth,(req, res) => {
   });
 });
 
-router.put('/:company_id',checkAuth, (req, res) => {
+router.put('/:company_id', (req, res) => {
   console.log(req.body)
   req.body.path="Update-company-profile"
   req.body.id=req.params.company_id

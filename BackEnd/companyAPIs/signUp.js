@@ -1,11 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const passwordHash = require('password-hash');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const kafka = require("../kafka/client");
-const { checkAuth } = require("./../passport");
-
-
+const kafka = require('../kafka/client');
 
 router.post('/', async (req, res) => {
 
@@ -18,13 +15,7 @@ router.post('/', async (req, res) => {
  
      if(results.status!=200){
       return res.status(results.status).send();
-    }    
-    const token = jwt.sign(payload, secret, {
-      expiresIn: 900000 // in seconds
-    });
-    let jwtToken = 'JWT ' + token;
-    msg.token = jwtToken;
-    return res.status(results.status).send(jwtToken);
+    }    res.status(results.status).send(JSON.parse(results.data));
  
    });
   });

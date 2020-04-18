@@ -2,9 +2,7 @@ const initialState = {
 
     isLoggedIn: false,
     userType: 'none',
-    user: {},
-    messages:[],
-    updateStatus:""
+    user: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,22 +22,10 @@ const reducer = (state = initialState, action) => {
             user: action.user
         }
     }
-    if (action.type === 'MESSAGE') {
-        return {
-            ...state,
-            messages:action.message
-        }
-    }
     if (action.type === 'saveToProfile') {
         return {
             ...state,
             user: action.user
-        }
-    }
-    if (action.type === 'UPDATESTATUS') {
-        return {
-            ...state,
-            updateStatus:"status Updated"
         }
     }
     return state;

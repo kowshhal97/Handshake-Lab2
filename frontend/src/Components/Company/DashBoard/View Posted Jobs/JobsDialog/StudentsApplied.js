@@ -59,6 +59,7 @@ class PostedJobs extends Component {
     };
 
     componentDidMount = () => {
+        window.alert("hello")
         this.setState({data: this.props.studentsApplied})
 
 

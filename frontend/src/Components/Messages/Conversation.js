@@ -52,7 +52,6 @@ class Messages extends Component {
               }))
           }
         }
-        this.props.messagesUpdate(messages);
         this.setState({ messages: messages })
       }).catch((e) => {
         console.log(e)
@@ -85,7 +84,6 @@ class Messages extends Component {
               }))
           }
         }
-        this.props.messagesUpdate(messages);
         this.setState({ messages: messages })
       }).catch(() => {
         window.alert("FAIL")
@@ -93,49 +91,41 @@ class Messages extends Component {
 
   }
   render = () => {
-    console.log("hello")
-      console.log(this.props)
-let chatFeed=null;
-    if(this.props.messages.length!=0)
-     chatFeed=(
-        <div>
-    <div className="chatFeeed">
-
-          <ChatFeed
-            messages={this.props.messages}
-            showSenderName
-            bubbleStyles={
-              {
-                text: {
-                  fontSize: 17
-                },
-                chatbubble: {
-                  borderRadius: 20,
-                  padding: 20
-                }
-              }
-            }
-          />
-          </div>
-          <Input
-            placeholder="Type here..."
-            multiline={true}
-            onChange={this.typeMessage}
-            ref='input'
-            rightButtons={
-              <Button
-                color='white'
-                backgroundColor='black'
-                text='Send'
-                onClick={this.sendMessage} />
-            } />
-            
-            </div>
-            );
-
 
     return <div style={{width: '100%'}}>
-        {chatFeed}
+<div className="chatFeeed">
+
+
+
+      <ChatFeed
+        messages={this.state.messages}
+        showSenderName
+        bubbleStyles={
+          {
+            text: {
+              fontSize: 17
+            },
+            chatbubble: {
+              borderRadius: 20,
+              padding: 20
+            }
+          }
+        }
+      />
+      </div>
+      <Input
+        placeholder="Type here..."
+        multiline={true}
+        onChange={this.typeMessage}
+        ref='input'
+        rightButtons={
+          <Button
+            color='white'
+            backgroundColor='black'
+            text='Send'
+            onClick={this.sendMessage} />
+        } />
+
 
     </div>
   }
@@ -144,16 +134,13 @@ let chatFeed=null;
 
 const mapDispatchToProps = dispatch => {
     return ({
-        
-        messagesUpdate: ( message) => dispatch({type: 'MESSAGE', message: message})
 
     });
 };
 
 const mapStateToProps = state => {
     return {
-        user: state.user,
-        messages:state.messages
+        user: state.user
     };
 };
 

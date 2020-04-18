@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const kafka = require('../kafka/client');
 
-const { checkAuth } = require("./../passport");
-
 router.get('/', (req, res) => {
     req.body.path="get-all-jobs"
  

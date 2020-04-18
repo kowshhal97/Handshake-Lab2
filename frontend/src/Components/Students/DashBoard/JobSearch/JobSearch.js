@@ -47,14 +47,6 @@ const column = [
             sort: true,
         }
     },
-    {
-        name: "job_posting_date",
-        label: "Job Posting Date",
-        options: {
-            filter: true,
-            sort: true,
-        }
-    },
 ];
 
 

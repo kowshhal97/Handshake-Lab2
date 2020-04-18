@@ -40,5 +40,3 @@ app.use('/company/signUp', require('./companyAPIs/signUp'));
  app.use('/messages',require('./messages/messages'));
 
 app.listen(3000, () => console.log("Server Listening on port 3000!"));
-
-module.exports=app

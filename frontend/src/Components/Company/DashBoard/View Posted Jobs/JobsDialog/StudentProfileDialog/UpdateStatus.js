@@ -91,13 +91,11 @@ class CustomizedDialogDemo extends React.Component {
         };
 
 
-
         axios.put('http://localhost:3000/applications/' + this.props.jobId, data)
             .then(response => {
                 this.setState({open: false});
                 this.props.close(e);
                 console.log("Status Code : ", response.status);
-                this.props.updateStatus({data})
             }).catch(() => {
             window.alert("FAIL")
         })
@@ -147,7 +145,6 @@ class CustomizedDialogDemo extends React.Component {
 
                                     <MenuItem value={"Accept"}><p style={{color: "green"}}>Accept </p></MenuItem>
                                     <MenuItem value={"Reject"}><p style={{color: "red"}}>Reject</p></MenuItem>
-                                    <MenuItem value={"Reviewed"}><p style={{color: "blue"}}>Reviewed</p></MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
@@ -170,7 +167,7 @@ class CustomizedDialogDemo extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-    return ({updateStatus: (user) => dispatch({type: "UPDATESTATUS", user: user})});
+    return ({});
 };
 
 const mapStateToProps = state => {
